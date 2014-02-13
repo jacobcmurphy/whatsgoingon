@@ -1,0 +1,16 @@
+<div data-role="header">
+  <h1>What's Going On?</h1>
+</div>
+ 
+<div data-role="content">
+  <ul data-role="listview">
+    <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post %>
+      <%= link_to 'edit post', edit_post_path(post), "data-icon" => "gear" %>
+    </li>
+    <% end %>
+  </ul>
+  <p><%= link_to 'New Post', new_post_path %></p>
+</div>
+
