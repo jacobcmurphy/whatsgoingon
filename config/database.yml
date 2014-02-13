@@ -47,7 +47,6 @@ test:
   encoding: unicode
   database: whatsgoingonapp_test
   pool: 5
-  username: whatsgoingonapp
   password:
 
 production:
@@ -55,5 +54,4 @@ production:
   encoding: unicode
   database: whatsgoingonapp_production
   pool: 5
-  username: whatsgoingonapp
   password:
