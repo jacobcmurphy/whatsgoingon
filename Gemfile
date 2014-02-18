@@ -44,3 +44,6 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'rails_12factor', group: :production
+
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
