@@ -1,0 +1,30 @@
+class Account < ActiveRecord::Base
+  belongs_to :campus
+  has_many :checkins
+end
+
+
+class CheckIn < ActiveRecord::Base
+	belongs_to :account
+	belongs_to :area
+end
+
+
+
+class Area < ActiveRecord::Base
+	belongs_to :building
+	has_many :checkins
+end
+
+
+class Building < ActiveRecord::Base
+	belongs_to :campus
+	has_many: areas
+end
+
+
+class Campus < ActiveRecord::Base
+  has_many :accounts
+  has_many :buildings
+end
+
