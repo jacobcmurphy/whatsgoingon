@@ -1,6 +1,15 @@
 <div data-role="header">
 	<h1>What's Going On?</h1>
+      
+</div>
+
+<section id="wrapper">
+    <header>
       <h1>
+      What's Going On?
+      </h1>
+    </header>
+    <h3>
       <div id="user-widget">
     <% if current_user %>
       Look at this handsome bastard: 
@@ -10,15 +19,7 @@
       <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
     <% end %>
       </div>
-    </h1>
-</div>
-
-<section id="wrapper">
-    <header>
-      <h1>
-      What's Going On?
-      </h1>
-    </header>
+    </h3>
 <meta name="viewport" content="width=620" />
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
