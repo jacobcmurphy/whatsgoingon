@@ -1,11 +1,11 @@
 <div class="center">
 
-	<h1 class="center">
+	<h1>
 		What's Going On?
 	</h1>
 	
 	<h3>
-		<div id="user-widget" class="center">
+		<div id="user-widget">
 			<% if current_user %>
 			Look at this handsome bastard: 
 			<%= image_tag current_user.image %>
@@ -20,7 +20,6 @@
 	<article>
 		<p>Finding your location: <span id="status">checking...</span></p>
 	</article>
-	<div class="Flexible-container">
 	<script>
 		function success(position) {
 			var s = document.querySelector('#status');
@@ -35,7 +34,7 @@
 
 		var mapcanvas = document.createElement('div');
 		mapcanvas.id = 'mapcanvas';
-		mapcanvas.style.height = ($(document).height() - 300) + 'px';
+		mapcanvas.style.height = ($(document).height() - 402) + 'px';
 		mapcanvas.style.width = ($(document).width() - 75) + 'px';
 
 		document.querySelector('article').appendChild(mapcanvas);
@@ -72,8 +71,4 @@
 		}
 
 	</script>
- <br /><br /><br /><br /><br /><!-- Responsive iFrame -->
-
-    <!-- <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=Bern&amp;aq=&amp;sll=46.813187,8.22421&amp;sspn=3.379772,8.453979&amp;ie=UTF8&amp;hq=&amp;hnear=Bern&amp;t=m&amp;z=12&amp;ll=46.947922,7.444608&amp;output=embed&amp;iwloc=near"></iframe> -->
-</div>
 </div>
