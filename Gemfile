@@ -47,3 +47,8 @@ gem 'rails_12factor', group: :production
 
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
+
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
