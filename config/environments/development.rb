@@ -27,6 +27,4 @@ Authdemo::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  #Compiile Bootstrap
-  config.assets.compile = true
 end
