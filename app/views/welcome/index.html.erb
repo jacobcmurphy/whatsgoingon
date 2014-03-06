@@ -1,48 +1,69 @@
 <div class="center">
 
-	<h1 class="center">
-		What's Going On?
-	</h1>
-
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<article>
 		<p>Finding your location: <span id="status">checking...</span></p>
 	</article>
-	<div class="Flexible-container">
+
 	<script>
 		function success(position) {
 			var s = document.querySelector('#status');
 
 			if (s.className == 'success') {
-		    // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
-		    return;
-		}
+		    	// not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
+		    	return;
+			}
 
-		s.innerHTML = "found you!";
-		s.className = 'success';
+			s.innerHTML = "found you!";
+			s.className = 'success';
 
-		var mapcanvas = document.createElement('div');
-		mapcanvas.id = 'mapcanvas';
-		mapcanvas.style.height = ($(document).height() - 300) + 'px';
-		mapcanvas.style.width = ($(document).width() - 75) + 'px';
+			var mapcanvas = document.createElement('div');
+			mapcanvas.id = 'mapcanvas';
+			mapcanvas.style.height = ($(document).height() - 170) + 'px';
+			mapcanvas.style.width = ($(document).width() - 75) + 'px';
 
-		document.querySelector('article').appendChild(mapcanvas);
+			document.querySelector('article').appendChild(mapcanvas);
 
-		var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		var myOptions = {
-			zoom: 18,
-			center: latlng,
-			mapTypeControl: false,
-			navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			var latlngTest = new google.maps.LatLng(position.coords.latitude, position.coords.longitude + 0.00005);
 
-		var marker = new google.maps.Marker({
-			position: latlng, 
-			map: map, 
-			title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
-		});
+			var myOptions = {
+				zoom: 20,
+				center: latlng,
+				mapTypeControl: false,
+				navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+
+			var marker1 = new google.maps.Marker({
+				position: latlng, 
+				map: map, 
+				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+			});
+			
+
+			var marker2 = new google.maps.Marker({
+				position: latlngTest, 
+				map: map, 
+				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+			});
+
+			var infowindow1 = new google.maps.InfoWindow({
+				content: "Hi"
+			});
+
+			var infowindow2 = new google.maps.InfoWindow({
+				content: "I follow marker1"
+			});
+
+			google.maps.event.addListener(marker1, 'click', function() {
+				infowindow1.open(map, marker1);
+			});
+
+			google.maps.event.addListener(marker2, 'click', function() {
+				infowindow2.open(map, marker2);
+			});
 		}
 
 		function error(msg) {
@@ -60,8 +81,4 @@
 		}
 
 	</script>
- <br /><br /><br /><br /><br /><!-- Responsive iFrame -->
-
-    <!-- <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ch/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=Bern&amp;aq=&amp;sll=46.813187,8.22421&amp;sspn=3.379772,8.453979&amp;ie=UTF8&amp;hq=&amp;hnear=Bern&amp;t=m&amp;z=12&amp;ll=46.947922,7.444608&amp;output=embed&amp;iwloc=near"></iframe> -->
-</div>
 </div>
