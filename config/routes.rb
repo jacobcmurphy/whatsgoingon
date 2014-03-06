@@ -1,7 +1,6 @@
 Authdemo::Application.routes.draw do
   root  'users#index'
   resources :users
-  resources :welcome, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup',  to: 'users#new',            via: 'get'

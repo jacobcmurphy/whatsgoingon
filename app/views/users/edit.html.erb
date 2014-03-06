@@ -1,9 +1,3 @@
-<% if current_user.id != params[:id].to_i %>
-    <h1>YOU DO NOT HAVE PERMISSION TO EDIT THIS USER</h1>
-    YOUR PAGE IS <%= link_to "HERE", edit_user_path(current_user) %>
-<% else %>
-	<h1>Editing user</h1>
+<h1>Editing user</h1>
 
-	<%= render 'form' %>
-<% end %>
-
+<%= render 'form' %>

@@ -5,6 +5,12 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+
+    if signed_in?
+        render 'signedin_index'
+    else
+      render 'index'
+    end
   end
 
   # GET /users/1
@@ -19,6 +25,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if !signed_in?
+      redirect_to signin_path
+    elsif current_user.id != params[:id].to_i
+      redirect_to current_user
+    end 
   end
 
   # POST /users
