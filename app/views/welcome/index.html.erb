@@ -9,9 +9,9 @@
 			<% if current_user %>
 			Look at this handsome bastard: 
 			<%= image_tag current_user.image %>
-			<%= link_to "Sign out", signout_path, id: "sign_out" %>
+			<%= link_to "Sign out", signout_path, id: "sign_out", :class => "btn btn-primary" %>
 			<% else %>
-			<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+			<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary" %>
 			<% end %>
 		</div>
 	</h3>
