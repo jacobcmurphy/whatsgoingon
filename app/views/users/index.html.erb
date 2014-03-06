@@ -1,0 +1,16 @@
+<% if signed_in? %>
+	<h2> 
+	You are already logged in. Go to the
+	<%= link_to 'map', welcome_index_path %>
+	</h2>
+<% else %>
+	<h1>
+	<%= link_to 'Sign in', signin_path, :class=>"btn btn-primary btn-block btn-lg" %>
+	</h1>
+
+	<br>
+
+	<h2>
+	<%= link_to 'Create account', new_user_path, :class=>"btn btn-block btn-primary" %>
+	</h2>
+<% end %>

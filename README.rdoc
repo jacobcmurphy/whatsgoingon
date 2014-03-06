@@ -1,0 +1,3 @@
+== README
+
+An app that helps you find friends and know what's going on.
