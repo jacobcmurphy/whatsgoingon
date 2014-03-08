@@ -1,3 +1,6 @@
-== README
+
+== What's Going On?
+
+{<img src="https://codeclimate.com/github/jacobcmurphy/whatsgoingon.png" />}[https://codeclimate.com/github/jacobcmurphy/whatsgoingon]
 
 An app that helps you find friends and know what's going on.
