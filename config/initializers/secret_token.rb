@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Authdemo::Application.config.secret_key_base = '9d11594481451cdd6fac61d41c835fd2159d8ac9d495cfdcc7d59a1a378184533767e3105d6f835a823d1cec4de7a653f2baac3aa9b1c6ab99accb7f0f9fef48'
+Whatsgoingon::Application.config.secret_key_base = '9d11594481451cdd6fac61d41c835fd2159d8ac9d495cfdcc7d59a1a378184533767e3105d6f835a823d1cec4de7a653f2baac3aa9b1c6ab99accb7f0f9fef48'

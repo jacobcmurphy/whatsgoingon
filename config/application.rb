@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module Authdemo
+module Whatsgoingon
   class Application < Rails::Application
 
 config.i18n.enforce_available_locales = true
