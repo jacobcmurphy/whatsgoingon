@@ -38,19 +38,24 @@
 			};
 			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
-			var marker1 = new google.maps.Marker({
-				position: latlng, 
-				map: map, 
-				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
-			});
+			// var mymarker = new google.maps.Marker({
+			// 	position: latlng, 
+			// 	map: map, 
+			// 	title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+			// });
 			
-			var infowindow1 = new google.maps.InfoWindow({
-				content: "Hi"
-			});
+			// var myinfowindow = new google.maps.InfoWindow({
+			// 	content: "Hi"
+			// });
 
-			google.maps.event.addListener(marker1, 'click', function() {
-				infowindow1.open(map, marker1);
-			});
+			// google.maps.event.addListener(mymarker, 'click', function() {
+			// 	myinfowindow.open(map, mymarker);
+			// });
+
+			<% for i in 1...CheckIn.most_recent.length %>
+			<%=	"var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent[i][:latitude].to_s + ", " + CheckIn.most_recent[i][:longitude].to_s + ");" %>
+			<%= "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, title: " + CheckIn.most_recent[i][:user_id].to_s + "});" %>
+			<% end %>
 
 			$.ajax({  
 			    type: 'POST',  
@@ -62,7 +67,7 @@
 			});
 		}
 
-		<%= "var myvarhi = 1;" %>
+
 
 		function error(msg) {
 			var s = document.querySelector('#status');

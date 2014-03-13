@@ -3,6 +3,6 @@ class CheckIn < ActiveRecord::Base
 
 	def self.most_recent
     self.find(:all,
-              :conditions => ['check_ins.time > ?', 10.minutes.ago]).uniq.pluck(:user_id)
+              :conditions => ['check_ins.time > ?', 10.minutes.ago])
   end
 end
