@@ -2,7 +2,7 @@
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<article>
-		<p>Finding your location: <span id="status">checking...</span></p>
+		<p id="loading">Finding your location: <span id="status">checking...</span></p>
 	</article>
 
 	<script>
@@ -19,22 +19,15 @@
 
 			var mapcanvas = document.createElement('div');
 			mapcanvas.id = 'mapcanvas';
-			mapcanvas.style.height = ($(document).height() - 100) + 'px';
+			mapcanvas.style.height = ($(document).height() - 80) + 'px';
 			mapcanvas.style.width = ($(document).width() - 30) + 'px';
+
+			$("#loading").css("display","none");
 
 			document.querySelector('article').appendChild(mapcanvas);
 
 			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			var latlngTest = new google.maps.LatLng(position.coords.latitude, position.coords.longitude + 0.00005);
-
-			$.ajax({  
-			    type: 'POST',  
-			    url: '/check_in', 
-			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
-			    success: function(response) {
-			        
-			    }
-			});
 
 			var myOptions = {
 				zoom: 20,
@@ -50,30 +43,22 @@
 				map: map, 
 				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
 			});
-
-			$("#latitude").val(latlng.lat());
-			$("#longitude").val(latlng.lng());
 			
-			var marker2 = new google.maps.Marker({
-				position: latlngTest, 
-				map: map, 
-				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
-			});
-
 			var infowindow1 = new google.maps.InfoWindow({
 				content: "Hi"
-			});
-
-			var infowindow2 = new google.maps.InfoWindow({
-				content: "I follow marker1"
 			});
 
 			google.maps.event.addListener(marker1, 'click', function() {
 				infowindow1.open(map, marker1);
 			});
 
-			google.maps.event.addListener(marker2, 'click', function() {
-				infowindow2.open(map, marker2);
+			$.ajax({  
+			    type: 'POST',  
+			    url: '/check_in', 
+			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+			    success: function(response) {
+			        
+			    }
 			});
 		}
 
@@ -81,8 +66,6 @@
 			var s = document.querySelector('#status');
 			s.innerHTML = typeof msg == 'string' ? msg : "failed";
 			s.className = 'fail';
-
-		  // console.log(arguments);
 		}
 
 		if (navigator.geolocation) {
