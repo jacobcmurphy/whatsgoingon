@@ -68,6 +68,17 @@
 			        
 			    }
 			});
+
+			setInterval(function() {
+			    $.ajax({  
+			    type: 'POST',  
+			    url: '/check_in', 
+			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+			    success: function(response) {
+			        
+			    }
+			});
+			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
 		}
 
 
