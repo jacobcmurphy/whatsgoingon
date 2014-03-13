@@ -27,6 +27,15 @@
 			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			var latlngTest = new google.maps.LatLng(position.coords.latitude, position.coords.longitude + 0.00005);
 
+			$.ajax({  
+			    type: 'POST',  
+			    url: '/check_in', 
+			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+			    success: function(response) {
+			        
+			    }
+			});
+
 			var myOptions = {
 				zoom: 20,
 				center: latlng,
@@ -84,9 +93,3 @@
 
 	</script>
 </div>
-
-<%= form_tag(check_in_index_path, method: "post") do %>
-  <%= hidden_field_tag(:latitude) %>
-  <%= hidden_field_tag(:longitude) %>
-  <%= submit_tag("Set location") %>
-<% end %>
