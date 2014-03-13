@@ -1,7 +1,10 @@
 Whatsgoingon::Application.routes.draw do
+  get "check_in/new"
+  get "check_in/create"
   root  'users#index'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :check_in, only: [:create]
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

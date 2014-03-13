@@ -41,8 +41,10 @@
 				map: map, 
 				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
 			});
-			
 
+			$("#latitude").val(latlng.lat());
+			$("#longitude").val(latlng.lng());
+			
 			var marker2 = new google.maps.Marker({
 				position: latlngTest, 
 				map: map, 
@@ -82,3 +84,9 @@
 
 	</script>
 </div>
+
+<%= form_tag(check_in_index_path, method: "post") do %>
+  <%= hidden_field_tag(:latitude) %>
+  <%= hidden_field_tag(:longitude) %>
+  <%= submit_tag("Set location") %>
+<% end %>
