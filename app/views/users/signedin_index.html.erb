@@ -1,10 +1,10 @@
+<% cuid = current_user.id %>
 <div class="center">
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<article>
 		<p id="loading">Finding your location: <span id="status">checking...</span></p>
 	</article>
-
 	<script>
 		function success(position) {
 			var s = document.querySelector('#status');
@@ -38,23 +38,26 @@
 			};
 			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
-			// var mymarker = new google.maps.Marker({
-			// 	position: latlng, 
-			// 	map: map, 
-			// 	title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
-			// });
+			var mymarker = new google.maps.Marker({
+				position: latlng, 
+				map: map, 
+				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
+				zIndex: 2
+			});
 			
-			// var myinfowindow = new google.maps.InfoWindow({
-			// 	content: "Hi"
-			// });
+			var myinfowindow = new google.maps.InfoWindow({
+				content: "You are here!"
+			});
 
-			// google.maps.event.addListener(mymarker, 'click', function() {
-			// 	myinfowindow.open(map, mymarker);
-			// });
+			google.maps.event.addListener(mymarker, 'click', function() {
+				myinfowindow.open(map, mymarker);
+			});
 
-			<% for i in 1...CheckIn.most_recent.length %>
-			<%=	"var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent[i][:latitude].to_s + ", " + CheckIn.most_recent[i][:longitude].to_s + ");" %>
-			<%= "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, title: " + CheckIn.most_recent[i][:user_id].to_s + "});" %>
+			<% for i in 0...CheckIn.most_recent(cuid).length %>
+			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ");" %>
+			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map });\n" %>
+			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "\" });" %>
+			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
 			$.ajax({  
