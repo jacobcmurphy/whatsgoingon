@@ -32,9 +32,14 @@
 			var myOptions = {
 				zoom: 20,
 				center: latlng,
-				mapTypeControl: false,
-				navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-				mapTypeId: google.maps.MapTypeId.ROADMAP
+				zoomControl: false,
+				streetViewControl: false,
+				navigationControlOptions: {style: google.maps.NavigationControlStyle.DEFAULT},
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				mapTypeControl: true,
+    			mapTypeControlOptions: {
+      			style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+    			}
 			};
 			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
