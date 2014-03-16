@@ -5,7 +5,7 @@ class CheckInController < ApplicationController
       @check.time = Time.now
       @check.user_id = current_user.id
       @check.save
-  end
+    end
  end
 
   private 

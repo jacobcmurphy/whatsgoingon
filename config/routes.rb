@@ -1,4 +1,10 @@
 Whatsgoingon::Application.routes.draw do
+  get "group_member/new"
+  get "group_member/create"
+  get "group_member/delete"
+  get "group/new"
+  get "group/create"
+  get "group/delete"
   get "check_in/new"
   get "check_in/create"
   root  'users#index'
