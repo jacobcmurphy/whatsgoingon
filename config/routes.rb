@@ -7,6 +7,7 @@ Whatsgoingon::Application.routes.draw do
   get "group/delete"
   get "check_in/new"
   get "check_in/create"
+  get "list_view/getStuff"
   root  'users#index'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
