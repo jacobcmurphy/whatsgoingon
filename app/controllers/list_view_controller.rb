@@ -1,0 +1,2 @@
+class ListViewController < ApplicationController
+end
