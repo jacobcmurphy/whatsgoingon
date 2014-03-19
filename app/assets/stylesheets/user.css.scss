@@ -1,0 +1,17 @@
+#accountupdatename {
+	padding-left:2px;
+}
+
+label {
+	padding-right:5px;
+}
+
+#accountupdatesubmit {
+	padding-top:10px;
+}
+
+abbr {
+	display: none;
+}
+
+label.required:after { content:" *"; }
