@@ -154,8 +154,6 @@ GEM
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
-    intercom-rails (0.2.24)
-      activesupport (> 3.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -363,7 +361,6 @@ DEPENDENCIES
   guard
   guard-cucumber
   guard-rspec
-  intercom-rails
   jbuilder (~> 1.2)
   jquery-rails
   json
