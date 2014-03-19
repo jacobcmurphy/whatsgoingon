@@ -8,14 +8,18 @@ Whatsgoingon::Application.routes.draw do
   get "check_in/new"
   get "check_in/create"
   get "list_view/getStuff"
-  root  'users#index'
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  get "pages/terms"
+  get "pages/welcome"
+  get "pages/landing"
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :check_in, only: [:create]
 
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  root 'pages#landing'
+  ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

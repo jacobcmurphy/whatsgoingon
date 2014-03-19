@@ -1,31 +1,39 @@
-# Each login has a user record.
 class User < ActiveRecord::Base
-  before_create :create_remember_token
-  before_save { self.email = email.downcase }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  has_many :groups, dependent: :destroy
-  has_many :check_ins, dependent: :destroy
+  devise :database_authenticatable, :registerable,
+      :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  validates_presence_of :email
+#  mount_uploader :image, ImageUploader
+  has_many :authorizations
 
-  validates :email, presence:true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create }
-
-  # password validation handled by has_secure_password
-  #validates :password, confirmation: true, length: {minimum: 6}, confirmation: true
-
-
-
-  has_secure_password
-
-  def self.new_remember_token
-    SecureRandom.urlsafe_base64
+  def self.new_with_session(params,session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"],without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
   end
 
-  def self.tokenhash(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
-  private
-
-  def create_remember_token
-    self.remember_token = User.tokenhash(User.new_remember_token)
-  end
+  def self.from_omniauth(auth, current_user)
+    authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
+    if authorization.user.blank?
+      user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
+      if user.blank?
+       user = User.new
+       user.password = Devise.friendly_token[0,10]
+       user.name = auth.info.name
+       user.email = auth.info.email
+       auth.provider == "twitter" ?  user.save(:validate => false) :  user.save
+     end
+     authorization.username = auth.info.nickname
+     authorization.user_id = user.id
+     authorization.save
+   end
+   authorization.user
+ end
 end

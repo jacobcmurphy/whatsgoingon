@@ -1,33 +1,29 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= simple_form_for @user do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="form-inputs">
+    <%= f.input :name, :required => true, :autofocus => true %>
+    <%= f.input :about, :required => true %>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name , :class=>"form-control"%>
-  </div> <br>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email, :class=>"form-control" %>
-  </div><br>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password, :class=>"form-control" %>
-  </div><br>
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation, :class=>"form-control" %>
-  </div><br>
-  <div class="actions">
-    <%= f.submit "Submit", :class=>"btn btn-primary" %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
+
+<div>
+Connect Account
+
+
+
+<% ['facebook', 'twitter', 'github', 'linkedin', 'google_oauth2'].each do |provider| %>
+
+  <% if current_user.authorizations.pluck(:provider).include?(provider.to_s) %>
+    <%= provider.to_s.titleize %> Connected
+  <% else %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider) %>
+  <% end %>
+<br/>
+<% end %>
+
+</div>
