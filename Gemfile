@@ -50,7 +50,6 @@ gem 'omniauth-twitter'
 gem 'simple_form'
 
 
-gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   #gem 'byebug'
