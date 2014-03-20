@@ -1,5 +1,5 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top nounderline">
     <div class="container">
       <div class="navbar-header">
         <%= link_to "What's Going On?", root_path, class: 'navbar-brand' %>
@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
       </button>
   </div>
-  <div class="navbar-collapse collapse" id="navbar-main">
+  <div class="navbar-collapse collapse nounderline" id="navbar-main">
     <ul class="nav navbar-nav">
         <% if user_signed_in? %>
         <li><%= link_to 'Friends', "/list_view/getStuff" %></li>
@@ -18,7 +18,7 @@
         <% end %>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right nounderline">
       <% if user_signed_in? %>
       <!-- <li><%= link_to current_user.name, current_user %></li> -->
       <li><%= link_to "Logout", destroy_user_session_path %></li>
