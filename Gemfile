@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
 gem 'bootstrap-sass'
-gem 'carrierwave'
+#gem 'carrierwave'
 gem 'twitter'
 gem 'json'
 #gem 'airbrake'
@@ -78,13 +78,6 @@ group :development, :test do
   gem 'quiet_assets'
 
   #gem 'timecop'
-end
-
-group :development, :test do
-  gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
-  #gem 'guard' # https://github.com/guard/guard
-  #gem 'guard-cucumber'
-  #gem 'guard-rspec'
 end
 
 
