@@ -18,6 +18,9 @@ gem 'taps'
 gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'meta_search', '>1.1.0.pre'
 
+
+gem 'thread_safe', '0.2.0'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
