@@ -2,6 +2,7 @@
 <div class="center">
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	    
 	<article>
 		<p id="loading">Finding your location: <span id="status">checking...</span></p>
 	</article>
@@ -42,6 +43,33 @@
     			}
 			};
 			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+
+
+
+
+			  // Define the LatLng coordinates for the polygon's path.
+			var regionCoords = [
+		  			new google.maps.LatLng(42.366061, -71.258425),
+		            new google.maps.LatLng(42.365953, -71.258642),
+				    new google.maps.LatLng(42.365742, -71.258564),
+				    new google.maps.LatLng(42.365875, -71.257893),
+				    new google.maps.LatLng(42.366034, -71.257706),
+				    new google.maps.LatLng(42.366145, -71.257910)
+				  
+
+			];
+
+		  	// Construct the polygon.
+		  	region = new google.maps.Polygon({
+		    paths: regionCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#0000FF',
+		    fillOpacity: 0.35
+		  	});
+
+		  	region.setMap(map);
 
 			var mymarker = new google.maps.Marker({
 				position: latlng, 

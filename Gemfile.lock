@@ -251,14 +251,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-<<<<<<< HEAD
   bootstrap-sass
-=======
-  airbrake
-  bootstrap-sass (~> 3.1.1)
-  byebug
-  carrierwave
->>>>>>> 1692e982940f5cd6f8383507164d79a5381e576f
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
@@ -277,7 +270,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 4.0.2)
-  sass-rails (>= 3.2)
+  sass-rails (~> 4.0.0)
   sdoc
   shoulda-matchers
   simple_form
