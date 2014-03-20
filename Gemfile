@@ -31,7 +31,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
 #gem 'carrierwave'
 gem 'twitter'
 gem 'json'
@@ -45,6 +45,9 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 gem 'simple_form'
+
+
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   #gem 'byebug'
