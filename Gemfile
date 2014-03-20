@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -31,11 +31,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
-gem 'bootstrap-sass-rails'
+gem 'bootstrap-sass'
 gem 'carrierwave'
 gem 'twitter'
 gem 'json'
-gem 'airbrake'
+#gem 'airbrake'
 gem 'koala'
 gem 'linkedin'
 gem 'omniauth'
@@ -44,13 +44,10 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
-#gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
 gem 'simple_form'
-gem 'pg'
-gem 'thin'
 
 group :development, :test do
-  gem 'byebug'
+  #gem 'byebug'
   #gem 'annotate'
   #gem 'better_errors'
   #gem 'binding_of_caller'
@@ -85,14 +82,14 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
-  gem 'guard' # https://github.com/guard/guard
-  gem 'guard-cucumber'
-  gem 'guard-rspec'
+  #gem 'guard' # https://github.com/guard/guard
+  #gem 'guard-cucumber'
+  #gem 'guard-rspec'
 end
 
 
 group :test do
-  gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails
+  #gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails
   gem 'database_cleaner' # https://github.com/bmabey/database_cleaner
   gem 'shoulda-matchers' # https://github.com/thoughtbot/shoulda-matchers
   gem 'launchy'
