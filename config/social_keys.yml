@@ -11,7 +11,7 @@ development:
   linkedin_key: "YOUR_KEY"
   linkedin_secret: "YOUR_SECRET"
 
-  google_key: "1041392525048"
+  google_key: "1041392525048-gqm7ojqsfg4gc02u8n0pgerfq362s2rb.apps.googleusercontent.com"
   google_secret: "jafjShTZP3ptYIZwMC7Iz4kR"
 
 production:
@@ -27,5 +27,5 @@ production:
   linkedin_key: "YOUR_KEY"
   linkedin_secret: "YOUR_SECRET"
 
-  google_key: "YOUR_KEY"
-  google_secret: "YOUR_SECRET"
+  google_key: "1041392525048-gqm7ojqsfg4gc02u8n0pgerfq362s2rb.apps.googleusercontent.com"
+  google_secret: "jafjShTZP3ptYIZwMC7Iz4kR"
