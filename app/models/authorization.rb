@@ -21,15 +21,6 @@ class Authorization < ActiveRecord::Base
 
 	end
 
-
-	def fetch_details_from_github
-	end
-
-
-	def fetch_details_from_linkedin
-
-	end
-
 	def fetch_details_from_google_oauth2
 
 	end
