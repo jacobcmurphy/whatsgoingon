@@ -46,7 +46,6 @@ gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 #gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
 gem 'simple_form'
-gem 'pg'
 gem 'thin'
 
 group :development, :test do
