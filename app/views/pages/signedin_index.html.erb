@@ -44,11 +44,10 @@
 			};
 			var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
-
-
+//******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
 
 			  // Define the LatLng coordinates for the polygon's path.
-			var regionCoords = [
+			var SSCCoords = [
 		  			new google.maps.LatLng(42.366061, -71.258425),
 		            new google.maps.LatLng(42.365953, -71.258642),
 				    new google.maps.LatLng(42.365742, -71.258564),
@@ -59,9 +58,9 @@
 
 			];
 
-		  	// Construct the polygon.
-		  	region = new google.maps.Polygon({
-		    paths: regionCoords,
+		  	// Construct the SSC.
+		  	SSC = new google.maps.Polygon({
+		    paths: SSCCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
 		    strokeWeight: 2,
@@ -69,7 +68,44 @@
 		    fillOpacity: 0.35
 		  	});
 
-		  	region.setMap(map);
+			var libraryCoords = [
+				new google.maps.LatLng(42.367700, -71.258654),
+				new google.maps.LatLng(42.367796, -71.257983),
+				new google.maps.LatLng(42.368675, -71.257629),
+				new google.maps.LatLng(42.368790, -71.258208),
+				new google.maps.LatLng(42.367906, -71.258835)
+			];
+
+		  	// Construct the library
+		  	library = new google.maps.Polygon({
+		    paths: libraryCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00FF00',
+		    fillOpacity: 0.35
+		  	});
+
+		  	var usdanCoords = [
+		  		new google.maps.LatLng(42.367953, -71.257469),
+		  		new google.maps.LatLng(42.367774, -71.256417),
+		  		new google.maps.LatLng(42.368218, -71.256224),
+		  		new google.maps.LatLng(42.368424, -71.257276)
+		  	];
+
+		  	usdan = new google.maps.Polygon({
+		    paths: usdanCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: 0.35
+		  	});
+
+		  	SSC.setMap(map);
+		  	library.setMap(map);
+		  	usdan.setMap(map);
+//*********HERE ENDS MAPPING OF BRANDEIS******************//
 
 			var mymarker = new google.maps.Marker({
 				position: latlng, 
