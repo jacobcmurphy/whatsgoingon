@@ -13,7 +13,7 @@
   <div class="navbar-collapse collapse nounderline" id="navbar-main">
     <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-        <li class= "navbar-brand"data-toggle="modal" data-target="#myModal">Friends</li>
+        <li><%= link_to "Friends", "#myModal", "data-toggle" => "modal" %></li>
         <li><%= link_to 'My Account', current_user %></li>
         <% else %>
         <% end %>
