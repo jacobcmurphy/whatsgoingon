@@ -1,4 +1,5 @@
 Whatsgoingon::Application.routes.draw do
+  get "get_markers/getmark"
   get "group_member/new"
   get "group_member/create"
   get "group_member/delete"
