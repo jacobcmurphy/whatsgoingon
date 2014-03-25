@@ -1,0 +1,8 @@
+<% @groups.each do |group| %>
+	<%= group.name %>	   <%= link_to 'Destroy', group,
+	            confirm: 'Are you sure?', :method => :delete %>
+	 <br>
+<% end %>
+
+<br>
+<%= link_to "New Group", new_group_path %>

@@ -1,22 +1,20 @@
 Whatsgoingon::Application.routes.draw do
-  get "group_member/new"
-  get "group_member/create"
-  get "group_member/delete"
-  get "group/new"
-  get "group/create"
-  get "group/delete"
-  get "check_in/new"
-  get "check_in/create"
+
   get "list_view/getStuff"
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  match "groups" => "groups#index", via: :get
+  match "groups" => "groups#destroy", via: :delete
   get "pages/terms"
   get "pages/welcome"
   get "pages/landing"
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :check_in, only: [:create]
+  
+  resources :check_in, only: [:create, :new]
+  resources :groups, only: [:new, :create, :destroy, :show]
+
 
   root 'pages#landing'
   ActiveAdmin.routes(self)
