@@ -16,7 +16,7 @@ function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 	var d = R * c; // Distance in km
 	var dInMi = d*0.621371; // American units
-	return (dInMi < 0.1 ? "<0.1 mi" : dInMi.toString() + " mi"); 
+	return (dInMi < 0.1 ? "<0.1 mi" : dInMi.toFixed(2).toString() + " mi"); 
 }
 
 function deg2rad(deg) {
