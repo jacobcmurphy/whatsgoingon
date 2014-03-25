@@ -83,8 +83,8 @@
 			//// ******** BUTTON
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
+			var opac = 0.35;
 
-			  // Define the LatLng coordinates for the polygon's path.
 			var SSCCoords = [
 		  		new google.maps.LatLng(42.366061, -71.258425),
 		        new google.maps.LatLng(42.365953, -71.258642),
@@ -92,18 +92,16 @@
 			    new google.maps.LatLng(42.365875, -71.257893),
 			    new google.maps.LatLng(42.366034, -71.257706),
 			    new google.maps.LatLng(42.366145, -71.257910)
-				  
-
 			];
 
-		  	// Construct the SSC.
+		  	
 		  	SSC = new google.maps.Polygon({
 		    paths: SSCCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
 		    strokeWeight: 2,
-		    fillColor: '#0000FF',
-		    fillOpacity: 0.35
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
 		  	});
 
 			var libraryCoords = [
@@ -120,8 +118,8 @@
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
 		    strokeWeight: 2,
-		    fillColor: '#00FF00',
-		    fillOpacity: 0.35
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
 		  	});
 
 		  //	google.maps.geometry.poly.containsLocation(google.maps.LatLng(latitude, longitude),polygons);
@@ -139,12 +137,113 @@
 		    strokeOpacity: 0.8,
 		    strokeWeight: 2,
 		    fillColor: '#00AAAA',
-		    fillOpacity: 0.35
+		    fillOpacity: opac
 		  	});
+
+		  	//***HERE STARTS MASSELL QUAD****
+
+		  	var usenCoords = [
+		  		new google.maps.LatLng(42.366991, -71.260724),
+		  		new google.maps.LatLng(42.366979, -71.260547),
+		  		new google.maps.LatLng(42.367347, -71.260504),
+		  		new google.maps.LatLng(42.367351, -71.260681)
+		  	];
+		  	
+
+		  	usen = new google.maps.Polygon({
+		    paths: usenCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var renCoords = [
+		  		new google.maps.LatLng(42.367480, -71.261287),
+		  		new google.maps.LatLng(42.367365, -71.260839),
+		  		new google.maps.LatLng(42.367478, -71.260778),
+		  		new google.maps.LatLng(42.367599, -71.261234)
+		  	];
+		  	
+
+		  	ren = new google.maps.Polygon({
+		    paths: renCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var deroyCoords = [
+		  		new google.maps.LatLng(42.367218, -71.261663),
+		  		new google.maps.LatLng(42.367458, -71.261411),
+		  		new google.maps.LatLng(42.367532, -71.261542),
+		  		new google.maps.LatLng(42.367298, -71.261783)		
+		  	];
+		  	
+
+		  	deroy = new google.maps.Polygon({
+		    paths: deroyCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var shapiroCoords = [
+		  		new google.maps.LatLng(42.366378, -71.261164),
+		  		new google.maps.LatLng(42.366455, -71.260998),
+		  		new google.maps.LatLng(42.367156, -71.261444),
+		  		new google.maps.LatLng(42.367063, -71.261669)		
+		  	];
+		  	
+
+		  	shapiro = new google.maps.Polygon({
+		    paths: shapiroCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  
+
+		  	//***HERE ENDS MASSELL QUAD
+
+		  	//***HERE BEGINS ROSENTHAL QAUD
+		  	var rosNorthCoords = [
+		  		new google.maps.LatLng(42.367217, -71.260349),
+		  		new google.maps.LatLng(42.367217, -71.259953),
+		  		new google.maps.LatLng(42.367416, -71.259950),
+		  		new google.maps.LatLng(42.367427, -71.260323)		
+		  	];
+		  	
+
+		  	rosNorth = new google.maps.Polygon({
+		    paths: rosNorthCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
 
 		  	SSC.setMap(map);
 		  	library.setMap(map);
 		  	usdan.setMap(map);
+		  	usen.setMap(map);
+		  	ren.setMap(map);
+		  	deroy.setMap(map);
+		  	shapiro.setMap(map);
+		  	rosNorth.setMap(map);
+
+
 //*********HERE ENDS MAPPING OF BRANDEIS******************//
 
 			var mymarker = new google.maps.Marker({

@@ -34,3 +34,11 @@
  main {
 	margin-top:51px;
 }
+
+.right {
+	float:right;
+}
+
+#therowsinthebody {
+	margin-top:15px;	
+}
