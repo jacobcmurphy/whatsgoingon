@@ -1,2 +1,0 @@
-class ListViewController < ApplicationController
-end
