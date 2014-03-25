@@ -46,6 +46,9 @@
 
             <% cuid = current_user.id %>
             <script>
+            function roundToTwo(num) {    
+              return +(Math.round(num + "e+2")  + "e-2");
+            }
             function success(position) {
               document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...CheckIn.most_recent(cuid).length %><%= raw "<div class=\"row card\">" %><%= raw "<div class=\"col-md-12 listrow\">" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "<span class=\"right\">\'+getDistanceFromLatLonInMi(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>" %><%= raw "</div>" %><% end %><% if CheckIn.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
             }
@@ -62,7 +65,7 @@
               var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
               var d = R * c; // Distance in km
               var dInMi = d*0.621371; // American units
-              return (dInMi < 0.1 ? "<0.1 mi" : dInMi.toString() + " mi"); 
+              return (dInMi < 0.1 ? "<0.1 mi" : roundToTwo(dInMi).toString() + " mi"); 
             }
 
             function deg2rad(deg) {
