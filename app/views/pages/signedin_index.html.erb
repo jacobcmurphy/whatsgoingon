@@ -233,7 +233,44 @@
 		    fillOpacity: opac
 		  	});
 
+		  	var rosEastCoords = [
+		  		new google.maps.LatLng(42.366917, -71.260045),
+		  		new google.maps.LatLng(42.366911, -71.259771),
+		  		new google.maps.LatLng(42.367216, -71.259771),
+		  		new google.maps.LatLng(42.367224, -71.260045)		
+		  	];
+		  	
 
+		  	rosEast = new google.maps.Polygon({
+		    paths: rosEastCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var rosSouthCoords = [
+		  		new google.maps.LatLng(42.366755, -71.260401),
+		  		new google.maps.LatLng(42.366741, -71.259959),
+		  		new google.maps.LatLng(42.366949, -71.259953),
+		  		new google.maps.LatLng(42.366963, -71.260372)		
+		  	];
+		  	
+
+		  	rosSouth = new google.maps.Polygon({
+		    paths: rosSouthCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 0.8,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	//***HERE ENDS ROSENTHAL QUAD
+		  	
+		  	
 		  	SSC.setMap(map);
 		  	library.setMap(map);
 		  	usdan.setMap(map);
@@ -242,6 +279,8 @@
 		  	deroy.setMap(map);
 		  	shapiro.setMap(map);
 		  	rosNorth.setMap(map);
+		  	rosEast.setMap(map);
+		  	rosSouth.setMap(map);
 
 
 //*********HERE ENDS MAPPING OF BRANDEIS******************//

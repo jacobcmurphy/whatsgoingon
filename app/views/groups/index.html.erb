@@ -4,5 +4,14 @@
 	 <br>
 <% end %>
 
+<center>
+<% if(@groups.length == 0) %>
+	
+	<div class="card"> You Haven't Created Any Groups </div>
+	<% end %>
+
 <br>
-<%= link_to "New Group", new_group_path %>
+
+<%= link_to 'New Group', new_group_path, class: 'btn btn-large btn-primary' %>
+
+</center>
