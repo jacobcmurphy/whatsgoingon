@@ -1,12 +1,11 @@
 <% @groups.each do |group| %>
-	<%= group.name %>	   <%= link_to 'Destroy', group,
-	            confirm: 'Are you sure?', :method => :delete %>
+	<div class="card"> <%= group.name %> </div>	 <%= link_to 'Destroy', group,
+	   confirm: 'Are you sure?', :method => :delete, class: 'btn btn-large btn-danger' %> 
 	 <br>
 <% end %>
 
 <center>
 <% if(@groups.length == 0) %>
-	
 	<div class="card"> You Haven't Created Any Groups </div>
 	<% end %>
 
@@ -15,3 +14,5 @@
 <%= link_to 'New Group', new_group_path, class: 'btn btn-large btn-primary' %>
 
 </center>
+
+

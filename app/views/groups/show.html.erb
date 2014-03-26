@@ -1,4 +1,5 @@
-<%= @group.name %>
+<div class="card"> <%= @group.name %> </div>
+
 <br>
-<%= link_to 'Destroy', @group,
-            confirm: 'Are you sure?', :method => :delete %>
+ <%= link_to 'Destroy', @group,
+	   confirm: 'Are you sure?', :method => :delete, class: 'btn btn-large btn-danger' %>
