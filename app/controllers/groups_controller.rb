@@ -31,6 +31,11 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id].to_i)
+    if params[:search].nil?
+      @users = nil
+    else
+      @users = User.find(:all, :conditions => ['name LIKE ? OR email LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%"])
+    end
   end
 
   def index

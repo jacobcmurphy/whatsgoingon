@@ -3,3 +3,28 @@
 
   <span class="right">  <%= link_to 'Delete', @group,
 	   confirm: 'Are you sure?', :method => :delete, class: 'btn btn-large btn-danger' %> </span> </div>
+
+<div class="card">
+<h1>Add a Person to Group <%= @group.name %> </h1>
+
+<%= form_tag @group, method: "get" do %>
+  <div class="form-group">
+      <%= label_tag :search, "Search" %>
+      <%= text_field_tag :search, nil, class: "form-control"  %>
+  </div>
+  <%= submit_tag "Search", class: "btn btn-success"%>
+<% end %>
+
+<% unless @users.nil? %>
+<%= params %>
+	<% @users.each do |member| %>
+		<li> <%= member.name %></li>
+    <%= form_tag group_members_path, method: "post" %>
+    <%= hidden_field_tag  'group_id', @group.id %>
+    <%= hidden_field_tag  'friend_id', member.id %>
+
+    <%= submit_tag "Add", class: "btn btn-primary"%>
+    <% end %>
+<% end %>
+
+</div>

@@ -36,4 +36,5 @@ class User < ActiveRecord::Base
    end
    authorization.user
  end
+
 end

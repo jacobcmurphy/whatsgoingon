@@ -3,10 +3,15 @@ class GroupMembersController < ApplicationController
   end
 
   def create
-  	if signed_in?
-  		gm = GroupMember.new(member_params)
-  		gm.save
-  		current_user << gm
+  	if user_signed_in?
+      puts "*************************"
+      puts params
+      puts Group.find(params[:group_id].to_i).class
+      puts "*************************"
+
+      group = Group.find(params[:group_id].to_i)
+  		gm = group.group_members.create(member_params)
+      redirect_to group
   	end
   end
 
@@ -15,6 +20,7 @@ class GroupMembersController < ApplicationController
 
   private
   def member_params
-  	params.permit(:user_id, :group_id, :friend_id)
+    params[user_id: current_user.id]
+  	params.permit(:friend_id, :group_id, :user_id)
   end
 end
