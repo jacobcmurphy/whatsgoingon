@@ -33,6 +33,15 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id].to_i)
+    @mems = @group.group_members
+    mem_ids = []
+
+    @mems.each do |mem|
+      mem_ids << mem[:friend_id]
+    end
+
+    @members = User.find_all_by_id(mem_ids)
+
     if params[:search].nil?
       @users = nil
     else
