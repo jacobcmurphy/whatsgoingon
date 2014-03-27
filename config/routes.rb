@@ -14,7 +14,7 @@ Whatsgoingon::Application.routes.draw do
   
   resources :check_in, only: [:create, :new]
   resources :groups, only: [:new, :create, :destroy, :show]
-  resource :group_members, only: [:create, :show, :destroy]
+  resource :group_members, only: [:create, :destroy]
 
 
   root 'pages#landing'
