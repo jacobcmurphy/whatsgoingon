@@ -19,9 +19,16 @@
 <% ['facebook', 'twitter', 'google_oauth2'].each do |provider| %>
 
   <% if current_user.authorizations.pluck(:provider).include?(provider.to_s) %>
-    <%= provider.to_s.titleize %> Connected
+    <%= provider.to_s.titleize %> Connected <br />
   <% else %>
-      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-facebook" %>
+
+    <% if provider == 'facebook' %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-facebook" %>
+    <% elsif provider == 'twitter' %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-twitter" %>
+    <% elsif provider == 'google_oauth2' %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-google-plus" %>
+    <% end %>
   <% end %>
 <br/>
 <% end %>
