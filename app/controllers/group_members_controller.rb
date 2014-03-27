@@ -4,13 +4,8 @@ class GroupMembersController < ApplicationController
 
   def create
   	if user_signed_in?
-      puts "*************************"
-      puts params
-      puts Group.find(params[:group_id].to_i).class
-      puts "*************************"
-
       group = Group.find(params[:group_id].to_i)
-  		gm = group.group_members.create(member_params)
+  		gm = group.group_members.create(friend_id: params[:friend_id], group_id: params[:group_id], user_id: current_user.id)
       redirect_to group
   	end
   end
