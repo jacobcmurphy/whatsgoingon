@@ -1,6 +1,6 @@
 Whatsgoingon::Application.routes.draw do
 
-  get "marker_requests/newRequest"
+  get "get_markers/getmark"
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   match "groups" => "groups#index", via: :get
