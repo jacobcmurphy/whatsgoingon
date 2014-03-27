@@ -3,7 +3,8 @@ class GroupsController < ApplicationController
     if user_signed_in?
       @group = Group.new
     else
-      redirect_to new_user_session_path
+      redirect_to groups_path
+      #redirect_to new_user_session_path
     end
   end
 
@@ -11,10 +12,11 @@ class GroupsController < ApplicationController
   	if user_signed_in?
   		@group = Group.new(name: params[:group][:name], user_id: current_user.id.to_i, visible: true)
   		if @group.save
-        redirect_to @group
+        redirect_to groups_path
       end
     else
-      redirect_to new_user_session_path
+      redirect_to groups_path
+      #redirect_to new_user_session_path
   	end
   end
 
@@ -42,7 +44,8 @@ class GroupsController < ApplicationController
     if user_signed_in?
       @groups = Group.where(user_id: current_user.id)
     else
-      redirect_to new_user_session_path
+      redirect_to groups_path
+      #redirect_to new_user_session_path
     end
   end
 

@@ -18,6 +18,7 @@ gem 'taps'
 gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'meta_search', '>1.1.0.pre'
 
+gem "font-awesome-rails"
 
 gem 'thread_safe', '0.2.0'
 
