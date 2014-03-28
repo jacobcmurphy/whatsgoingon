@@ -74,7 +74,42 @@
 			controlUI.appendChild(controlText);
 
 			google.maps.event.addDomListener(controlUI, 'click', function() {
-		   		map.setCenter(new google.maps.LatLng(42.369591, -71.255408));
+				google.maps.Map.prototype.clearOverlays = function() {
+				  for (var i = 0; i < markersArray.length; i++ ) {
+				    markersArray[i].setMap(null);
+				  }
+				  markersArray.length = 0;
+				}
+		   		var mymarker = new google.maps.Marker({
+					position: latlng, 
+					map: map, 
+					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
+					zIndex: 2
+				});
+				
+				var myinfowindow = new google.maps.InfoWindow({
+					content: "You are here!"
+				});
+
+				google.maps.event.addListener(mymarker, 'click', function() {
+					myinfowindow.open(map, mymarker);
+				});
+
+				$.getJSON( "get_markers/getmark.json", function( data ) {
+					$.each( data, function( key, val ) {
+			            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
+			            var newmarker = new google.maps.Marker({
+			                position: newlatLng,
+			                map: map
+			            });
+			            var newmyinfowindow = new google.maps.InfoWindow({
+							content: val[0]['name']
+						});
+						google.maps.event.addListener(newmarker, 'click', function() {
+							myinfowindow.open(map, newmarker);
+						});	
+	  				});
+				});
   			});
 
 			controlDiv.index = 1;
@@ -300,42 +335,14 @@
 				myinfowindow.open(map, mymarker);
 			});
 
-			$.getJSON( "get_markers/getmark.json", function( data ) {
-				console.log("in ajax");
-				// console.log(data);
+			
 
-				
-				$.each( data, function( key, val ) {
-    				console.log(val[0]['name']);
-		            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
-		            var newmarker = new google.maps.Marker({
-		                position: newlatLng,
-		                map: map
-		            });
-		            var newmyinfowindow = new google.maps.InfoWindow({
-						content: val[0]['name']
-					});
-					google.maps.event.addListener(newmarker, 'click', function() {
-						myinfowindow.open(map, newmarker);
-					});	
-  				});
-
-
-			 //  for( i = 0; i < data.length; i++) {
-			 //  	console.log(data[i])
-	   //          var newlatLng = new google.maps.LatLng(data[i][1].lat, data[i][2].lng);
-	   //          var newmarker = new google.maps.Marker({
-	   //              position: newlatLng,
-	   //              map: map
-	   //          });
-	   //          var newmyinfowindow = new google.maps.InfoWindow({
-				// 	content: data[i][0]
-				// });
-				// google.maps.event.addListener(newmarker, 'click', function() {
-				// 	myinfowindow.open(map, newmarker);
-				// });
-	   //        }
-			});
+			<% for i in 0...CheckIn.most_recent(cuid).length %>
+			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ");" %>
+			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map });\n" %>
+			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "\" });" %>
+			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
+			<% end %>
 
 
 	
