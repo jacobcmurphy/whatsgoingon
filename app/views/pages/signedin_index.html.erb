@@ -306,14 +306,14 @@
 
 				
 				$.each( data, function( key, val ) {
-    				console.log(val[0]);
-		            var newlatLng = new google.maps.LatLng(val[1].lat, val[2].lng);
+    				console.log(val[0]['name']);
+		            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
 		            var newmarker = new google.maps.Marker({
 		                position: newlatLng,
 		                map: map
 		            });
 		            var newmyinfowindow = new google.maps.InfoWindow({
-						content: val[0]
+						content: val[0]['name']
 					});
 					google.maps.event.addListener(newmarker, 'click', function() {
 						myinfowindow.open(map, newmarker);
