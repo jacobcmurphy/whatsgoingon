@@ -301,8 +301,9 @@
 			});
 
 			$.getJSON( "get_markers/getmark.json", function( data ) {
+				console.log("in ajax1");
 				var json = jQuery.parseJSON(data);
-				console.log("in ajax");
+				console.log("in ajax2");
 				console.log(data);
 
 				
