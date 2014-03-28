@@ -302,39 +302,39 @@
 
 			$.getJSON( "get_markers/getmark.json", function( data ) {
 				console.log("in ajax");
-				console.log(data);
+				// console.log(data);
 
 				
 				$.each( data, function( key, val ) {
     				console.log(val[0]);
 		            var newlatLng = new google.maps.LatLng(val[1].lat, val[2].lng);
 		            var newmarker = new google.maps.Marker({
-		                position: latLng,
+		                position: newlatLng,
 		                map: map
 		            });
 		            var newmyinfowindow = new google.maps.InfoWindow({
 						content: val[0]
 					});
-					google.maps.event.addListener(mymarker, 'click', function() {
-						myinfowindow.open(map, newmymarker);
+					google.maps.event.addListener(newmarker, 'click', function() {
+						myinfowindow.open(map, newmarker);
 					});	
   				});
 
 
-			  for( i = 0; i < data.length; i++) {
-			  	console.log(data[i])
-	            var newlatLng = new google.maps.LatLng(data[i][1].lat, data[i][2].lng);
-	            var newmarker = new google.maps.Marker({
-	                position: latLng,
-	                map: map
-	            });
-	            var newmyinfowindow = new google.maps.InfoWindow({
-					content: data[i][0]
-				});
-				google.maps.event.addListener(mymarker, 'click', function() {
-					myinfowindow.open(map, newmymarker);
-				});
-	          }
+			 //  for( i = 0; i < data.length; i++) {
+			 //  	console.log(data[i])
+	   //          var newlatLng = new google.maps.LatLng(data[i][1].lat, data[i][2].lng);
+	   //          var newmarker = new google.maps.Marker({
+	   //              position: newlatLng,
+	   //              map: map
+	   //          });
+	   //          var newmyinfowindow = new google.maps.InfoWindow({
+				// 	content: data[i][0]
+				// });
+				// google.maps.event.addListener(newmarker, 'click', function() {
+				// 	myinfowindow.open(map, newmarker);
+				// });
+	   //        }
 			});
 
 
