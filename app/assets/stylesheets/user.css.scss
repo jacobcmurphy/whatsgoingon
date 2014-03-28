@@ -14,4 +14,6 @@ abbr {
 	display: none;
 }
 
-label.required:after { content:" *"; }
+label.required:after {
+	content:" *";
+}
