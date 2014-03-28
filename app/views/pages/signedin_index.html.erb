@@ -301,16 +301,28 @@
 			});
 
 			$.getJSON( "get_markers/getmark.json", function( data ) {
-				console.log("in ajax1");
-				var json = jQuery.parseJSON(data);
-				console.log("in ajax2");
+				console.log("in ajax");
 				console.log(data);
 
 				
+				$.each( data, function( key, val ) {
+    				console.log(val[0]);
+		            var newlatLng = new google.maps.LatLng(val[1].lat, val[2].lng);
+		            var newmarker = new google.maps.Marker({
+		                position: latLng,
+		                map: map
+		            });
+		            var newmyinfowindow = new google.maps.InfoWindow({
+						content: val[0]
+					});
+					google.maps.event.addListener(mymarker, 'click', function() {
+						myinfowindow.open(map, newmymarker);
+					});	
+  				});
 
 
-
-			  for( i = 0; i < json.length; i++) {
+			  for( i = 0; i < data.length; i++) {
+			  	console.log(data[i])
 	            var newlatLng = new google.maps.LatLng(data[i][1].lat, data[i][2].lng);
 	            var newmarker = new google.maps.Marker({
 	                position: latLng,
