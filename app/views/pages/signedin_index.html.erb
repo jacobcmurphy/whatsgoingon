@@ -301,9 +301,15 @@
 			});
 
 			$.getJSON( "get_markers/getmark.json", function( data ) {
+				var json = jQuery.parseJSON(data);
 				console.log("in ajax");
 				console.log(data);
-			  for( i = 0; i < data.length; i++) {
+
+				
+
+
+
+			  for( i = 0; i < json.length; i++) {
 	            var newlatLng = new google.maps.LatLng(data[i][1].lat, data[i][2].lng);
 	            var newmarker = new google.maps.Marker({
 	                position: latLng,
