@@ -76,6 +76,7 @@
 			controlText.innerHTML = '<strong>Refresh</strong>';
 			controlUI.appendChild(controlText);
 
+			// refresh button
 			google.maps.event.addDomListener(controlUI, 'click', function() {
 				// clear markers
 				for (var i = 0; i < markers.length; i++) {
@@ -123,6 +124,16 @@
 						});	
 	  				});
 				});
+
+				$.ajax({  
+				    type: 'POST',  
+				    url: '/check_in', 
+				    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+				    success: function(response) {
+				        
+				    }
+				});
+
   			});
 
 			controlDiv.index = 1;
