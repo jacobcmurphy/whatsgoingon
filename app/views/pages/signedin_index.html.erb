@@ -46,6 +46,10 @@
 			};
 			map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
+			<% if (params.has_key?(:lat) && params.has_key?(:lng)) %>
+			<%= "map.setCenter(new google.maps.LatLng(" + params[:lat] + ", " + params[:lng] + "));" %>
+			<% end %>
+
 			var markers = [];
 			var infoWindows = [];
 
