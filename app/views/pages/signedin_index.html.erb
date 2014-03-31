@@ -53,100 +53,12 @@
 			var markers = [];
 			var infoWindows = [];
 
-			//// ******** BUTTON
-
-			// Create a div to hold the control.
-			var controlDiv = document.createElement('div');
-
-			// Set CSS styles for the DIV containing the control
-			// Setting padding to 5 px will offset the control
-			// from the edge of the map.
-			controlDiv.style.padding = '5px';
-
-			// Set CSS for the control border.
-			var controlUI = document.createElement('div');
-			controlUI.style.backgroundColor = 'white';
-			controlUI.style.cursor = 'pointer';
-			controlUI.style.textAlign = 'center';
-			controlUI.title = 'Click to refresh map';
-			controlDiv.appendChild(controlUI);
-
-			// Set CSS for the control interior.
-			var controlText = document.createElement('div');
-			controlText.style.fontFamily = 'Arial,sans-serif';
-			controlText.style.fontSize = '12px';
-			controlText.style.paddingLeft = '4px';
-			controlText.style.paddingRight = '4px';
-			controlText.innerHTML = '<strong>Refresh</strong>';
-			controlUI.appendChild(controlText);
-
-			// refresh button
-			google.maps.event.addDomListener(controlUI, 'click', function() {
-				// clear markers
-				for (var i = 0; i < markers.length; i++) {
-				    markers[i].setMap(null);
-				}
-				markers = [];
-				// add my location
-		   		var mymarker = new google.maps.Marker({
-					position: latlng, 
-					map: map, 
-					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
-					zIndex: 2
-				});
-				markers.push(mymarker);
-				
-				var myinfowindow = new google.maps.InfoWindow({
-					content: "You are here!"
-				});
-				infoWindows.push(myinfowindow);
-
-				google.maps.event.addListener(mymarker, 'click', function() {
-					for (var i = 0; i < infoWindows.length; i++) {
-						infoWindows[i].close();
-					}
-					myinfowindow.open(map, mymarker);
-				});
-
-				$.getJSON( "get_markers/getmark.json", function( data ) {
-					$.each( data, function( key, val ) {
-			            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
-			            var newmarker = new google.maps.Marker({
-			                position: newlatLng,
-			                map: map
-			            });
-			            markers.push(newmarker);
-			            var newmyinfowindow = new google.maps.InfoWindow({
-							content: val[0]['name']
-						});
-						infoWindows.push(newmyinfowindow);
-						google.maps.event.addListener(newmarker, 'click', function() {
-							for (var i = 0; i < infoWindows.length; i++) {
-								infoWindows[i].close();
-							}
-							newmyinfowindow.open(map, newmarker);
-						});	
-	  				});
-				});
-
-				$.ajax({  
-				    type: 'POST',  
-				    url: '/check_in', 
-				    data: { latitude: latlng.lat(), longitude: latlng.lng() },
-				    success: function(response) {
-				        
-				    }
-				});
-
-  			});
-
-			controlDiv.index = 1;
-  			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
-
-			//// ******** BUTTON
+			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
 			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South"];
+
+			<% buildingsArraySize = 9 %>
 
 			var opac = 0.35;
 
@@ -335,7 +247,7 @@
 
 		  	//***HERE ENDS ROSENTHAL QUAD
 		  	
-		  	<% for i in 0..9 %>
+		  	<% for i in 0..buildingsArraySize %>
 		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
 		  	<% end %>
 
@@ -373,13 +285,17 @@
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
+			var mybuilding = "";
+		  <% for i in 0..buildingsArraySize %>
+		  <%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "]; console.log(mybuilding)}" %>
+		  <% end %>
 
-	
+		
 
 			$.ajax({  
 			    type: 'POST',  
 			    url: '/check_in', 
-			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
 			    success: function(response) {
 			        
 			    }
@@ -389,12 +305,112 @@
 			    $.ajax({  
 			    type: 'POST',  
 			    url: '/check_in', 
-			    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
 			    success: function(response) {
 			        
 			    }
 			});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
+
+
+
+
+//// ******** BUTTON
+
+			// Create a div to hold the control.
+			var controlDiv = document.createElement('div');
+
+			// Set CSS styles for the DIV containing the control
+			// Setting padding to 5 px will offset the control
+			// from the edge of the map.
+			controlDiv.style.padding = '5px';
+
+			// Set CSS for the control border.
+			var controlUI = document.createElement('div');
+			controlUI.style.backgroundColor = 'white';
+			controlUI.style.cursor = 'pointer';
+			controlUI.style.textAlign = 'center';
+			controlUI.title = 'Click to refresh map';
+			controlDiv.appendChild(controlUI);
+
+			// Set CSS for the control interior.
+			var controlText = document.createElement('div');
+			controlText.style.fontFamily = 'Arial,sans-serif';
+			controlText.style.fontSize = '12px';
+			controlText.style.paddingLeft = '4px';
+			controlText.style.paddingRight = '4px';
+			controlText.innerHTML = '<strong>Refresh</strong>';
+			controlUI.appendChild(controlText);
+
+			// refresh button
+			google.maps.event.addDomListener(controlUI, 'click', function() {
+				// clear markers
+				for (var i = 0; i < markers.length; i++) {
+				    markers[i].setMap(null);
+				}
+				markers = [];
+				// add my location
+		   		var mymarker = new google.maps.Marker({
+					position: latlng, 
+					map: map, 
+					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
+					zIndex: 2
+				});
+				markers.push(mymarker);
+				
+				var myinfowindow = new google.maps.InfoWindow({
+					content: "You are here!"
+				});
+				infoWindows.push(myinfowindow);
+
+				google.maps.event.addListener(mymarker, 'click', function() {
+					for (var i = 0; i < infoWindows.length; i++) {
+						infoWindows[i].close();
+					}
+					myinfowindow.open(map, mymarker);
+				});
+
+				$.getJSON( "get_markers/getmark.json", function( data ) {
+					$.each( data, function( key, val ) {
+			            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
+			            var newmarker = new google.maps.Marker({
+			                position: newlatLng,
+			                map: map
+			            });
+			            markers.push(newmarker);
+			            var newmyinfowindow = new google.maps.InfoWindow({
+							content: val[0]['name']
+						});
+						infoWindows.push(newmyinfowindow);
+						google.maps.event.addListener(newmarker, 'click', function() {
+							for (var i = 0; i < infoWindows.length; i++) {
+								infoWindows[i].close();
+							}
+							newmyinfowindow.open(map, newmarker);
+						});	
+	  				});
+				});
+
+				$.ajax({  
+				    type: 'POST',  
+				    url: '/check_in', 
+				    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
+				    success: function(response) {
+				        
+				    }
+				});
+
+  			});
+
+			controlDiv.index = 1;
+  			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
+
+			//// ******** BUTTON
+
+
+
+
+
 		}
 
 

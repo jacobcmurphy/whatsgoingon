@@ -4,12 +4,12 @@ class CheckInController < ApplicationController
       @check = CheckIn.new(check_in_params)
       @check.time = Time.now
       @check.user_id = current_user.id
-      @check.save
+      @check.save!
     end
  end
 
   private 
   def check_in_params
-    params.permit(:user_id, :latitude, :longitude, :user_id, :time)
+    params.permit(:user_id, :latitude, :longitude, :time, :location)
   end
 end
