@@ -142,6 +142,8 @@
 			//// ******** BUTTON
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
+			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South"];
+
 			var opac = 0.35;
 
 			var SSCCoords = [
@@ -154,7 +156,7 @@
 			];
 
 		  	
-		  	SSC = new google.maps.Polygon({
+		  	building0 = new google.maps.Polygon({
 		    paths: SSCCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -172,7 +174,7 @@
 			];
 
 		  	// Construct the library
-		  	library = new google.maps.Polygon({
+		  	building1 = new google.maps.Polygon({
 		    paths: libraryCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -190,7 +192,7 @@
 		  		new google.maps.LatLng(42.368424, -71.257276)
 		  	];
 
-		  	usdan = new google.maps.Polygon({
+		  	building2 = new google.maps.Polygon({
 		    paths: usdanCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -209,7 +211,7 @@
 		  	];
 		  	
 
-		  	usen = new google.maps.Polygon({
+		  	building3 = new google.maps.Polygon({
 		    paths: usenCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -226,7 +228,7 @@
 		  	];
 		  	
 
-		  	ren = new google.maps.Polygon({
+		  	building4 = new google.maps.Polygon({
 		    paths: renCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -244,7 +246,7 @@
 		  	];
 		  	
 
-		  	deroy = new google.maps.Polygon({
+		  	building5 = new google.maps.Polygon({
 		    paths: deroyCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -261,7 +263,7 @@
 		  	];
 		  	
 
-		  	shapiro = new google.maps.Polygon({
+		  	building6 = new google.maps.Polygon({
 		    paths: shapiroCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -283,7 +285,7 @@
 		  	];
 		  	
 
-		  	rosNorth = new google.maps.Polygon({
+		  	building7 = new google.maps.Polygon({
 		    paths: rosNorthCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -300,7 +302,7 @@
 		  	];
 		  	
 
-		  	rosEast = new google.maps.Polygon({
+		  	building8 = new google.maps.Polygon({
 		    paths: rosEastCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -318,7 +320,7 @@
 		  	];
 		  	
 
-		  	rosSouth = new google.maps.Polygon({
+		  	building9 = new google.maps.Polygon({
 		    paths: rosSouthCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -329,17 +331,9 @@
 
 		  	//***HERE ENDS ROSENTHAL QUAD
 		  	
-		  	
-		  	SSC.setMap(map);
-		  	library.setMap(map);
-		  	usdan.setMap(map);
-		  	usen.setMap(map);
-		  	ren.setMap(map);
-		  	deroy.setMap(map);
-		  	shapiro.setMap(map);
-		  	rosNorth.setMap(map);
-		  	rosEast.setMap(map);
-		  	rosSouth.setMap(map);
+		  	<% for i in 0..9 %>
+		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
+		  	<% end %>
 
 
 //*********HERE ENDS MAPPING OF BRANDEIS******************//
