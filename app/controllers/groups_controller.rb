@@ -58,4 +58,11 @@ class GroupsController < ApplicationController
     end
   end
 
+  def changeVisibility
+    grp = Group.find(params[:group_id])
+    grp.visible = !(grp.visible)
+    grp.save! 
+    redirect_to groups_path
+  end
+
 end

@@ -10,6 +10,6 @@ class CheckInController < ApplicationController
 
   private 
   def check_in_params
-    params.permit(:user_id, :latitude, :longitude, :user_id, :time)
+    params.permit(:user_id, :latitude, :longitude, :time, :location)
   end
 end

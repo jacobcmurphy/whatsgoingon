@@ -1,6 +1,7 @@
 Whatsgoingon::Application.routes.draw do
 
   get "get_markers/getmark"
+  match "groups/changeVisibility", via: :post
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   match "groups" => "groups#index", via: :get

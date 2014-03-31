@@ -7,7 +7,7 @@ class CheckIn < ActiveRecord::Base
 	    #.where('check_ins.time > ? AND check_ins.user_id != ?', 15.minutes.ago, uid)
 
 	    CheckIn.find_by_sql([
-	    	"SELECT distinct ON (c.user_id) c.user_id, c.latitude, c.longitude
+	    	"SELECT distinct ON (c.user_id) c.user_id, c.latitude, c.longitude, c.location
 	    	FROM check_ins AS c
 	    	WHERE c.time > ? AND c.user_id != ? AND c.user_id IN
 	    		(SELECT g.user_id
