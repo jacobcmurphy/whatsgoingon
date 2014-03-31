@@ -5,6 +5,7 @@ class CreateCheckIns < ActiveRecord::Migration
       t.timestamp :time
       t.float :latitude
       t.float :longitude
+      t.string :location
     end
   end
 end

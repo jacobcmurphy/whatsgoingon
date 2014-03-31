@@ -65,12 +65,14 @@ ActiveRecord::Schema.define(version: 20140324030137) do
     t.datetime "time"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "location"
   end
 
   create_table "group_members", force: true do |t|
     t.integer "group_id"
     t.integer "user_id"
     t.integer "friend_id"
+    t.boolean "accepted"
   end
 
   create_table "groups", force: true do |t|
