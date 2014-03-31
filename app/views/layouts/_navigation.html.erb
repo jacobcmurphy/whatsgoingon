@@ -51,7 +51,7 @@
               return +(Math.round(num + "e+2")  + "e-2");
             }
             function success(position) {
-              document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...CheckIn.most_recent(cuid).length %><%= raw "<div class=\"row card\">" %><%= raw "<div class=\"col-md-12 listrow\">" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "<span class=\"right\">\'+getDistanceFromLatLonInMi(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>" %><%= raw "</div>" %><% end %><% if CheckIn.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
+              document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...CheckIn.most_recent(cuid).length %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "<span class=\"right\">\'+getDistanceFromLatLonInMi(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>"), "/" %><%= raw "</div>" %><% end %><% if CheckIn.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
             }
 
             function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {

@@ -3,7 +3,7 @@
 </center>
 
 <% @groups.each do |group| %>
-<div class="card"> <%= group.name %> <span class="right">
+<div class="card" > <%= group.name %> <span class="right">
 	<%= link_to 'Edit Group', group, class: 'btn btn-default btn-info' %> 
 	<%= link_to 'Delete', group,
 	confirm: 'Are you sure?', :method => :delete, class: 'btn btn-default btn-danger' %> </span>
