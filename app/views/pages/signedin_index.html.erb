@@ -46,6 +46,13 @@
 			};
 			map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
+			<% if (params.has_key?(:lat) && params.has_key?(:lng)) %>
+			<%= "map.setCenter(new google.maps.LatLng(" + params[:lat] + ", " + params[:lng] + "));" %>
+			<% end %>
+
+			var markers = [];
+			var infoWindows = [];
+
 			//// ******** BUTTON
 
 			// Create a div to hold the control.
@@ -73,25 +80,31 @@
 			controlText.innerHTML = '<strong>Refresh</strong>';
 			controlUI.appendChild(controlText);
 
+			// refresh button
 			google.maps.event.addDomListener(controlUI, 'click', function() {
-				google.maps.Map.prototype.clearOverlays = function() {
-				  for (var i = 0; i < markersArray.length; i++ ) {
-				    markersArray[i].setMap(null);
-				  }
-				  markersArray.length = 0;
+				// clear markers
+				for (var i = 0; i < markers.length; i++) {
+				    markers[i].setMap(null);
 				}
+				markers = [];
+				// add my location
 		   		var mymarker = new google.maps.Marker({
 					position: latlng, 
 					map: map, 
 					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
 					zIndex: 2
 				});
+				markers.push(mymarker);
 				
 				var myinfowindow = new google.maps.InfoWindow({
 					content: "You are here!"
 				});
+				infoWindows.push(myinfowindow);
 
 				google.maps.event.addListener(mymarker, 'click', function() {
+					for (var i = 0; i < infoWindows.length; i++) {
+						infoWindows[i].close();
+					}
 					myinfowindow.open(map, mymarker);
 				});
 
@@ -102,14 +115,29 @@
 			                position: newlatLng,
 			                map: map
 			            });
+			            markers.push(newmarker);
 			            var newmyinfowindow = new google.maps.InfoWindow({
 							content: val[0]['name']
 						});
+						infoWindows.push(newmyinfowindow);
 						google.maps.event.addListener(newmarker, 'click', function() {
+							for (var i = 0; i < infoWindows.length; i++) {
+								infoWindows[i].close();
+							}
 							newmyinfowindow.open(map, newmarker);
 						});	
 	  				});
 				});
+
+				$.ajax({  
+				    type: 'POST',  
+				    url: '/check_in', 
+				    data: { latitude: latlng.lat(), longitude: latlng.lng() },
+				    success: function(response) {
+				        
+				    }
+				});
+
   			});
 
 			controlDiv.index = 1;
@@ -118,6 +146,8 @@
 			//// ******** BUTTON
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
+			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South"];
+
 			var opac = 0.35;
 
 			var SSCCoords = [
@@ -130,7 +160,7 @@
 			];
 
 		  	
-		  	SSC = new google.maps.Polygon({
+		  	building0 = new google.maps.Polygon({
 		    paths: SSCCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -148,7 +178,7 @@
 			];
 
 		  	// Construct the library
-		  	library = new google.maps.Polygon({
+		  	building1 = new google.maps.Polygon({
 		    paths: libraryCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -166,7 +196,7 @@
 		  		new google.maps.LatLng(42.368424, -71.257276)
 		  	];
 
-		  	usdan = new google.maps.Polygon({
+		  	building2 = new google.maps.Polygon({
 		    paths: usdanCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -185,7 +215,7 @@
 		  	];
 		  	
 
-		  	usen = new google.maps.Polygon({
+		  	building3 = new google.maps.Polygon({
 		    paths: usenCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -202,7 +232,7 @@
 		  	];
 		  	
 
-		  	ren = new google.maps.Polygon({
+		  	building4 = new google.maps.Polygon({
 		    paths: renCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -220,7 +250,7 @@
 		  	];
 		  	
 
-		  	deroy = new google.maps.Polygon({
+		  	building5 = new google.maps.Polygon({
 		    paths: deroyCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -237,7 +267,7 @@
 		  	];
 		  	
 
-		  	shapiro = new google.maps.Polygon({
+		  	building6 = new google.maps.Polygon({
 		    paths: shapiroCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -259,7 +289,7 @@
 		  	];
 		  	
 
-		  	rosNorth = new google.maps.Polygon({
+		  	building7 = new google.maps.Polygon({
 		    paths: rosNorthCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -276,7 +306,7 @@
 		  	];
 		  	
 
-		  	rosEast = new google.maps.Polygon({
+		  	building8 = new google.maps.Polygon({
 		    paths: rosEastCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -294,7 +324,7 @@
 		  	];
 		  	
 
-		  	rosSouth = new google.maps.Polygon({
+		  	building9 = new google.maps.Polygon({
 		    paths: rosSouthCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: 0.8,
@@ -305,17 +335,9 @@
 
 		  	//***HERE ENDS ROSENTHAL QUAD
 		  	
-		  	
-		  	SSC.setMap(map);
-		  	library.setMap(map);
-		  	usdan.setMap(map);
-		  	usen.setMap(map);
-		  	ren.setMap(map);
-		  	deroy.setMap(map);
-		  	shapiro.setMap(map);
-		  	rosNorth.setMap(map);
-		  	rosEast.setMap(map);
-		  	rosSouth.setMap(map);
+		  	<% for i in 0..9 %>
+		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
+		  	<% end %>
 
 
 //*********HERE ENDS MAPPING OF BRANDEIS******************//
@@ -326,12 +348,17 @@
 				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
 				zIndex: 2
 			});
+			markers.push(mymarker);
 			
 			var myinfowindow = new google.maps.InfoWindow({
 				content: "You are here!"
 			});
+			infoWindows.push(myinfowindow);
 
 			google.maps.event.addListener(mymarker, 'click', function() {
+				for (var i = 0; i < infoWindows.length; i++) {
+					infoWindows[i].close();
+				}
 				myinfowindow.open(map, mymarker);
 			});
 
@@ -340,8 +367,10 @@
 			<% for i in 0...CheckIn.most_recent(cuid).length %>
 			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ");" %>
 			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map });\n" %>
+			<%= raw "markers.push(newmarker"+i.to_s+");" %>
 			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "\" });" %>
-			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
+			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
+			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
 
@@ -367,6 +396,7 @@
 			});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
 		}
+
 
 
 
