@@ -1,6 +1,6 @@
 <%# navigation styled for Bootstrap 3.0 %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<div class="navbar navbar-default navbar-fixed-top nounderline">
+<div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <%= link_to "What's Going On?", root_path, class: 'navbar-brand' %>
@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
       </button>
   </div>
-  <div class="navbar-collapse collapse nounderline" id="navbar-main">
+  <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav">
         <% if user_signed_in? %>
         <li><%= link_to "Friends", "#myModal", "data-toggle" => "modal" %></li>
@@ -20,9 +20,23 @@
         <% end %>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right nounderline">
+    <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
       <!-- <li><%= link_to current_user.name, current_user %></li> -->
+        <% notifs = GroupMember.notifications current_user.id %>
+
+         <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications (<%= notifs.size.to_s %>) <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                 <% notifs.each do |pend| %>
+                  <li>
+                    <%= pend[1] %> wants to add you.
+                  </li>
+                <% end %>
+              </ul>
+        </li>
+
+
       <li><%= link_to "Logout", destroy_user_session_path %></li>
       <% else %>
       <li><%= link_to "Sign in", new_user_session_path %></li>

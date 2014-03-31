@@ -25,6 +25,10 @@ class GroupMembersController < ApplicationController
   	end
   end
 
+  def accept
+    
+  end
+
   def destroy
     if user_signed_in?
       GroupMember.find(params[:mid].to_i).destroy
