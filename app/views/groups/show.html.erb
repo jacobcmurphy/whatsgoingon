@@ -1,13 +1,11 @@
 <br />
 <script>
 function changeGroupVisibility(groupId) {
-  console.log("in change method");
   $.ajax({  
       type: 'POST',  
       url: '/groups/changeVisibility', 
       data: { group_id: groupId },
       success: function(response) {
-        console.log("success");
       }
   });
 }
