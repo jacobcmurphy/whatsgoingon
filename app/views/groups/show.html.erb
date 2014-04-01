@@ -16,7 +16,7 @@ function changeGroupVisibility(groupId) {
   <div><h4><%= @group.name %> </h4>
 
     <span class="right top">  
-    	<input id="option1" type="checkbox" data-size="small" name="<%= "group" + @group.id.to_s + "VisibilityToggle" %>" value="option1" data-off-color="default" onclick="changeGroupVisibility(<%= @group.id.to_s %>);">
+    	<input id="option1" type="checkbox" data-size="small" name="<%= "group" + @group.id.to_s + "VisibilityToggle" %>" value="option1" data-off-color="default" onfocus="changeGroupVisibility(<%= @group.id.to_s %>);">
        <script>$("[name='<%= "group" + @group.id.to_s + "VisibilityToggle" %>']").bootstrapSwitch('state', <%= @group.visible.to_s %>, false);</script>
       </input>
     	<%= link_to 'Delete', @group,
