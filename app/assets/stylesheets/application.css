@@ -47,3 +47,7 @@
 .center {
 	text-align: center;
 }
+
+.user-notification-block {
+	padding: 3px;
+}

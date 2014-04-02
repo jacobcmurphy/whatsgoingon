@@ -51,7 +51,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <% if notifs.size > 0 %>(<%= notifs.size.to_s %>) <% end %><b class="caret"></b></a>
               <ul class="dropdown-menu">
                  <% notifs.each do |pend| %>
-                  <li>
+                  <li class="user-notification-block">
                     <p>
                     <%= pend[1] %> wants to add you.
                     <div class="btn-group">
