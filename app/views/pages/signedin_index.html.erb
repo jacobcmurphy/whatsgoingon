@@ -56,7 +56,7 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman"];
 
 			<% buildingsArraySize = 13 %>
 
@@ -293,7 +293,7 @@
 		  		new google.maps.LatLng(42.363767, -71.261431)					
 		  	];
 
-		  	building11 = new google.maps.Polygon({
+		  	building12 = new google.maps.Polygon({
 		    paths: ridgeBCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -313,7 +313,7 @@
 		  		new google.maps.LatLng(42.369728, -71.255713)					
 		  	];
 
-		  	building12 = new google.maps.Polygon({
+		  	building13 = new google.maps.Polygon({
 		    paths: reitmanCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -327,14 +327,10 @@
 		  
 
 		  	//***HERE ENDS NORTH
-
-
-		  
 		  	
 		  	<% for i in 0..buildingsArraySize %>
 		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
 		  	<% end %>
-
 
 
 //*********HERE ENDS MAPPING OF BRANDEIS******************//
