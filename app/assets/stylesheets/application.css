@@ -50,4 +50,9 @@
 
 .user-notification-block {
 	padding: 3px;
+	padding-left: 4px;
+}
+
+.request-buttons-left-padding {
+	padding-left: 7px;
 }
