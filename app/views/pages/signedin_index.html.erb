@@ -33,7 +33,7 @@
 			var latlngTest = new google.maps.LatLng(position.coords.latitude, position.coords.longitude + 0.00005);
 
 			var myOptions = {
-				zoom: 20,
+				zoom: 18,
 				center: latlng,
 				zoomControl: false,
 				streetViewControl: false,
@@ -56,9 +56,9 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South"];
+			var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman"];
 
-			<% buildingsArraySize = 9 %>
+			<% buildingsArraySize = 13 %>
 
 			var opac = 0;
 
@@ -246,10 +246,95 @@
 		  	});
 
 		  	//***HERE ENDS ROSENTHAL QUAD
+
+
+		  	var SCCCoords = [
+		  		new google.maps.LatLng(42.365510, -71.260671),
+		  		new google.maps.LatLng(42.365542, -71.259840),
+		  		new google.maps.LatLng(42.365792, -71.259636),
+		  		new google.maps.LatLng(42.366158, -71.260080),
+		  		new google.maps.LatLng(42.366004, -71.260434)			
+		  	];
+		  	
+
+		  	building10 = new google.maps.Polygon({
+		    paths: SCCCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var shermanCoords = [
+		  		new google.maps.LatLng(42.366251, -71.260959),
+		  		new google.maps.LatLng(42.366216, -71.260450),
+		  		new google.maps.LatLng(42.366319, -71.260257),
+		  		new google.maps.LatLng(42.366707, -71.260514),
+		  		new google.maps.LatLng(42.366676, -71.260954),
+		  		new google.maps.LatLng(42.366347, -71.261018)				
+		  	];
+		  	
+
+		  	building11 = new google.maps.Polygon({
+		    paths: shermanCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	//***HERE BEGINS RIDGEWOOD
+		  	var ridgeBCoords = [
+		  		new google.maps.LatLng(42.363828, -71.260930),
+		  		new google.maps.LatLng(42.364008, -71.260857),
+		  		new google.maps.LatLng(42.363963, -71.261450),
+		  		new google.maps.LatLng(42.363767, -71.261431)					
+		  	];
+
+		  	building11 = new google.maps.Polygon({
+		    paths: ridgeBCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+		  	
+		  	//***HERE ENDS RIDGEWOOD
+
+		  	//***HERE BEGINS NORTH
+
+		  	var reitmanCoords = [
+		  		new google.maps.LatLng(42.369502, -71.254989),
+		  		new google.maps.LatLng(42.369672, -71.254908),
+		  		new google.maps.LatLng(42.369855, -71.255627),
+		  		new google.maps.LatLng(42.369728, -71.255713)					
+		  	];
+
+		  	building12 = new google.maps.Polygon({
+		    paths: reitmanCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	
+
+		  
+
+		  	//***HERE ENDS NORTH
+
+
+		  
 		  	
 		  	<% for i in 0..buildingsArraySize %>
 		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
 		  	<% end %>
+
 
 
 //*********HERE ENDS MAPPING OF BRANDEIS******************//
