@@ -29,6 +29,7 @@
           location.reload();
         }
     });
+    location.reload();
   }
 
   function rejectFriend(friendId) {
@@ -37,6 +38,7 @@
         url: '/group_members/reject', 
         data: { friend_id: friendId },
         success: function() {
+          location.reload();
         }
     });
     location.reload();
