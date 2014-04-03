@@ -19,18 +19,48 @@
         <% else %>
         <% end %>
     </ul>
+<script>
+  function acceptFriend(friendId) {
+    $.ajax({  
+        type: 'POST',  
+        url: '/group_members/accept', 
+        data: { friend_id: friendId },
+        success: function() {
+          location.reload(true);
+        }
+    });
+    location.reload(true);
+  }
 
+  function rejectFriend(friendId) {
+    $.ajax({  
+        type: 'POST',  
+        url: '/group_members/reject', 
+        data: { friend_id: friendId },
+        success: function() {
+          location.reload(true);
+        }
+    });
+    location.reload(true);
+  }
+</script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
       <!-- <li><%= link_to current_user.name, current_user %></li> -->
         <% notifs = GroupMember.notifications current_user.id %>
 
          <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications (<%= notifs.size.to_s %>) <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <% if notifs.size > 0 %>(<%= notifs.size.to_s %>) <% end %><b class="caret"></b></a>
               <ul class="dropdown-menu">
                  <% notifs.each do |pend| %>
-                  <li>
+                  <li class="user-notification-block">
+                    <p>
                     <%= pend[1] %> wants to add you.
+                    <div class="btn-group request-buttons-left-padding">
+                      <button type="button" class="btn btn-success" onclick="acceptFriend(<%= pend[0] %>);">Accept</button>
+                      <button type="button" class="btn btn-danger" onclick="rejectFriend(<%= pend[0] %>);">Reject</button>
+                    </div>
+                    </p>
                   </li>
                 <% end %>
               </ul>

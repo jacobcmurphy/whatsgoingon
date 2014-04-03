@@ -42,7 +42,7 @@ class GroupsController < ApplicationController
 
     @members = User.find_all_by_id(mem_ids)
 
-    if params[:search].nil?
+    if params[:search].nil? or params[:search].strip == ""
       @users = nil
     else
       @users = User.find(:all, :conditions => ['name LIKE ? OR email LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%"])

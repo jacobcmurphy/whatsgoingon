@@ -9,7 +9,7 @@ class CheckIn < ActiveRecord::Base
 	    	WHERE c.time > ? AND c.user_id != ? AND c.user_id IN
 	    		(SELECT g.user_id
 	    		FROM groups as g, group_members AS gm
-	    		WHERE g.user_id = gm.user_id AND gm.friend_id = ? AND gm.accepted = TRUE)", 10.minutes.ago, uid, uid])
+	    		WHERE g.user_id = gm.user_id AND g.visible = TRUE AND gm.friend_id = ? AND gm.accepted = TRUE)", 10.minutes.ago, uid, uid])
 	end
   end
 end
