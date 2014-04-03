@@ -26,10 +26,10 @@
         url: '/group_members/accept', 
         data: { friend_id: friendId },
         success: function() {
-          location.reload();
+          location.reload(true);
         }
     });
-    location.reload();
+    location.reload(true);
   }
 
   function rejectFriend(friendId) {
@@ -38,10 +38,10 @@
         url: '/group_members/reject', 
         data: { friend_id: friendId },
         success: function() {
-          location.reload();
+          location.reload(true);
         }
     });
-    location.reload();
+    location.reload(true);
   }
 </script>
     <ul class="nav navbar-nav navbar-right">
