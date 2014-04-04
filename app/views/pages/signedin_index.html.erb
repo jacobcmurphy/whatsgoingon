@@ -56,11 +56,11 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman", "Cable", "Gordon", "Scheffres"];
 
-			<% buildingsArraySize = 13 %>
+			<% buildingsArraySize = 16 %>
 
-			var opac = 0;
+			var opac = .35;
 
 			var SSCCoords = [
 		  		new google.maps.LatLng(42.366061, -71.258425),
@@ -322,10 +322,53 @@
 		    fillOpacity: opac
 		  	});
 
-		  	
+		  	var cableCoords = [
+		  		new google.maps.LatLng(42.368966, -71.255500),
+		  		new google.maps.LatLng(42.368919, -71.255309),
+		  		new google.maps.LatLng(42.369434, -71.255063),
+		  		new google.maps.LatLng(42.369474, -71.255234)					
+		  	];
 
-		  
+		  	building14 = new google.maps.Polygon({
+		    paths: cableCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
 
+		  	var gordonCoords = [
+		  		new google.maps.LatLng(42.369358, -71.256010),
+		  		new google.maps.LatLng(42.369923, -71.255747),
+		  		new google.maps.LatLng(42.369971, -71.255935),
+		  		new google.maps.LatLng(42.369416, -71.256201)					
+		  	];
+
+		  	building15 = new google.maps.Polygon({
+		    paths: gordonCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var scheffresCoords = [
+		  		new google.maps.LatLng(42.369014, -71.256386),
+		  		new google.maps.LatLng(42.369450, -71.256168),
+		  		new google.maps.LatLng(42.369501, -71.256340),
+		  		new google.maps.LatLng(42.369055, -71.256549)					
+		  	];
+
+		  	building16 = new google.maps.Polygon({
+		    paths: scheffresCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
 		  	//***HERE ENDS NORTH
 		  	
 		  	<% for i in 0..buildingsArraySize %>
