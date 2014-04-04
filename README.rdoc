@@ -1,5 +1,5 @@
 == What's Going On?
-{img src = "https://www.codeship.io/projects/f7033570-9dbd-0131-1b93-5208ed84afda/status" />}[https://www.codeship.io/projects/f7033570-9dbd-0131-1b93-5208ed84afda/status]
+{<img src = "https://www.codeship.io/projects/f7033570-9dbd-0131-1b93-5208ed84afda/status" />}[https://www.codeship.io/projects/f7033570-9dbd-0131-1b93-5208ed84afda/status]
 {<img src="https://codeclimate.com/github/jacobcmurphy/whatsgoingon.png" />}[https://codeclimate.com/github/jacobcmurphy/whatsgoingon]
 
 An app that helps you find friends and know what's going on.
