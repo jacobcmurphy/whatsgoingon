@@ -89,6 +89,7 @@ end
 
 group :test do
   #gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails
+  gem 'pry'
   gem 'database_cleaner' # https://github.com/bmabey/database_cleaner
   gem 'shoulda-matchers' # https://github.com/thoughtbot/shoulda-matchers
   gem 'launchy'

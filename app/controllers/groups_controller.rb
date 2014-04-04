@@ -4,7 +4,6 @@ class GroupsController < ApplicationController
       @group = Group.new
     else
       redirect_to groups_path
-      #redirect_to new_user_session_path
     end
   end
 
@@ -16,7 +15,6 @@ class GroupsController < ApplicationController
       end
     else
       redirect_to groups_path
-      #redirect_to new_user_session_path
   	end
   end
 
@@ -29,6 +27,7 @@ class GroupsController < ApplicationController
         format.json { head :no_content }
       end
    end
+   render :nothing => true
   end
 
   def show
@@ -54,7 +53,6 @@ class GroupsController < ApplicationController
       @groups = Group.where(user_id: current_user.id)
     else
       redirect_to groups_path
-      #redirect_to new_user_session_path
     end
   end
 

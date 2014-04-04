@@ -3,9 +3,11 @@
 one:
   group_id: 1
   user_id: 1
-  friend_id: 1
+  friend_id: 2
+  accepted: true
 
 two:
-  group_id: 1
-  user_id: 1
+  group_id: 2
+  user_id: 2
   friend_id: 1
+  accepted: true

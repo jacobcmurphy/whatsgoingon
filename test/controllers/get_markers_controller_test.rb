@@ -1,3 +1,4 @@
+=begin
 require 'test_helper'
 
 class GetMarkersControllerTest < ActionController::TestCase
@@ -7,3 +8,5 @@ class GetMarkersControllerTest < ActionController::TestCase
   end
 
 end
+=end
+# this should not have it's own controller - put it in the CheckIn model

@@ -29,3 +29,19 @@ production:
 
   google_key: "1041392525048-7scnaq9ra0a25mj7sch19gi74fdvsfmk.apps.googleusercontent.com"
   google_secret: "Nri5aj1eI1L5_3PJfWFrrtoJ"
+
+test:
+  facebook_key: "826643820685975"
+  facebook_secret: "a836718c60a360b5c52ef2cf0b5f4fca"
+
+  twitter_key: "NB4qEM6mFsomiOI26Sp8BQ"
+  twitter_secret: "bTSpDvixWSpiYyZ5HaEp2KJYZsggKL7DnDZGbh7r8"
+
+  github_key: "YOUR_KEY"
+  github_secret: "YOUR_SECRET"
+
+  linkedin_key: "YOUR_KEY"
+  linkedin_secret: "YOUR_SECRET"
+
+  google_key: "1041392525048-7scnaq9ra0a25mj7sch19gi74fdvsfmk.apps.googleusercontent.com"
+  google_secret: "Nri5aj1eI1L5_3PJfWFrrtoJ"

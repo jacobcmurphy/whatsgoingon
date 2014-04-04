@@ -22,8 +22,11 @@ class GroupMembersController < ApplicationController
         gm.save!
       end
       redirect_to group
+    else
+      redirect_to root_url
   	end
   end
+
 
   def accept
     group = nil
@@ -52,7 +55,7 @@ class GroupMembersController < ApplicationController
       request.save!
     end
 
-    redirect_to redirect_to session.delete(:return_to)
+    redirect_to session.delete(:return_to)
   end
 
   def reject
@@ -64,6 +67,8 @@ class GroupMembersController < ApplicationController
     if user_signed_in?
       GroupMember.find(params[:mid].to_i).destroy
       redirect_to Group.find(params[:gid].to_i)
+    else 
+      redirect_to root_url
     end
   end
 

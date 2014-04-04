@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  time: 2014-03-07 19:41:09
+  latitude: 1.5
+  longitude: 1.5
+  location: 'SSC'
+
+two:
+  user_id: 1
+  time: 2014-03-07 19:41:09
+  latitude: 1.5
+  longitude: 1.5
+  location: 'Library'
