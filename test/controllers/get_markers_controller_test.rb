@@ -9,4 +9,5 @@ class GetMarkersControllerTest < ActionController::TestCase
 
 end
 =end
-# this should not have it's own controller - put it in the CheckIn model
+
+# the entire GetMarkers operation should be moved to the CheckIn model
