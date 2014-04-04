@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'pry'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,7 +23,6 @@ module Whatsgoingon
     social_keys = File.join(Rails.root, 'config', 'social_keys.yml')
 
     CONFIG = HashWithIndifferentAccess.new(YAML::load(IO.read(social_keys)))[Rails.env]
-#binding.pry
     CONFIG.each do |k,v|
       ENV[k.upcase] ||= v
     end
