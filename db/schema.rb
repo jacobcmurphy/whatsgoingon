@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.string   "unconfirmed_email"
     t.string   "authentication_token"
     t.string   "image"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "location"
     t.string   "username"
   end
