@@ -5,7 +5,7 @@ function searchForFriends() {
 	var query = $("#search_box").val();
 
 	var options = {
-	  keys: ['name', 'email', 'location']
+	  keys: ['name', 'location']
 	};
 
 	var f = new Fuse(friends, options);

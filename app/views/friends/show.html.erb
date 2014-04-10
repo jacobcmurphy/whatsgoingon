@@ -12,7 +12,7 @@
         current_user.friends.each do |f|
           f_ids << f.user_id
         end
-        @my_friends = User.find(f_ids)
+        @my_friends = User.find(f_ids, :select => "name, location, latitude, longitude")
         %>
 
         <script>
