@@ -19,3 +19,5 @@ groups = Group.create([
 	])
 
 GroupMember.create(group_id: 1002, user_id: 1, friend_id: 2)
+
+Friend.create(user_id: 1, friend_id: 1, accepted: true)

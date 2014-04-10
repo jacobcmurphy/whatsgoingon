@@ -16,10 +16,15 @@
         %>
 
         <script>
+            var $haslocation = false;
+            var $pos = null;
+
             function roundToTwo(num) {
                 return +(Math.round(num + "e+2")  + "e-2");
             }
             function success(position) {
+                $haslocation = true;
+                $pos = position;
                 $("#therowsinthebody").html('<% @my_friends.each do |f| %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + f[:name].to_s + "<span class=\"right\">"+f[:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"card\">You have no friends. Add a new friend.</div>" %><% end %>');
             }
 
