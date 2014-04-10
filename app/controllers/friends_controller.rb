@@ -57,7 +57,7 @@ class FriendsController < ApplicationController
   		thisMarker = { user_friends[i][:user_id] => [
 	                  { name: user_friends[i][:name] },
 	                  { lat:  user_friends[i][:latitude] },
-	                  { lng:  user_friends[i][:longitude] } 
+	                  { lng:  user_friends[i][:longitude] }
 	                ]
 	            }
 	    dbMarkers.merge! thisMarker
@@ -66,7 +66,6 @@ class FriendsController < ApplicationController
   	respond_to do |format|
   		format.json { render json: dbMarkers }
     end
-
   end
 
 end

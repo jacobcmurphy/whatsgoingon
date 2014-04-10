@@ -382,7 +382,9 @@
 				position: latlng, 
 				map: map, 
 				title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
-				zIndex: 2
+				zIndex: 2,
+				<%= raw "icon: '/images/marker" + current_user.color_status.to_s + ".png'" %>
+
 			});
 			markers.push(mymarker);
 			
@@ -476,7 +478,10 @@
 					map: map, 
 					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
 					zIndex: 2
+					
+					
 				});
+		
 				markers.push(mymarker);
 	
 				var myinfowindow = new google.maps.InfoWindow({

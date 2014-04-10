@@ -15,6 +15,7 @@ Whatsgoingon::Application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
   match "users/update_location" => "users#update_location", via: :post
+  match "users/color_status" => "users#color_status", via: :post
 
   resources :sessions, only: [:new, :create, :destroy]
   
@@ -22,6 +23,7 @@ Whatsgoingon::Application.routes.draw do
   resource :group_members, only: [:create, :destroy]
   resource :friends, only: [:create, :new, :destroy, :show]
   match "friends/getmarkers" => "friends#getmarkers", via: :get
+
 
 
   root 'pages#landing'

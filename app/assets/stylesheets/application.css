@@ -38,7 +38,7 @@
 
 .right {
 	float:right;
-	text-align:right
+	text-align:right;
 }
 
 .left {
@@ -61,4 +61,8 @@
 
 .request-buttons-left-padding {
 	padding-left: 7px;
+}
+
+.botherme {
+	float:right;
 }
