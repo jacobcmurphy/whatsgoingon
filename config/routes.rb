@@ -1,25 +1,27 @@
 Whatsgoingon::Application.routes.draw do
 
-  get "get_markers/getmark"
   match "groups/changeVisibility", via: :post
-  match "group_members/accept", via: :post
-  match "group_members/reject", via: :post
+  #match "group_members/accept", via: :post
+  #match "group_members/reject", via: :post
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   match "groups" => "groups#index", via: :get
   match "groups" => "groups#destroy", via: :delete
+
   get "pages/terms"
   get "pages/welcome"
   get "pages/landing"
+
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
+  match "users/update_location" => "users#update_location", via: :post
+
   resources :sessions, only: [:new, :create, :destroy]
   
-  resources :check_in, only: [:create, :new]
   resources :groups, only: [:new, :create, :destroy, :show]
   resource :group_members, only: [:create, :destroy]
   resource :friends, only: [:create, :new, :destroy, :show]
-
+  match "friends/getmarkers" => "friends#getmarkers", via: :get
 
 
   root 'pages#landing'

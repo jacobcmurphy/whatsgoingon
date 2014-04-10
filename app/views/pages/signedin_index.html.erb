@@ -1,7 +1,7 @@
 <% cuid = current_user.id %>
 <div class="center">
 
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
 	    
 	<article>
 		<p id="loading">Finding your location: <span id="status">checking...</span></p>
@@ -398,13 +398,11 @@
 				myinfowindow.open(map, mymarker);
 			});
 
-			
-
-			<% for i in 0...CheckIn.most_recent(cuid).length %>
-			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ");" %>
+			<% for i in 0...Friend.most_recent(cuid).length %>
+			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + Friend.most_recent(cuid)[i][:latitude].to_s + ", " + Friend.most_recent(cuid)[i][:longitude].to_s + ");" %>
 			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map });\n" %>
 			<%= raw "markers.push(newmarker"+i.to_s+");" %>
-			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name] + "\" });" %>
+			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + Friend.most_recent(cuid)[i][:name] + "\" });" %>
 			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
@@ -415,20 +413,18 @@
 		  <% end %>
 
 		
-
-			$.ajax({  
+			$.ajax({
 			    type: 'POST',  
-			    url: '/check_in', 
+			    url: 'users/update_location', 
 			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
 			    success: function(response) {
-			        
 			    }
 			});
 
 			setInterval(function() {
 			    $.ajax({  
 			    type: 'POST',  
-			    url: '/check_in', 
+			    url: 'users/update_location', 
 			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
 			    success: function(response) {
 			        
@@ -472,6 +468,7 @@
 				for (var i = 0; i < markers.length; i++) {
 				    markers[i].setMap(null);
 				}
+
 				markers = [];
 				// add my location
 		   		var mymarker = new google.maps.Marker({
@@ -481,7 +478,7 @@
 					zIndex: 2
 				});
 				markers.push(mymarker);
-				
+	
 				var myinfowindow = new google.maps.InfoWindow({
 					content: "You are here!"
 				});
@@ -493,8 +490,7 @@
 					}
 					myinfowindow.open(map, mymarker);
 				});
-
-				$.getJSON( "get_markers/getmark.json", function( data ) {
+				$.getJSON( "friends/getmarkers.json", function( data ) {
 					$.each( data, function( key, val ) {
 			            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
 			            var newmarker = new google.maps.Marker({
@@ -517,10 +513,9 @@
 
 				$.ajax({  
 				    type: 'POST',  
-				    url: '/check_in', 
+				    url: 'users/update_location', 
 				    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
-				    success: function(response) {
-				        
+				    success: function(response) {  
 				    }
 				});
 
@@ -530,10 +525,6 @@
   			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
 
 			//// ******** BUTTON
-
-
-
-
 
 		}
 

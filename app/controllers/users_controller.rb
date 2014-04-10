@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    if signed_in?
-        render 'signedin_index'
+    if user_signed_in?
+        redirect_to current_user
     else
-      render 'index'
+      redirect_to root_url
     end
   end
 
@@ -25,8 +25,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if !signed_in?
-      redirect_to signin_path
+    if !user_signed_in?
+      redirect_to root_url
     elsif current_user.id != params[:id].to_i
       redirect_to current_user
     end 
@@ -46,6 +46,16 @@ class UsersController < ApplicationController
       end
     end
   end
+
+
+   def update_location
+    curr = User.find(current_user.id)
+    curr.latitude = params[:latitude]
+    curr.longitude = params[:longitude]
+    curr.location = params[:location]
+    curr.save!
+    render nothing: true
+   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json

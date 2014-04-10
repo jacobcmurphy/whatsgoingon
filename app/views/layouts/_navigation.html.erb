@@ -3,7 +3,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "What's Going On?", "/", class: 'navbar-brand' %>
+        <%= link_to "What's Going On?", root_url, class: 'navbar-brand' %>
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -15,7 +15,7 @@
         <% if user_signed_in? %>
         <li><%= link_to "Friends", friends_path %></li>
         <li><%= link_to "Groups", groups_path %></li>
-        <li><%= link_to 'My Account', current_user %></li>
+        <li><%= link_to "My Account", User.find(current_user.id) %></li>
         <% else %>
         <% end %>
     </ul>
@@ -23,10 +23,9 @@
   function acceptFriend(friendId) {
     $.ajax({  
         type: 'POST',  
-        url: '/group_members/accept', 
+        url: '/friends/accept', 
         data: { friend_id: friendId },
         success: function() {
-          location.reload(true);
         }
     });
     location.reload(true);
@@ -35,7 +34,7 @@
   function rejectFriend(friendId) {
     $.ajax({  
         type: 'POST',  
-        url: '/group_members/reject', 
+        url: '/friends/reject', 
         data: { friend_id: friendId },
         success: function() {
           location.reload(true);
@@ -46,8 +45,7 @@
 </script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-      <!-- <li><%= link_to current_user.name, current_user %></li> -->
-        <% notifs = GroupMember.notifications current_user.id %>
+        <% notifs = Friend.notifications current_user.id %>
 
          <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <% if notifs.size > 0 %>(<%= notifs.size.to_s %>) <% end %><b class="caret"></b></a>

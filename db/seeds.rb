@@ -17,3 +17,5 @@ groups = Group.create([
 	{id: 1006, user_id: 1, name: "Archery", visible: true},
 	{id: 1007, user_id: 1, name: "Ballroom Dance Club", visible: true}
 	])
+
+GroupMember.create(group_id: 1002, user_id: 1, friend_id: 2)

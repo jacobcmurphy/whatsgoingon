@@ -18,7 +18,7 @@
             function success(position) {
 
 
-                document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...CheckIn.most_recent(cuid).length %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + User.find(CheckIn.most_recent(cuid)[i][:user_id])[:name].to_s + "<span class=\"right\">"+CheckIn.most_recent(cuid)[i][:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + CheckIn.most_recent(cuid)[i][:latitude].to_s + ", " + CheckIn.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+CheckIn.most_recent(cuid)[i][:latitude].to_s+"&lng="+CheckIn.most_recent(cuid)[i][:longitude].to_s) %><% end %><% if CheckIn.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
+                document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...Friend.most_recent(cuid).length %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + Friend.most_recent(cuid)[i][:name].to_s + "<span class=\"right\">"+Friend.most_recent(cuid)[i][:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + Friend.most_recent(cuid)[i][:latitude].to_s + ", " + Friend.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+Friend.most_recent(cuid)[i][:latitude].to_s+"&lng="+Friend.most_recent(cuid)[i][:longitude].to_s) %><% end %><% if Friend.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
             }
 
             function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
@@ -76,19 +76,16 @@
         <h4 class="modal-title" id="myModalLabel">Add New Friend</h4>
       </div>
       <div>
-        <%= form_tag @group, method: "get" do %>
+        <%= form_tag @friend, method: "get" do %>
         <div class="form-group">
-            <%= text_field_tag :search, nil, class: "form-control", :placeholder=> "Search for your new friend"  %>
+            <%= text_field_tag :search, nil, class: "form-control", placeholder: "Search for your new friend"  %>
             <%= submit_tag "Search", class: "btn btn-success"%>
         </div>
         <% end %>
       </div>
 
-
-
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>
