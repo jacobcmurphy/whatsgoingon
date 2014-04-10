@@ -1,36 +1,43 @@
-<% 
-f_ids = []
-current_user.friends.each do |f|
-  f_ids << f.user_id
-end
-@my_friends = User.find(f_ids)
-%>
-
-<script type="text/javascript" src="/app/assets/javascript/fuse.js"> </script>
-
-<script id="friends_json" type="text/json">
-    <%= @my_friends.to_json %>
-</script>
-
 <script>
-var friends = <%= raw @my_friends.to_json %>;
-	$(document).ready(function() {
-	  function findMember(str) {
-	    alert('search: ' + str);
-	  }
+function searchForFriends() {
+	console.log(position.coords.latitude);
+	console.log(position.coords.longitude);
 
-	  $('#search_box').keyup(function() {
-	    clearTimeout(thread);
-	    var target = $(this);
-	    thread = setTimeout(function() { findMember(target.val()); }, 500); 
-	  });
+	var friends = <%= raw @my_friends.to_json %>;
 
-	});
+	var keys = {
+	  keys: ['name', 'email', 'location']
+	}
+
+	var f = new Fuse(friends, {
+        keys: keys,
+        caseSensitive: false
+    });
+
+    var r = f.search($("#search_box").val());
+
+    var result = $("#therowsinthebody");
+
+    if (r.length != 0) {
+    	result.empty();
+		$.each(r, function() {
+        	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, position.coords.latitude, position.coords.longitude) + '</span></div>');
+      	});	
+    } else if (friends.length != 0) {
+    	result.empty();
+    	$.each(friends, function() {
+        	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, position.coords.latitude, position.coords.longitude) + '</span></div>');
+      	});	
+    } else {
+    	result.empty();
+    	result.html('<div class="card">You have no friends. Add a new friend.</div>');
+    }
+    console.log(friends.length);
+	console.log($("#search_box").val());
+	console.log(r);
+}
 </script>
 
 <div class="form-group">
-	<%= text_field_tag :search_box, nil, class: "form-control", :placeholder=> "Search for your friends"  %>
-</div>
-
-<div id='search_results'>
+	<%= text_field_tag :search_box, nil, class: "form-control", :placeholder=> "Search for your friends", onKeyUp:"searchForFriends();"  %>
 </div>

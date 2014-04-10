@@ -1,18 +1,26 @@
 <div class="container" id="friends">
 
-    <%= render 'friends/friend_search' %>
+    
 
     <% if current_user.nil? %>
     <% else %>
 
         <% cuid = current_user.id %>
+
+        <% 
+        f_ids = []
+        current_user.friends.each do |f|
+          f_ids << f.user_id
+        end
+        @my_friends = User.find(f_ids)
+        %>
+
         <script>
             function roundToTwo(num) {
                 return +(Math.round(num + "e+2")  + "e-2");
             }
             function success(position) {
-
-                document.querySelector("#therowsinthebody").innerHTML = '<% @friends.each do |f| %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + f[:name].to_s + "<span class=\"right\">"+f[:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><% end %><% if @friends.length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
+                $("#therowsinthebody").html('<% @my_friends.each do |f| %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + f[:name].to_s + "<span class=\"right\">"+f[:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"card\">You have no friends. Add a new friend.</div>" %><% end %>');
             }
 
             function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
@@ -46,6 +54,10 @@
                 error('not supported');
             }
         </script>
+
+        <%= render 'friends/friend_search' %>
+
+
         <div id="therowsinthebody">
         </div>
 
