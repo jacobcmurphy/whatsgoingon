@@ -35,15 +35,9 @@
 
                 <li role="presentation" class="divider"></li>
 
-                <% for i in 0...6 %>
-                    <% raw "var test=" + i.to_s%>
-                    <%= raw "<li role='presentation'><a role='menuitem' tabindex='-1'>" + statusNames[i] + "<span class='right'><INPUT TYPE='image' SRC='/images/marker" + i.to_s + ".png' onclick= 'submitForm(test)'>&nbsp;&nbsp;&nbsp;<INPUT TYPE='image' SRC='/images/marker" + i.to_s + "-op.png'></a></li>" %>
-                 
-                   <% end %>
-             
-
-
-
+                <% for i in 0...6 %> 
+                    <%= raw "<li role='presentation'><a role='menuitem' tabindex='-1'>" + statusNames[i] + "<span class='right'><INPUT TYPE='image' SRC='/images/marker" + i.to_s + ".png' onclick= 'submitForm(" + i.to_s + ")'>&nbsp;&nbsp;&nbsp;<INPUT TYPE='image' SRC='/images/marker" + (i+6).to_s + ".png' onclick= 'submitForm(" + (i+6).to_s + ")'></a></li>" %>
+                <% end %>
              
                 <script>function submitForm(i){
                   $.ajax({  
@@ -51,7 +45,7 @@
                       url: 'users/color_status', 
                       data: { color_status: i },
                       success: function(response) {
-                      alerts(data)    
+                         window.location.reload();
                       }
 
                   });
