@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.string   "username"
   end
 
+  create_table "check_ins", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "time"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "location"
+  end
+
   create_table "friends", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -86,7 +94,7 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: ""
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -100,12 +108,10 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "authentication_token"
-    #t.string   "image"
-    #t.string   "username"
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "visible",               default: true
+    t.boolean  "visible",                default: true
     t.integer  "color_status"
   end
 
