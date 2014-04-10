@@ -16,10 +16,54 @@
         <li><%= link_to "Friends", friends_path %></li>
         <li><%= link_to "Groups", groups_path %></li>
         <li><%= link_to "My Account", User.find(current_user.id) %></li>
+
+
+       <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Status
+                <span class="caret"></span>
+              </button>
+
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> 
+
+              <!--  <% for i in 0..markerPics.size %>
+                   <%= raw "building" + i.to_s + ".setMap(map);" %>
+                <% end %> -->
+
+                <li role="presentation" class="dropdown-header"> Bother Me? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No</li>
+
+                <li role="presentation" class="divider"></li>
+
+                <% for i in 0...6 %>
+                    <% raw "var test=" + i.to_s%>
+                    <%= raw "<li role='presentation'><a role='menuitem' tabindex='-1'>" + statusNames[i] + "<span class='right'><INPUT TYPE='image' SRC='/images/marker" + i.to_s + ".png' onclick= 'submitForm(test)'>&nbsp;&nbsp;&nbsp;<INPUT TYPE='image' SRC='/images/marker" + i.to_s + "-op.png'></a></li>" %>
+                    print test;
+                   <% end %>
+             
+
+
+
+             
+                <script>function submitForm(i){
+                  $.ajax({  
+                      type: 'POST',  
+                      url: 'users/color_status', 
+                      data: { color_status: i },
+                      success: function(response) {
+                      alerts(data)    
+                      }
+
+                  });
+                }</script>
+
+
+              </ul>
+        </li>
         <% else %>
         <% end %>
     </ul>
 <script>
+
   function acceptFriend(friendId) {
     $.ajax({  
         type: 'POST',  

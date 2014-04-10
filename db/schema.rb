@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.integer "group_id"
     t.integer "user_id"
     t.integer "friend_id"
+    t.boolean "accepted"
   end
 
   create_table "groups", force: true do |t|
@@ -108,11 +109,17 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "authentication_token"
+<<<<<<< HEAD
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "visible",                default: true
     t.integer  "color_status"
+=======
+    t.string   "image"
+    t.string   "location"
+    t.string   "username"
+>>>>>>> da88b112a4dd36618dc169f989221f3200795b13
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
