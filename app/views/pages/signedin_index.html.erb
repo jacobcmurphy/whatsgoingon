@@ -477,9 +477,8 @@
 					position: latlng, 
 					map: map, 
 					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
-					zIndex: 2
-					
-					
+					zIndex: 2,
+					<%= raw "icon: '/images/marker" + current_user.color_status.to_s + ".png'" %>
 				});
 		
 				markers.push(mymarker);
@@ -500,7 +499,8 @@
 			            var newlatLng = new google.maps.LatLng(val[1]['lat'], val[2]['lng']);
 			            var newmarker = new google.maps.Marker({
 			                position: newlatLng,
-			                map: map
+			                map: map,
+			                icon: val[3]['color_status']
 			            });
 			            markers.push(newmarker);
 			            var newmyinfowindow = new google.maps.InfoWindow({
@@ -537,9 +537,9 @@
 
 
 		function error(msg) {
-			var s = document.querySelector('#status');
-			s.innerHTML = typeof msg == 'string' ? msg : "failed";
-			s.className = 'fail';
+			var s = $('#status');
+            s.html(typeof msg == 'string' ? msg : "failed");
+            s.addClass('fail');  
 		}
 
 		if (navigator.geolocation) {
