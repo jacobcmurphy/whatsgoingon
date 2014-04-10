@@ -20,7 +20,14 @@ class FriendsController < ApplicationController
   end
 
   def show
+    f_ids = []
+    
+    current_user.friends.each do |f|
+      f_ids << f.user_id
+    end
+
     @friend = Friend.new
+    @friends = User.find(f_ids)
   end
 
   def reject

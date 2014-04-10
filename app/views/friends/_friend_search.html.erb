@@ -1,0 +1,36 @@
+<% 
+f_ids = []
+current_user.friends.each do |f|
+  f_ids << f.user_id
+end
+@my_friends = User.find(f_ids)
+%>
+
+<script type="text/javascript" src="/app/assets/javascript/fuse.js"> </script>
+
+<script id="friends_json" type="text/json">
+    <%= @my_friends.to_json %>
+</script>
+
+<script>
+var friends = <%= raw @my_friends.to_json %>;
+	$(document).ready(function() {
+	  function findMember(str) {
+	    alert('search: ' + str);
+	  }
+
+	  $('#search_box').keyup(function() {
+	    clearTimeout(thread);
+	    var target = $(this);
+	    thread = setTimeout(function() { findMember(target.val()); }, 500); 
+	  });
+
+	});
+</script>
+
+<div class="form-group">
+	<%= text_field_tag :search_box, nil, class: "form-control", :placeholder=> "Search for your friends"  %>
+</div>
+
+<div id='search_results'>
+</div>

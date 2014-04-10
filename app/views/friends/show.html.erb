@@ -1,11 +1,6 @@
 <div class="container" id="friends">
-    <%= form_tag @group, method: "get" do %>
-      <div class="form-group">
-          <%= text_field_tag :search, nil, class: "form-control", :placeholder=> "Search for your friends"  %>
-            <!--<%= submit_tag "Search", class: "btn btn-success"%>-->
-      </div>
-    <% end %>
 
+    <%= render 'friends/friend_search' %>
 
     <% if current_user.nil? %>
     <% else %>
@@ -17,8 +12,7 @@
             }
             function success(position) {
 
-
-                document.querySelector("#therowsinthebody").innerHTML = '<% for i in 0...Friend.most_recent(cuid).length %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + Friend.most_recent(cuid)[i][:name].to_s + "<span class=\"right\">"+Friend.most_recent(cuid)[i][:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + Friend.most_recent(cuid)[i][:latitude].to_s + ", " + Friend.most_recent(cuid)[i][:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+Friend.most_recent(cuid)[i][:latitude].to_s+"&lng="+Friend.most_recent(cuid)[i][:longitude].to_s) %><% end %><% if Friend.most_recent(cuid).length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
+                document.querySelector("#therowsinthebody").innerHTML = '<% @friends.each do |f| %><%= link_to (raw "<div class=\"row card\"><div class=\"col-md-12 listrow\">" + f[:name].to_s + "<span class=\"right\">"+f[:location].to_s+"&nbsp;&nbsp;&nbsp;"+"\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><% end %><% if @friends.length == 0 %><%= raw "<div class=\"card\">No recent friends</div>" %><% end %>';
             }
 
             function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
