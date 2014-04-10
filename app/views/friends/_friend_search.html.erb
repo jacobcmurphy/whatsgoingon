@@ -20,14 +20,26 @@ function searchForFriends() {
 
     if (r.length != 0) {
     	result.empty();
-		$.each(r, function() {
+    	if (typeof position == 'undefined') {
+    		$.each(r, function() {
+        	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '</span></div>');
+      		});		
+    	} else {
+    		$.each(r, function() {
         	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, position.coords.latitude, position.coords.longitude) + '</span></div>');
-      	});	
+      		});		
+    	}
     } else if (friends.length != 0) {
     	result.empty();
-    	$.each(friends, function() {
+    	if (typeof position == 'undefined') {
+    		$.each(friends, function() {
+        	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '</span></div>');
+      		});		
+    	} else {
+    		$.each(friends, function() {
         	result.append('<div class="row card"><div class="col-md-12 listrow">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, position.coords.latitude, position.coords.longitude) + '</span></div>');
-      	});	
+      		});		
+    	}
     } else {
     	result.empty();
     	result.html('<div class="card">You have no friends. Add a new friend.</div>');
