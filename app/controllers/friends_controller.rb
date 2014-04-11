@@ -52,7 +52,9 @@ class FriendsController < ApplicationController
     def search
         @results = User.find_by_fuzzy_name(params[:search], :limit => 10)
         @results.delete(current_user)
-
+        current_user.friends.each do |f|
+            @results.delete(User.find(f.friend_id))
+        end
         respond_to do |format|
             format.js
         end
