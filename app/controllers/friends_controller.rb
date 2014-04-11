@@ -79,8 +79,8 @@ class FriendsController < ApplicationController
     def unfriend
         if user_signed_in?
             cuid = current_user.id
-            # Friend.where(:user_id => cuid, :friend_id => params[:fid].to_i).destroy_all
-            # Friend.where(:user_id => params[:fid].to_i, :friend_id => cuid).destroy_all
+            Friend.where(:user_id => cuid, :friend_id => params[:fid].to_i).destroy_all
+            Friend.where(:user_id => params[:fid].to_i, :friend_id => cuid).destroy_all
             render nothing: true
         else 
             redirect_to root_url
