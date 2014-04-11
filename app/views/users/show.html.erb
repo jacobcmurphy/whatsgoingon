@@ -1,11 +1,9 @@
-<div ="container">
-<p id="notice"><%= notice %></p>
-</br>
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-info" %>
-
+<div class="container">
+	<p id="notice"><%= notice %></p>
+	</br>
+	<p>
+	  <strong>Name:</strong>
+	  <%= @user.name %>
+	</p>
+	<%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-info" %>
 </div>
