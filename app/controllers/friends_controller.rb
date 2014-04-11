@@ -20,12 +20,16 @@ class FriendsController < ApplicationController
     end
 
     def show
-        f_ids = []
-        current_user.friends.each do |f|
-            f_ids << f.friend_id
-        end
-        @friend = Friend.new
-        @friends = User.find(f_ids, :select => "name, location, latitude, longitude")
+        if user_signed_in?
+            f_ids = []
+            current_user.friends.each do |f|
+                f_ids << f.friend_id
+            end
+            @friend = Friend.new
+            @friends = User.find(f_ids, :select => "name, location, latitude, longitude, id")
+        else
+           redirect_to root_url
+        end 
     end
 
     def reject
@@ -71,6 +75,18 @@ class FriendsController < ApplicationController
             format.json { render json: dbMarkers }
         end
     end
+
+    def unfriend
+        if user_signed_in?
+            cuid = current_user.id
+            # Friend.where(:user_id => cuid, :friend_id => params[:fid].to_i).destroy_all
+            # Friend.where(:user_id => params[:fid].to_i, :friend_id => cuid).destroy_all
+            render nothing: true
+        else 
+            redirect_to root_url
+        end
+    end
+
 
     helper_method :show
 end

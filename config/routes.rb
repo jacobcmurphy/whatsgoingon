@@ -16,6 +16,8 @@ Whatsgoingon::Application.routes.draw do
   resources :users
   match "users/update_location" => "users#update_location", via: :post
   match "users/color_status" => "users#color_status", via: :post
+  
+  match "friends/unfriend" => "friends#unfriend", via: :post
 
   resources :sessions, only: [:new, :create, :destroy]
   
