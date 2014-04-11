@@ -20,6 +20,8 @@ groups = Group.create([
 
 GroupMember.create(group_id: 1002, user_id: 1, friend_id: 2)
 
-User.create(id: 1000, name: "Sharat", about: nil, created_at: Time.now, updated_at: Time.now, email: "runchersp@aim.com", encrypted_password: "$2a$10$erAhkULpvx2hciJKoXsVJ.inh2ptmnM5IdG.CBxQIiIE...", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2014-04-10 17:40:59", last_sign_in_at: "2014-04-10 03:28:28", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, authentication_token: nil, location: "", latitude: 42.3660969, longitude: -71.2583631, visible: true, color_status: 9, password: "Bullshit")
+User.create(id: 1000, name: "Sharat-test", about: nil, created_at: Time.now, updated_at: Time.now, email: "runchersp@aim.com", encrypted_password: "$2a$10$erAhkULpvx2hciJKoXsVJ.inh2ptmnM5IdG.CBxQIiIE...", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2014-04-10 17:40:59", last_sign_in_at: "2014-04-10 03:28:28", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", confirmation_token: nil, confirmed_at: nil, confirmation_sent_at: nil, unconfirmed_email: nil, authentication_token: nil, location: "", latitude: 42.3660969, longitude: -71.2583631, visible: true, color_status: 9, password: "Bullshit")
 
 Friend.create(user_id: 1000, friend_id: 1, accepted: true)
+
+Friend.create(user_id: 1, friend_id: 1000, accepted: true)
