@@ -29,7 +29,11 @@
 
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> 
 
-    
+                <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + "No Status" +  '<span class="right">' + (image_tag "/images/marker12.png", onclick: 'setStatus(12)', class:"statuspadding") + '</span></a></li>' %>
+
+                <br>
+
+                <li role="presentation" class="divider"></li>
 
                 <li role="presentation" class="dropdown-header"><span class="right"><span id="botherme">Bother Me?</span><span id="bothermeyes">Yes</span><span id="bothermeno">No</span></span></li>
 
