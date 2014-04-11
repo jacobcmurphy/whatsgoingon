@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :friends, dependent: :destroy
   has_many :groups, dependent: :destroy
 
+  fuzzily_searchable :name, :email
+
   def self.new_with_session(params,session)
     if session["devise.user_attributes"]
       new(session["devise.user_attributes"],without_protection: true) do |user|

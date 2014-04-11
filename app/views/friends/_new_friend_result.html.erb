@@ -1,0 +1,12 @@
+<% if @results.nil? %>
+<% elsif @results.length == 0 %>
+	<h2>Search Results</h2>
+	<p>No matches were found.</p>
+<% else %>
+	<h2>Search Results</h2>
+	<p> <%= @results.length %> matches found </p>
+		<% @results.each do |r| %>
+			<% puts r.attributes %>
+			<div class='card'><%= link_to r[:name], r %></div>
+		<% end %>
+<% end %>

@@ -78,6 +78,8 @@ GEM
       railties (>= 3.2, < 5.0)
     formtastic (2.3.0.rc2)
       actionpack (>= 3.0)
+    fuzzily (0.3.2)
+      activerecord (>= 2.3.17)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -262,6 +264,7 @@ DEPENDENCIES
   database_cleaner
   devise
   font-awesome-rails
+  fuzzily
   jbuilder (~> 1.2)
   jquery-rails
   json

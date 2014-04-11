@@ -82,13 +82,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Add New Friend</h4>
       </div>
+
       <div>
-        <%= form_tag @friend, method: "get" do %>
+        <%= form_tag search_friends_path, method: "get", remote: true, class: "form", role: "form" do %>
         <div class="form-group">
             <%= text_field_tag :search, nil, class: "form-control", placeholder: "Search for your new friend"  %>
-            <%= submit_tag "Search", class: "btn btn-success"%>
+            <%= submit_tag "Search", class: "btn btn-success" %>
         </div>
         <% end %>
+        <div id = "new-friend-result">
+            <%= render(partial: 'new_friend_result') %>
+        </div>
       </div>
 
       <div class="modal-footer">

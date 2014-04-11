@@ -45,6 +45,16 @@ class FriendsController < ApplicationController
         render nothing: true
     end
 
+    def search
+        @results = User.find_by_fuzzy_name(params[:search], :limit => 10)
+        @results.delete(current_user)
+
+        respond_to do |format|
+            format.js
+        end
+    end
+
+
     def getmarkers
         cuid = current_user.id
         dbMarkers = {}

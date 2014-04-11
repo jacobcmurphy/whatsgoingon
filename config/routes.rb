@@ -21,8 +21,14 @@ Whatsgoingon::Application.routes.draw do
   
   resources :groups, only: [:new, :create, :destroy, :show]
   resource :group_members, only: [:create, :destroy]
-  resource :friends, only: [:create, :new, :destroy, :show]
-  match "friends/getmarkers" => "friends#getmarkers", via: :get
+  resource :friends do
+    collection do
+      get 'search'
+      get 'getmarkers'
+    end
+  end
+  #match "friends/getmarkers" => "friends#getmarkers", via: :get
+  #match "friends/getmarkers" => "friends#getmarkers", via: :get
 
 
 

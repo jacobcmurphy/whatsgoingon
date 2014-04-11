@@ -49,6 +49,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 gem 'simple_form'
+gem 'fuzzily'
 
 
 
