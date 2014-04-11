@@ -6,8 +6,8 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "What's Going On?", root_url, class: 'navbar-brand' %>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <%= link_to "What's Going On?", "/", class: 'navbar-brand' %>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="/">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -31,21 +31,24 @@
 
     
 
-                <li role="presentation" class="dropdown-header botherme"> Bother Me? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li role="presentation" class="dropdown-header"><span class="right"><span id="botherme">Bother Me?</span><span id="bothermeyes">Yes</span><span id="bothermeno">No</span></span></li>
 
-                <li role="presentation" class="divider"></li>
+                <!-- <li role="presentation" class="divider"></li> -->
 
-                <% for i in 0...6 %> 
-                    <%= raw "<li role='presentation'><a role='menuitem' tabindex='-1'>" + statusNames[i] + "<span class='right'><INPUT TYPE='image' SRC='/images/marker" + i.to_s + ".png' onclick= 'submitForm(" + i.to_s + ")'>&nbsp;&nbsp;&nbsp;<INPUT TYPE='image' SRC='/images/marker" + (i+6).to_s + ".png' onclick= 'submitForm(" + (i+6).to_s + ")'></a></li>" %>
+                <% for i in 0...statusNames.length %> 
+                    <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + statusNames[i] + '<span class="right">' + (image_tag "/images/marker" + i.to_s + '.png', onclick:"setStatus(" + i.to_s + ")", class:"statuspadding") + (image_tag "/images/marker" + (i+6).to_s + '.png', onclick:"setStatus(" + (i+6).to_s + ")") + '</span></a></li>' %>
                 <% end %>
-             
-                <script>function submitForm(i){
+                
+                <script>
+                function setStatus(i){
                   $.ajax({  
                       type: 'POST',  
-                      url: 'users/color_status', 
+                      url: '/users/color_status', 
                       data: { color_status: i },
                       success: function(response) {
-                         window.location.reload();
+                         if (location.pathname == "/") {
+                            window.location.reload();
+                         }
                       }
 
                   });

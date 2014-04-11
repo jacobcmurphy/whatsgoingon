@@ -63,6 +63,18 @@
 	padding-left: 7px;
 }
 
-.botherme {
-	float:right;
+.statuspadding {
+	padding-right: 5px;
+}
+
+#botherme {
+	padding-right: 15px;
+}
+
+#bothermeyes {
+	padding-right: 20px;
+}
+
+#bothermeno {
+	padding-right: 10px;
 }
