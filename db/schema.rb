@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140406222018) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "visible",                default: true
-    t.integer  "color_status"            default: 12
+    t.integer  "color_status",            default: 12
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
