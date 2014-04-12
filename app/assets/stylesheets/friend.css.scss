@@ -15,8 +15,28 @@
 }
 
 .deletefriend {
-	position:fixed;
-	right: 10px;
-	color:red;
-	z-index: 1;
+	float: right;
+    position: absolute;
+    padding-top: 25px;
+    color:red;
+}
+
+.card {
+	float: left;
+	display: block;
+	width: 88%;
+}
+
+#therowsinthebody {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+#addnewfriendbutton {
+	padding-top: 30px;
+}
+
+#therowsinthebody .row {
+    width: 50%;
+    margin: 0 auto;
 }
