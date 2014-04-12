@@ -31,22 +31,35 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id].to_i)
-    @mems = @group.group_members
-    mem_ids = []
+    if user_signed_in?
+      # get the group info
+      @group = Group.find(params[:id].to_i)
+      @mems = @group.group_members
+      mem_ids = []
 
-    @mems.each do |mem|
-      mem_ids << mem[:friend_id]
-    end
+      @mems.each do |mem|
+        mem_ids << mem[:friend_id]
+      end
+      # all members currently in the group
+      @members = User.find_all_by_id(mem_ids)
 
-    @members = User.find_all_by_id(mem_ids)
 
-    if params[:search].nil? or params[:search].strip == ""
-      @users = nil
-    else
-      @users = User.find(:all, :conditions => ['name LIKE ? OR email LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%"])
-    end
+      # possible friends to add
+
+      f_ids = []
+
+      # get all friend ids for friends currently not in the group
+      current_user.friends.each do |f|
+          f_ids << f.friend_id unless mem_ids.include? f.friend_id
+      end
+      @my_friends = User.find(f_ids)
+
+      else
+        redirect_to root_url
+      end
   end
+
+
 
   def index
     if user_signed_in?

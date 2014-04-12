@@ -40,8 +40,8 @@ function changeGroupVisibility(groupId) {
     <%= submit_tag "Search", class: "btn btn-success"%>
   <% end %>
   <br>
-  <% unless @users.nil? %>
-    <% @users.each do |member| %>
+  <% unless @my_friends.nil? %>
+    <% @my_friends.each do |member| %>
       <% if member.id != current_user.id %>
         <div class="card">
           <%= member.name %>

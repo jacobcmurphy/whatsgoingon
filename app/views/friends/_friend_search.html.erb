@@ -39,11 +39,11 @@ function searchForFriends() {
     	result.empty();
     } else {
     	result.empty();
-    	result.html('<div class="row card">You have no friends. Add a new friend.</div>');
+    	result.html('<div class="row card">Get started adding your first friend!</div>');
     }
 }
 </script>
 
 <div class="form-group">
-	<%= text_field_tag :search_box, nil, class: "form-control", :placeholder=> "Search for your friends", onKeyUp:"searchForFriends();"  %>
+	<%= text_field_tag :search_box, nil, class: "form-control", placeholder: "Search for your friends", onKeyUp:"searchForFriends();"  %>
 </div>
