@@ -1,6 +1,6 @@
-<center>
-	<h1>Your Groups</h1>
-</center>
+<div class="container">
+
+	<h1 class="center">Your Groups</h1>
 
 <script>
 function changeGroupVisibility(groupId) {
@@ -26,16 +26,13 @@ function changeGroupVisibility(groupId) {
 </div> 
 <% end %>
 
-<center>
 	<% if(@groups.length == 0) %>
-	<div class="card"> You Haven't Created Any Groups </div>
+	<div class="card">You Haven't Created Any Groups</div>
 	<% end %>
-</center>
 
-<br>
-
-<center>
-	<button class="btn btn-lg btn-primary" data-toggle="modal" data-target=".bs-modal-lg">New Group</button>
+<br />
+ 
+	<div class="center"><button class="btn btn-lg btn-primary center" data-toggle="modal" data-target=".bs-modal-lg">New Group</button></div>
 
 
 	<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -68,4 +65,4 @@ function changeGroupVisibility(groupId) {
 			</div>
 		</div>
 	</div>
-</center>
+</div>
