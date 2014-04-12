@@ -10,15 +10,6 @@ class FriendsController < ApplicationController
         render nothing: true
     end
 
-    def destroy
-        if user_signed_in?
-            Friend.find(params[:fid].to_i).destroy
-            redirect_to friend_path
-        else 
-            redirect_to root_url
-        end
-    end
-
     def show
         if user_signed_in?
             f_ids = []
@@ -78,7 +69,7 @@ class FriendsController < ApplicationController
         end
     end
 
-    def unfriend
+    def destroy
         if user_signed_in?
             cuid = current_user.id
             Friend.where(:user_id => cuid, :friend_id => params[:fid].to_i).destroy_all

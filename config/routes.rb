@@ -1,40 +1,38 @@
 Whatsgoingon::Application.routes.draw do
-
-  match "groups/changeVisibility", via: :post
-  #match "group_members/accept", via: :post
-  #match "group_members/reject", via: :post
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
-  match "groups" => "groups#index", via: :get
-  match "groups" => "groups#destroy", via: :delete
+  root 'pages#landing'
 
   get "pages/terms"
-  get "pages/welcome"
   get "pages/landing"
+
+  
+  resources :sessions, only: [:new, :create, :destroy]
+  
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
   match "users/update_location" => "users#update_location", via: :post
   match "users/color_status" => "users#color_status", via: :post
-  
-  match "friends/unfriend" => "friends#unfriend", via: :post
 
-  resources :sessions, only: [:new, :create, :destroy]
   
   resources :groups, only: [:new, :create, :destroy, :show]
+  match "groups" => "groups#index", via: :get
+  match "groups" => "groups#destroy", via: :delete
+  match "groups/changeVisibility", via: :post
+
+
   resource :group_members, only: [:create, :destroy]
+
   resource :friends do
     collection do
       get 'search'
       get 'getmarkers'
     end
   end
-  #match "friends/getmarkers" => "friends#getmarkers", via: :get
-  #match "friends/getmarkers" => "friends#getmarkers", via: :get
+  match "friends/destroy" => "friends#destroy", via: :post
 
 
 
-  root 'pages#landing'
   ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation: first created -> highest priority.

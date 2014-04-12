@@ -27,7 +27,7 @@ function changeGroupVisibility(groupId) {
       </span>
       <% g_mem_id = @mems.where(friend_id: memb.id.to_i).first.id %>
       <span class="right">  <%= link_to 'Remove', group_members_path+"?gid="+@group.id.to_s+"&mid="+g_mem_id.to_s,
-       confirm: 'Are you sure?', :method => :delete, class: 'btn btn-default btn-danger' %> </span>
+       confirm: 'Are you sure you want to remove '+memb.name+' from '+@group.name+'?', :method => :delete, class: 'btn btn-default btn-danger' %> </span>
     </div>
   <% end %>
 </div>
