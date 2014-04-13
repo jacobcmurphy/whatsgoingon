@@ -56,9 +56,9 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman"];
 
-			<% buildingsArraySize = 21 %>
+			<% buildingsArraySize = 26 %>
 
 			var opac = .35;
 
@@ -468,7 +468,91 @@
 		  	});
 
 		  	//***HERE ENDS EAST
+		  	//***HERE STARTS RABB
+
+		  	var rabbCoords = [
+		  		new google.maps.LatLng(42.369143, -71.257691),
+		  		new google.maps.LatLng(42.368979, -71.256817),
+		  		new google.maps.LatLng(42.369147, -71.256767),
+		  		new google.maps.LatLng(42.369311, -71.257644)
+		  	];
+
+		  	building22 = new google.maps.Polygon({
+		    paths: rabbCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var olinCoords = [
+		  		new google.maps.LatLng(42.369778, -71.258027),
+		  		new google.maps.LatLng(42.369372, -71.257482),
+		  		new google.maps.LatLng(42.369503, -71.257292),
+		  		new google.maps.LatLng(42.369907, -71.257847)
+		  	];
+
+		  	building23 = new google.maps.Polygon({
+		    paths: olinCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var goldCoords = [
+		  		new google.maps.LatLng(42.369861, -71.257925),
+		  		new google.maps.LatLng(42.370238, -71.257445),
+		  		new google.maps.LatLng(42.370389, -71.257651),
+		  		new google.maps.LatLng(42.370018, -71.258142)
+		  	];
+
+		  	building24 = new google.maps.Polygon({
+		    paths: goldCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
 		  	
+
+		  	var lownCoords = [
+		  		new google.maps.LatLng(42.369933, -71.257166),
+		  		new google.maps.LatLng(42.370083, -71.256970),
+		  		new google.maps.LatLng(42.370331, -71.257313),
+		  		new google.maps.LatLng(42.370186, -71.257512)
+		  	];
+
+		  	building25 = new google.maps.Polygon({
+		    paths: lownCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var shiffCoords = [
+		  		new google.maps.LatLng(42.369459, -71.256881),
+		  		new google.maps.LatLng(42.369580, -71.256707),
+		  		new google.maps.LatLng(42.369945, -71.257227),
+		  		new google.maps.LatLng(42.369842, -71.257386)
+		  	];
+
+		  	building26 = new google.maps.Polygon({
+		    paths: shiffCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
 		  	<% for i in 0..buildingsArraySize %>
 		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
 		  	<% end %>
