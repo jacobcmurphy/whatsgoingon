@@ -4,15 +4,13 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap.min
  *= require bootstrap-switch.min
+ *= require bootstrap-social
+ *= require font-awesome
  *= require_self
  *= require_tree .
  */
 
  /* nav bar */
-/*$bgDefault      : #153472;
-$bgHighlight    : #0F2450;
-$colDefault     : #B9C2D5;
-$colHover       : #ecf0f1;*/
 
 $bgDefault      : #338DFF;
 $bgHighlight    : #0070FF;

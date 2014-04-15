@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require bootstrap-switch.min
+//= require fuse
+//= require underscore-min
 //= require turbolinks
 //= require_tree .
