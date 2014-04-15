@@ -8,10 +8,9 @@
   <%= csrf_meta_tags %>
   <script> 
   var pusher = new Pusher('e1dfac7109fe5cab6829', { authEndpoint: '/friends/auth', authTransport: 'jsonp' });
-  var channel = pusher.subscribe('private-channel');//<%= current_user.id.to_s %>);
-  <% puts '*********************************\n' + current_user.id.to_s + '\n**********************************' %>
+  var channel = pusher.subscribe('private-channel-'+<%= current_user.id.to_s%>);
     channel.bind('my-event', function(data) {
-    alert(data.message);
+    alert(data.fid);
     });
   </script>
 

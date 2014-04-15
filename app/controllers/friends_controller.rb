@@ -7,23 +7,22 @@ class FriendsController < ApplicationController
 
     def create
         if user_signed_in?
-            Pusher.trigger('private-channel', 'my-event', {
-                message: 'Test'
+            Pusher.trigger('private-channel-'+params[:friend_id], 'my-event', {
+                fid: params[:friend_id]
             })
             current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
         end
-        puts '************************************** ' + params[:friend_id] + '********************************************'
-
-        render nothing: true
+puts "****************\n HELLO MY HOMIE \n**************************"
+        redirect_to root_url#friends_path, success: "successful."
     end
   
     def auth
     if current_user
       auth = Pusher[params[:channel_name]].authenticate(params[:socket_id])
       
-      render :text => params[:callback] + "(" + auth.to_json + ")"
+      render text: params[:callback] + "(" + auth.to_json + ")"
     else
-      render :text => "Forbidden", :status => '403'
+      render text: "Forbidden", status: '403'
     end
   end
 
