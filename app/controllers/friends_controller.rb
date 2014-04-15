@@ -4,11 +4,17 @@ class FriendsController < ApplicationController
     end
 
     def create
-        if(user_signed_in?)
+        if user_signed_in?
+            Pusher.trigger('channel', 'my-event', {
+                message: 'Test'
+            })
             current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
         end
+        puts '************************************** ' + params[:friend_id] + '********************************************'
+
         render nothing: true
     end
+
 
     def show
         if user_signed_in?
@@ -32,7 +38,7 @@ class FriendsController < ApplicationController
 
     def accept
         if user_signed_in?
-            current_user.friends.create(user_id: current_user.id, friend_id: friend_id, accepted: true)
+            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id].to_i, accepted: true)
             accepted_friend = Friend.where(user_id: friend_id, friend_id: current_user.id).first
             accepted_friend.accepted = true
             accepted_friend.save!

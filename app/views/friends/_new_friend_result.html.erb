@@ -4,9 +4,26 @@
 	<p>No matches were found.</p>
 <% else %>
 	<h2>Search Results</h2>
-	<p> <%= @results.length %> matches found </p>
+	<p> <%= @results.length%> <%= 'match'.pluralize(@results.length, :es) %> found </p>
 		<% @results.each do |r| %>
 			<% puts r.attributes %>
-			<div class='card'><%= link_to r[:name], r %></div>
+			<div class='card'><%= link_to r[:name], r %>
+			<button type="submit" class="btn btn-primary pull-right" onclick="sendRequest(<%= r[:id] %>);"> Add </button>
+			</div>
 		<% end %>
 <% end %>
+
+<script>
+
+function sendRequest(friendId) {
+	$.ajax({  
+        type: 'POST',  
+        url: '/friends', 
+        data: { friend_id: friendId },
+        success: function() {
+        alert('Added');
+        location.reload(true);
+        }
+    });
+}
+</script>

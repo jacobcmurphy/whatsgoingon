@@ -21,6 +21,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem "font-awesome-rails"
 
 gem 'thread_safe', '0.2.0'
+gem 'pusher'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

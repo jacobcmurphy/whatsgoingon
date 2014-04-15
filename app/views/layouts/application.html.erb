@@ -2,9 +2,20 @@
 <html>
 <head>
   <title>What's Going On</title>
+  <script src="http://js.pusher.com/2.2/pusher.min.js"></script>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <script> 
+  var pusher = new Pusher('e1dfac7109fe5cab6829');
+  var channel = pusher.subscribe('channel');//<%= current_user.id.to_s %>);
+  <% puts '*********************************\n' + current_user.id.to_s + '\n**********************************' %>
+channel.bind('my-event', function(data) {
+alert(data.message);
+});
+  </script>
+
+
 </head>
 <body>
 
