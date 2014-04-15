@@ -21,6 +21,14 @@
     color:red;
 }
 
+.deletefriend:hover {
+	float: right;
+    position: absolute;
+    padding-top: 25px;
+    color:red;
+    -webkit-text-stroke: 1px #800000;
+}
+
 .card {
 	float: left;
 	display: block;
