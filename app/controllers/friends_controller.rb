@@ -1,11 +1,13 @@
 class FriendsController < ApplicationController
+    protect_from_forgery :except => :auth # stop rails CSRF protection for this action
+
     def new
         @friend = Friend.new
     end
 
     def create
         if user_signed_in?
-            Pusher.trigger('channel', 'my-event', {
+            Pusher.trigger('private-channel', 'my-event', {
                 message: 'Test'
             })
             current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
@@ -14,7 +16,16 @@ class FriendsController < ApplicationController
 
         render nothing: true
     end
-
+  
+    def auth
+    if current_user
+      auth = Pusher[params[:channel_name]].authenticate(params[:socket_id])
+      
+      render :text => params[:callback] + "(" + auth.to_json + ")"
+    else
+      render :text => "Forbidden", :status => '403'
+    end
+  end
 
     def show
         if user_signed_in?
