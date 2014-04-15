@@ -56,9 +56,9 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood B", "Reitman", "Cable", "Gordon", "Scheffres"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman"];
 
-			<% buildingsArraySize = 16 %>
+			<% buildingsArraySize = 26 %>
 
 			var opac = .35;
 
@@ -286,6 +286,23 @@
 		  	});
 
 		  	//***HERE BEGINS RIDGEWOOD
+		  	
+  			var ridgeACoords = [
+		  		new google.maps.LatLng(42.364016, -71.260757),
+		  		new google.maps.LatLng(42.363871, -71.260312),
+		  		new google.maps.LatLng(42.364042, -71.260298),
+		  		new google.maps.LatLng(42.364179, -71.260642)					
+		  	];
+
+		  	building12 = new google.maps.Polygon({
+		    paths: ridgeACoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
 		  	var ridgeBCoords = [
 		  		new google.maps.LatLng(42.363828, -71.260930),
 		  		new google.maps.LatLng(42.364008, -71.260857),
@@ -293,7 +310,7 @@
 		  		new google.maps.LatLng(42.363767, -71.261431)					
 		  	];
 
-		  	building12 = new google.maps.Polygon({
+		  	building13 = new google.maps.Polygon({
 		    paths: ridgeBCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -301,7 +318,22 @@
 		    fillColor: '#00AAAA',
 		    fillOpacity: opac
 		  	});
-		  	
+
+		  	var ridgeCCoords = [
+		  		new google.maps.LatLng(42.363588, -71.261057),
+		  		new google.maps.LatLng(42.363410, -71.260548),
+		  		new google.maps.LatLng(42.363582, -71.260432),
+		  		new google.maps.LatLng(42.363717, -71.260891)					
+		  	];
+
+		  	building14 = new google.maps.Polygon({
+		    paths: ridgeCCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
 		  	//***HERE ENDS RIDGEWOOD
 
 		  	//***HERE BEGINS NORTH
@@ -313,7 +345,7 @@
 		  		new google.maps.LatLng(42.369728, -71.255713)					
 		  	];
 
-		  	building13 = new google.maps.Polygon({
+		  	building15 = new google.maps.Polygon({
 		    paths: reitmanCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -329,7 +361,7 @@
 		  		new google.maps.LatLng(42.369474, -71.255234)					
 		  	];
 
-		  	building14 = new google.maps.Polygon({
+		  	building16 = new google.maps.Polygon({
 		    paths: cableCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -345,7 +377,7 @@
 		  		new google.maps.LatLng(42.369416, -71.256201)					
 		  	];
 
-		  	building15 = new google.maps.Polygon({
+		  	building17 = new google.maps.Polygon({
 		    paths: gordonCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -361,7 +393,7 @@
 		  		new google.maps.LatLng(42.369055, -71.256549)					
 		  	];
 
-		  	building16 = new google.maps.Polygon({
+		  	building18 = new google.maps.Polygon({
 		    paths: scheffresCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
@@ -370,7 +402,157 @@
 		    fillOpacity: opac
 		  	});
 		  	//***HERE ENDS NORTH
+
+		  	//***HERE BEGINS EAST
+
+
+			var HassCoords = [
+		  		new google.maps.LatLng(42.367651, -71.254630),
+		  		new google.maps.LatLng(42.367670, -71.254472),
+		  		new google.maps.LatLng(42.367842, -71.254535),
+		  		new google.maps.LatLng(42.367938, -71.254649),	
+		  		new google.maps.LatLng(42.368035, -71.254769),	
+		  		new google.maps.LatLng(42.368083, -71.254897),	
+		  		new google.maps.LatLng(42.368215, -71.255170),
+		  		new google.maps.LatLng(42.368136, -71.255290),
+		  		new google.maps.LatLng(42.367986, -71.255074),
+		  		new google.maps.LatLng(42.367855, -71.254772),
+		  		new google.maps.LatLng(42.367651, -71.254628)
+
+
+		  	];
+
+		  	building19 = new google.maps.Polygon({
+		    paths: HassCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var PomCoords = [
+		  		new google.maps.LatLng(42.367197, -71.254924),
+		  		new google.maps.LatLng(42.367214, -71.254761),
+		  		new google.maps.LatLng(42.367610, -71.254654),
+		  		new google.maps.LatLng(42.367700, -71.254669),	
+		  		new google.maps.LatLng(42.367681, -71.254839),	
+		  		new google.maps.LatLng(42.367332, -71.254941),	
+		  		new google.maps.LatLng(42.367200, -71.254919)
+		  	];
+
+		  	building20 = new google.maps.Polygon({
+		    paths: PomCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var ICCCoords = [
+		  		new google.maps.LatLng(42.367538, -71.255099),
+		  		new google.maps.LatLng(42.367561, -71.254922),
+		  		new google.maps.LatLng(42.367812, -71.254968),
+		  		new google.maps.LatLng(42.367800, -71.255150)
+		  	];
+
+		  	building21 = new google.maps.Polygon({
+		    paths: ICCCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	//***HERE ENDS EAST
+		  	//***HERE STARTS RABB
+
+		  	var rabbCoords = [
+		  		new google.maps.LatLng(42.369143, -71.257691),
+		  		new google.maps.LatLng(42.368979, -71.256817),
+		  		new google.maps.LatLng(42.369147, -71.256767),
+		  		new google.maps.LatLng(42.369311, -71.257644)
+		  	];
+
+		  	building22 = new google.maps.Polygon({
+		    paths: rabbCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var olinCoords = [
+		  		new google.maps.LatLng(42.369778, -71.258027),
+		  		new google.maps.LatLng(42.369372, -71.257482),
+		  		new google.maps.LatLng(42.369503, -71.257292),
+		  		new google.maps.LatLng(42.369907, -71.257847)
+		  	];
+
+		  	building23 = new google.maps.Polygon({
+		    paths: olinCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var goldCoords = [
+		  		new google.maps.LatLng(42.369861, -71.257925),
+		  		new google.maps.LatLng(42.370238, -71.257445),
+		  		new google.maps.LatLng(42.370389, -71.257651),
+		  		new google.maps.LatLng(42.370018, -71.258142)
+		  	];
+
+		  	building24 = new google.maps.Polygon({
+		    paths: goldCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
 		  	
+
+		  	var lownCoords = [
+		  		new google.maps.LatLng(42.369933, -71.257166),
+		  		new google.maps.LatLng(42.370083, -71.256970),
+		  		new google.maps.LatLng(42.370331, -71.257313),
+		  		new google.maps.LatLng(42.370186, -71.257512)
+		  	];
+
+		  	building25 = new google.maps.Polygon({
+		    paths: lownCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var shiffCoords = [
+		  		new google.maps.LatLng(42.369459, -71.256881),
+		  		new google.maps.LatLng(42.369580, -71.256707),
+		  		new google.maps.LatLng(42.369945, -71.257227),
+		  		new google.maps.LatLng(42.369842, -71.257386)
+		  	];
+
+		  	building26 = new google.maps.Polygon({
+		    paths: shiffCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
 		  	<% for i in 0..buildingsArraySize %>
 		  	<%= raw "building" + i.to_s + ".setMap(map);" %>
 		  	<% end %>
