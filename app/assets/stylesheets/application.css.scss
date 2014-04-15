@@ -1,0 +1,129 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require bootstrap.min
+ *= require bootstrap-switch.min
+ *= require_self
+ *= require_tree .
+ */
+
+ /* nav bar */
+$bgDefault      : #153472;
+$bgHighlight    : #0F2450;
+$colDefault     : #B9C2D5;
+$colHover       : #ecf0f1;
+
+
+/* --- Style --- */
+.navbar-default {
+    background-color: $bgDefault;
+    border-color: $bgHighlight;
+    .navbar-brand {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHover; }}
+    .navbar-nav {
+        > li {
+            > a {
+                color: $colDefault;
+                &:hover, &:focus {
+                    color: $colHover;   }}}
+        .active {
+            > a, > a:hover, > a:focus {
+                color: $colHover;
+                background-color: $bgHighlight; }}
+        .open {
+            > a, > a:hover, > a:focus {
+                color: $colHover;
+                background-color: $bgHighlight;
+                .caret {
+                    border-top-color: $colHover;
+                    border-bottom-color: $colHover; }}}
+        > .dropdown {
+            > a {
+                .caret {
+                    border-top-color: $colDefault;
+                    border-bottom-color: $colDefault; }
+                &:hover, &:focus {
+                    .caret {
+                        border-top-color: $colHover;
+                        border-bottom-color: $colHover; }}}}}
+    .navbar-toggle {
+        border-color: $bgHighlight;
+        &:hover, &:focus {
+            background-color: $bgHighlight; }
+        .icon-bar {
+            background-color: $colDefault; }}}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHover;
+            background-color: $bgHighlight; }}
+}
+
+
+/* other style */
+ 
+ .card {
+	 padding:1.5rem;
+	 box-shadow:0 1px 2px #aaa;
+	 background:white;
+	 margin:0 1rem 1rem;
+	 border-radius:3px;
+	 user-select:none;
+	 animation:fly-in-from-left .5s 1s ease both;
+	 transform-origin:top left;
+ }
+ 
+ .nounderline {
+ 	text-decoration:none;
+ }
+
+ main {
+	margin-top:51px;
+}
+
+.right {
+	float:right;
+	text-align:right;
+}
+
+.left {
+	float:left;
+	text-align:left
+}
+
+#therowsinthebody {
+	margin-top:15px;	
+}
+
+.center {
+	text-align: center;
+}
+
+.user-notification-block {
+	padding: 3px;
+	padding-left: 4px;
+}
+
+.request-buttons-left-padding {
+	padding-left: 7px;
+}
+
+.statuspadding {
+	padding-right: 5px;
+}
+
+#botherme {
+	padding-right: 15px;
+}
+
+#bothermeyes {
+	padding-right: 20px;
+}
+
+#bothermeno {
+	padding-right: 10px;
+}
