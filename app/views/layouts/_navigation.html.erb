@@ -29,7 +29,7 @@
 
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> 
 
-                <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + "No Status" +  '<span class="right">' + (image_tag asset_path("images/marker12.png"), onclick: 'setStatus(12)', class:"statuspadding") + '</span></a></li>' %>
+                <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + "No Status" +  '<span class="right">' + (image_tag image_path("marker12.png"), onclick: 'setStatus(12)', class:"statuspadding") + '</span></a></li>' %>
 
                 <br>
 
@@ -40,7 +40,7 @@
                 <!-- <li role="presentation" class="divider"></li> -->
 
                 <% for i in 0...statusNames.length %> 
-                    <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + statusNames[i] + '<span class="right">' + (image_tag asset_path('images/marker' + i.to_s + '.png'), onclick:"setStatus(" + i.to_s + ")", class:"statuspadding") + (image_tag asset_path('images/marker' + (i+statusNames.length).to_s + '.png'), onclick:"setStatus(" + (i+statusNames.length).to_s + ")") + '</span></a></li>' %>
+                    <%= raw '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + statusNames[i] + '<span class="right">' + (image_tag asset_path('marker' + i.to_s + '.png'), onclick:"setStatus(" + i.to_s + ")", class:"statuspadding") + (image_tag asset_path('marker' + (i+statusNames.length).to_s + '.png'), onclick:"setStatus(" + (i+statusNames.length).to_s + ")") + '</span></a></li>' %>
                 <% end %>
                 
                 <script>
