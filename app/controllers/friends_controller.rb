@@ -1,14 +1,30 @@
 class FriendsController < ApplicationController
+    protect_from_forgery :except => :auth # stop rails CSRF protection for this action
+
     def new
         @friend = Friend.new
     end
 
     def create
-        if(user_signed_in?)
+        if user_signed_in?
+            Pusher.trigger('private-channel-'+params[:friend_id], 'my-event', {
+                fid: params[:friend_id]
+            })
             current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
         end
-        render nothing: true
+puts "****************\n HELLO MY HOMIE \n**************************"
+        redirect_to root_url#friends_path, success: "successful."
     end
+  
+    def auth
+    if current_user
+      auth = Pusher[params[:channel_name]].authenticate(params[:socket_id])
+      
+      render text: params[:callback] + "(" + auth.to_json + ")"
+    else
+      render text: "Forbidden", status: '403'
+    end
+  end
 
     def show
         if user_signed_in?
@@ -32,7 +48,7 @@ class FriendsController < ApplicationController
 
     def accept
         if user_signed_in?
-            current_user.friends.create(user_id: current_user.id, friend_id: friend_id, accepted: true)
+            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id].to_i, accepted: true)
             accepted_friend = Friend.where(user_id: friend_id, friend_id: current_user.id).first
             accepted_friend.accepted = true
             accepted_friend.save!

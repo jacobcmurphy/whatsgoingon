@@ -23,11 +23,11 @@
   <% else %>
 
     <% if provider == 'facebook' %>
-      <%= link_to raw "<i class=\"fa fa-facebook\"></i>Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-facebook" %>
+      <%= link_to raw("<i class=\"fa fa-facebook\"></i>Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path('user', provider), class: "btn btn-block btn-social btn-facebook" %>
     <% elsif provider == 'twitter' %>
-      <%= link_to raw "<i class=\"fa fa-twitter\"></i>Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-twitter" %>
+      <%= link_to raw("<i class=\"fa fa-twitter\"></i>Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path('user', provider), class: "btn btn-block btn-social btn-twitter" %>
     <% elsif provider == 'google_oauth2' %>
-      <%= link_to raw "<i class=\"fa fa-google-plus\"></i>Sign in with #{provider.to_s.titleize}", omniauth_authorize_path('user', provider), :class => "btn btn-block btn-social btn-google-plus" %>
+      <%= link_to raw("<i class=\"fa fa-google-plus\"></i>Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path('user', provider), class: "btn btn-block btn-social btn-google-plus" %>
     <% end %>
   <% end %>
 <br/>

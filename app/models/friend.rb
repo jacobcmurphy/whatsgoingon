@@ -1,5 +1,7 @@
 class Friend < ActiveRecord::Base
 	belongs_to :user
+	validates_uniqueness_of :id, :scope => [:user_id, :friend_id] # FIX THIS
+
 
 	def self.notifications uid
 		#if uid is_a? Integer

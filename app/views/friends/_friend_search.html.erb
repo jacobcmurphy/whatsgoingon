@@ -1,5 +1,6 @@
 <script>
 function searchForFriends() {
+    $('#search_box').focus();
 	var friends = <%= raw @my_friends.to_json %>;
 
 	var query = $("#search_box").val();

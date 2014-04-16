@@ -27,6 +27,9 @@ Whatsgoingon::Application.routes.draw do
     collection do
       get 'search'
       get 'getmarkers'
+      post 'accept'
+      post 'reject'
+      get 'auth'
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post
