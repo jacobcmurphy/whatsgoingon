@@ -6,13 +6,15 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <% if user_signed_in? %>
   <script> 
   var pusher = new Pusher('e1dfac7109fe5cab6829', { authEndpoint: '/friends/auth' });
   var channel = pusher.subscribe('private-channel');
     channel.bind('my-event', function(data) {
-    alert(data.message);
+    alert(data.fid);
     });
   </script>
+  <% end %>
 
 
 </head>
