@@ -29,7 +29,7 @@ Whatsgoingon::Application.routes.draw do
       get 'getmarkers'
       post 'accept'
       post 'reject'
-      get 'auth'
+      post 'auth'
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post

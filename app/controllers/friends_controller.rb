@@ -12,20 +12,18 @@ class FriendsController < ApplicationController
             })
             current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
         end
-        puts '************************************** ' + params[:friend_id] + '********************************************'
 
         render nothing: true
     end
   
     def auth
-    if current_user
-      auth = Pusher[params[:channel_name]].authenticate(params[:socket_id])
-      
-      render :text => params[:callback] + "(" + auth.to_json + ")"
-    else
-      render :text => "Forbidden", :status => '403'
+        if current_user
+          response = Pusher[params[:channel_name]].authenticate(params[:socket_id])
+          render :json => response
+        else
+          render :text => "Forbidden", :status => '403'
+        end
     end
-  end
 
     def show
         if user_signed_in?
