@@ -90,6 +90,7 @@
     location.reload(true);
   }
 
+  <% if user_signed_in? %>
   channel.bind('my-event', function(data) {
     $("#notification-list").append('<li class="user-notification-block"><p>' + data.fid + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
     if (!$('#elemId').length) {
@@ -99,7 +100,7 @@
       $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
     }
   });
-
+  <% end %>
 </script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
