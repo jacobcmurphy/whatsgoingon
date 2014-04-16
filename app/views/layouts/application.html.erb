@@ -9,10 +9,8 @@
   <% if user_signed_in? %>
   <script> 
   var pusher = new Pusher('e1dfac7109fe5cab6829', { authEndpoint: '/friends/auth' });
-  var channel = pusher.subscribe('private-channel');
-    channel.bind('my-event', function(data) {
-    alert(data.fid);
-    });
+  var channel = pusher.subscribe('private-channel-' + <%= current_user.id.to_s %>);
+    
   </script>
   <% end %>
 

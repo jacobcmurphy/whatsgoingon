@@ -21,7 +21,6 @@ function sendRequest(friendId) {
         url: '/friends', 
         data: { friend_id: friendId },
         success: function() {
-        alert('Added');
         location.reload(true);
         }
     });

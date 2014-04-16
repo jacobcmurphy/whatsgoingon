@@ -89,6 +89,10 @@
     });
     location.reload(true);
   }
+
+  channel.bind('my-event', function(data) {
+    alert(data.fid);
+    });
 </script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
