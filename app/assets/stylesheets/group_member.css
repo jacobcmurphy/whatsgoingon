@@ -5,15 +5,15 @@
 	padding:10px;
 	margin:15px;
 	overflow:hidden;
-	width: 100%;
-}
-
-.innercard {
 	width: 98%;
 }
 
-.innerinnercard {
+.innercard {
 	width: 96%;
+}
+
+.innerinnercard {
+	width: 94%;
 }
 
 .groupname {
