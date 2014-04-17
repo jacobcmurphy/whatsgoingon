@@ -56,9 +56,9 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman", "Mandel", "Heller", "ASAC"];
 
-			<% buildingsArraySize = 26 %>
+			<% buildingsArraySize = 29 %>
 
 			var opac = .35;
 
@@ -545,6 +545,58 @@
 
 		  	building26 = new google.maps.Polygon({
 		    paths: shiffCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var mandelCoords = [
+		  		new google.maps.LatLng(42.369426, -71.258013),
+		  		new google.maps.LatLng(42.369488, -71.257637),
+		  		new google.maps.LatLng(42.369668, -71.257859),
+		  		new google.maps.LatLng(42.369876, -71.258586),
+		  		new google.maps.LatLng(42.369698, -71.258601),
+		  		new google.maps.LatLng(42.369564, -71.258113)
+		  	];
+
+		  	building27 = new google.maps.Polygon({
+		    paths: mandelCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+
+		  	var hellerCoords = [
+		  		new google.maps.LatLng(42.369149, -71.259733),
+		  		new google.maps.LatLng(42.369003, -71.258424),
+		  		new google.maps.LatLng(42.369197, -71.258360),
+		  		new google.maps.LatLng(42.369462, -71.259205),
+		  		new google.maps.LatLng(42.369310, -71.259827)
+		  	];
+
+		  	building28 = new google.maps.Polygon({
+		    paths: hellerCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var asacCoords = [
+		  		new google.maps.LatLng(42.369605, -71.259768),
+		  		new google.maps.LatLng(42.369520, -71.259301),
+		  		new google.maps.LatLng(42.369766, -71.259213),
+		  		new google.maps.LatLng(42.369841, -71.259674)
+		  	];
+
+		  	building29 = new google.maps.Polygon({
+		    paths: asacCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
 		    strokeWeight: 2,
