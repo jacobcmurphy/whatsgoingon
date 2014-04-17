@@ -17,3 +17,7 @@ abbr {
 label.required:after {
 	content:" *";
 }
+
+body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-facebook, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-twitter, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-google-plus {
+    color: #FFFFFF;
+}

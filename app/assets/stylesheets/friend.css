@@ -14,15 +14,15 @@
 	float: right;
     position: absolute;
     padding-top: 25px;
-    color:red;
+    color:#FF4136;
 }
 
 .deletefriend:hover, .deleterequest:hover {
 	float: right;
     position: absolute;
     padding-top: 25px;
-    color:red;
-    -webkit-text-stroke: 1px #800000;
+    color:#FF4136;
+    -webkit-text-stroke: 1px #85144B;
 }
 
 .card {
