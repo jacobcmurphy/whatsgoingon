@@ -92,6 +92,7 @@ class FriendsController < ApplicationController
         respond_to do |format|
             format.json { render json: dbMarkers }
         end
+        render nothing: true
     end
 
     def destroy
