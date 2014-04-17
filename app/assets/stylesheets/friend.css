@@ -10,14 +10,14 @@
 	margin-top: 10px;
 }
 
-.deletefriend {
+.deletefriend, .deleterequest {
 	float: right;
     position: absolute;
     padding-top: 25px;
     color:red;
 }
 
-.deletefriend:hover {
+.deletefriend:hover, .deleterequest:hover {
 	float: right;
     position: absolute;
     padding-top: 25px;

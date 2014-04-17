@@ -8,7 +8,8 @@ class FriendsController < ApplicationController
     def create
         if user_signed_in?
             Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'my-event', {
-                fid: current_user.id
+                fid: current_user.id,
+                name: current_user.name
             })
             current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
         end

@@ -1,112 +1,124 @@
+<% if user_signed_in? %> 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
 <div class="container" id="friends">
 
-    <% if current_user.nil? %>
-    <% else %>
+    <% cuid = current_user.id %>
 
-        <% cuid = current_user.id %>
+    <% @my_friends = show %>
 
-        <% @my_friends = show %>
+    <script>
+        var $haslocation = false;
+        var $pos = null;
+        <% if @pending_friends.size > 0 %>var pendingReq = <%= @pending_friends.size %>;<% end %>
 
-        <script>
-            var $haslocation = false;
-            var $pos = null;
+        function roundToTwo(num) {
+            return +(Math.round(num + "e+2")  + "e-2");
+        }
+        function success(position) {
+            $haslocation = true;
+            $pos = position;
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
+        }
 
-            function roundToTwo(num) {
-                return +(Math.round(num + "e+2")  + "e-2");
-            }
-            function success(position) {
-                $haslocation = true;
-                $pos = position;
-                $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
-
-            }
-
-            function deleteFriend(friendId, friendName) {
-                if (confirm("Are you sure you want to unfriend " + friendName + "?")) {
-                    $.ajax({
-                        type: 'POST',  
-                        url: '/friends/destroy', 
-                        data: { fid: friendId },
-                        success: function(response) { 
-                            $("#friendId"+friendId).remove();
-                            var rowbody = $("#therowsinthebody");
-                            if ($.trim($(rowbody).html()).length == 0) {
-                                rowbody.empty();
-                                rowbody.html('<div class="row card">Get started adding your first friend!</div>');
-                            }
+        function deleteFriend(friendId, friendName) {
+            if (confirm("Are you sure you want to unfriend " + friendName + "?")) {
+                $.ajax({
+                    type: 'POST',  
+                    url: '/friends/destroy', 
+                    data: { fid: friendId },
+                    success: function(response) {
+                        $("#friendId"+friendId).remove();
+                        var rowbody = $("#therowsinthebody");
+                        if ($.trim($(rowbody).html()).length == 0) {
+                            rowbody.empty();
+                            rowbody.html('<br /><br /><br /><div class="row card">Get started adding your first friend!</div>');
                         }
-                    });
-                }
+                    }
+                });
             }
+        }
 
-            function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
-                var R = 6371; // Radius of the earth in km
-                var dLat = deg2rad(lat2-lat1);  // deg2rad below
-                var dLon = deg2rad(lon2-lon1);
-                var a =
-                                Math.sin(dLat/2) * Math.sin(dLat/2) +
-                                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                                Math.sin(dLon/2) * Math.sin(dLon/2)
-                        ;
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                var d = R * c; // Distance in km
-                var dInMi = d*0.621371; // American units
-                return (dInMi < 0.1 ? "<0.1 mi" : roundToTwo(dInMi).toString() + " mi");
+        function deleteRequest(friendId, friendName) {
+            if (confirm("Are you sure you want to cancel your friend request to " + friendName + "?")) {
+                $.ajax({
+                    type: 'POST',  
+                    url: '/friends/destroy', 
+                    data: { fid: friendId },
+                    success: function(response) {
+                        <% if @pending_friends.length-1 == 0 %>
+                            $("#pending").remove();   
+                        <% else %>
+                            $("#requestId"+friendId).remove();
+                            pendingReq--;
+                            if (pendingReq == 0) {
+                                $("#pending").remove();        
+                            }
+                        <% end %>
+                    }
+                });
             }
+        }
 
-            function deg2rad(deg) {
-                return deg * (Math.PI/180)
+        function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = deg2rad(lat2-lat1);  // deg2rad below
+            var dLon = deg2rad(lon2-lon1);
+            var a =
+                            Math.sin(dLat/2) * Math.sin(dLat/2) +
+                            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                            Math.sin(dLon/2) * Math.sin(dLon/2)
+                    ;
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var d = R * c; // Distance in km
+            var dInMi = d*0.621371; // American units
+            return (dInMi < 0.1 ? "<0.1 mi" : roundToTwo(dInMi).toString() + " mi");
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI/180)
+        }
+
+        function error(msg) {
+            if ($('#status').length > 0) { //if #status exists; change #status if on the map page
+                var s = $('#status');
+                s.html(typeof msg == 'string' ? msg : "failed");
+                s.addClass('fail');    
             }
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
+        }
 
-            function error(msg) {
-                if ($('#status').length > 0) { //if #status exists; change #status if on the map page
-                    var s = $('#status');
-                    s.html(typeof msg == 'string' ? msg : "failed");
-                    s.addClass('fail');    
-                }
-                $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
-            }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            error('not supported');
+        }
+    </script>
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
-            } else {
-                error('not supported');
-            }
-        </script>
-
-        <%= render 'friends/friend_search' %>
+    <%= render 'friends/friend_search' %>
 
 
-        <div id="therowsinthebody">
-            <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>
+    <div id="therowsinthebody">
+        <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>
+    </div>
+
+    <% if @pending_friends.size > 0 %>
+        <div id="pending">
+            <% if @my_friends.length == 0 %>
+                <br /><br /><br />
+            <% end %>
+            <br />
+            Pending friends:
+            <% @pending_friends.each do |pf| %>
+                <div class="row" id="requestId<%= pf[:id] %>"><div class="card"><%= pf[:name] %></div><span class="deleterequest" onclick="deleteRequest(<%= pf[:id] %>, '<%= pf[:name] %>');">&#10006;</span></div>
+            <% end %>
         </div>
-
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
     <% end %>
-
 
     <!-- Button trigger modal -->
     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="addnewfriendbutton">
       Add New Friend
     </button>
-
 </div>
-
-    <% if @pending_friends.size > 0 %>
-        <div class= "row">
-        Pending friends:
-        </div>
-        <% @pending_friends.each do |pf| %>
-            <div class='row' id="friendId<%= pf.id %>">
-            <div class='card'>
-            <%= pf.name %>
-
-            <span class="deletefriend" onclick="deleteFriend(<%= pf[:id] %>, <%= pf[:name] %>);"> &#10006; </span>
-            </div>
-            </div>
-        <% end %>
-        </div>
-    <% end %>
 
 
 <!-- Modal -->
@@ -136,3 +148,4 @@
     </div>
   </div>
 </div>
+<% end %>
