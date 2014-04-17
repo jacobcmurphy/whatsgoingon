@@ -27,12 +27,12 @@ function searchForFriends() {
   if (friends.length != 0 && query.length == 0) {
     result.empty();
     $.each(friends, function() {
-         result.append('<div class="card">' + this.name + '<span class="right"><%= form_tag group_members_path, method: "post" %><%= hidden_field_tag  'group_id', @group.id %><input id="friend_id" name="friend_id" type="hidden" value="' + this.id + '"><%= submit_tag "Add", class: "btn btn-primary"%></span></div>');
+         result.append('<div class="innerinnercard card">' + this.name + '<span class="right"><%= form_tag group_members_path, method: "post" %><%= hidden_field_tag  'group_id', @group.id %><input id="friend_id" name="friend_id" type="hidden" value="' + this.id + '"><%= submit_tag "Add", class: "btn btn-primary"%></span></div>');
     });
   } else if (friends.length != 0 && r.length != 0) {
     result.empty();
     $.each(r, function() {
-         result.append('<div class="card">' + this.name + '<span class="right"><%= form_tag group_members_path, method: "post" %><%= hidden_field_tag  'group_id', @group.id %><input id="friend_id" name="friend_id" type="hidden" value="' + this.id + '"><%= submit_tag "Add", class: "btn btn-primary"%></span></div>');
+         result.append('<div class="innerinnercard card">' + this.name + '<span class="right"><%= form_tag group_members_path, method: "post" %><%= hidden_field_tag  'group_id', @group.id %><input id="friend_id" name="friend_id" type="hidden" value="' + this.id + '"><%= submit_tag "Add", class: "btn btn-primary"%></span></div>');
     });
   } else if (friends.length != 0 && r.length == 0) {
     result.empty();
@@ -66,7 +66,7 @@ function searchForFriends() {
     </div>
   <% end %>
   
-  <div class="card">
+  <div class="innercard card">
     <h4>Add a friend to <%= @group.name %></h4>
       <div class="form-group">
           <%= text_field_tag :search, nil, class: "form-control", id: "search_box", :placeholder=> "Search for a friend to add to " + @group.name, onKeyUp:"searchForFriends();"  %>
@@ -75,7 +75,7 @@ function searchForFriends() {
       <div id="friendsdiv">
         <% @my_friends.each do |member| %>
           <% if member.id != current_user.id %>
-            <div class="card">
+            <div class="innerinnercard card">
               <%= member.name %>
               <span class="right">
               <%= form_tag group_members_path, method: "post" %>

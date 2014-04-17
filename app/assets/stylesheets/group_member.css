@@ -8,6 +8,14 @@
 	width: 100%;
 }
 
+.innercard {
+	width: 98%;
+}
+
+.innerinnercard {
+	width: 96%;
+}
+
 .groupname {
 	display: inline;
 }
