@@ -31,7 +31,10 @@
                         var rowbody = $("#therowsinthebody");
                         if ($.trim($(rowbody).html()).length == 0) {
                             rowbody.empty();
-                            rowbody.html('<br /><br /><br /><div class="row card">Get started adding your first friend!</div>');
+                            rowbody.html('<div class="row card">Get started adding your first friend!</div>');
+                            if (pendingReq > 0) {
+                                rowbody.append("<br /><br /><br />");
+                            }
                         }
                     }
                 });

@@ -1,7 +1,3 @@
-<div class="container">
-
-	<h1 class="center">Your Groups</h1>
-
 <script>
 function changeGroupVisibility(groupId) {
 	$.ajax({  
@@ -13,27 +9,27 @@ function changeGroupVisibility(groupId) {
 	});
 }
 </script>
+<div class="container">
+	<br />
+	<h1 class="center">Your Groups</h1>
 
-<% @groups.each do |group| %>
-<div class="card">
-	<%= group.name %>
-	<span class="right">
-		<input id="check<%= group.name %>" type="checkbox" data-size="small" name="<%= "group" + group.id.to_s + "VisibilityToggle" %>" value="check<%= group.name %>" data-off-color="default" onfocus="changeGroupVisibility(<%= group.id.to_s %>);">
-	     <script>$("[name='<%= "group" + group.id.to_s + "VisibilityToggle" %>']").bootstrapSwitch('state', <%= group.visible.to_s %>, false);</script>
-	    </input>
-		<%= link_to 'Edit', group, class: 'btn btn-default btn-info' %> 
-	</span>
-</div> 
-<% end %>
+	<% @groups.each do |group| %>
+	<div class="card">
+		<%= group.name %>
+		<span class="right">
+			<input id="check<%= group.name %>" type="checkbox" data-size="small" name="<%= "group" + group.id.to_s + "VisibilityToggle" %>" value="check<%= group.name %>" data-off-color="default" onfocus="changeGroupVisibility(<%= group.id.to_s %>);">
+		     <script>$("[name='<%= "group" + group.id.to_s + "VisibilityToggle" %>']").bootstrapSwitch('state', <%= group.visible.to_s %>, false);</script>
+		    </input>
+			<%= link_to 'Edit', group, class: 'btn btn-default btn-info' %> 
+		</span>
+	</div> 
+	<% end %>
 
 	<% if(@groups.length == 0) %>
 	<div class="card">You Haven't Created Any Groups</div>
 	<% end %>
-
-<br />
- 
+	
 	<div class="center"><button class="btn btn-lg btn-primary center" data-toggle="modal" data-target=".bs-modal-lg">New Group</button></div>
-
 
 	<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -53,13 +49,13 @@ function changeGroupVisibility(groupId) {
 						</ul>
 						<% end %>
 					</div>
-					Group Name <%= f.text_field :name %><br /><br />
-					
+					<div class="container">
+						Group Name <%= f.text_field :name %><br /><br />
+					</div>
 				<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Create</button>
 					</div>
-
 				</div>
 				<% end %>
 			</div>
