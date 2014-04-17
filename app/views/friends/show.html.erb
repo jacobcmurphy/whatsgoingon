@@ -27,15 +27,18 @@
                     url: '/friends/destroy', 
                     data: { fid: friendId },
                     success: function(response) {
-                        $("#friendId"+friendId).remove();
-                        var rowbody = $("#therowsinthebody");
-                        if ($.trim($(rowbody).html()).length == 0) {
-                            rowbody.empty();
-                            rowbody.html('<div class="row card">Get started adding your first friend!</div>');
-                            if (pendingReq > 0) {
-                                rowbody.append("<br /><br /><br />");
+                        $("#friendId"+friendId).addClass('animated bounceOutRight');
+                        $("#friendId"+friendId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                            $("#friendId"+friendId).remove();
+                            var rowbody = $("#therowsinthebody");
+                            if ($.trim($(rowbody).html()).length == 0) {
+                                rowbody.empty();
+                                rowbody.html('<div class="row card">Get started adding your first friend!</div>');
+                                if (pendingReq > 0) {
+                                    rowbody.append("<br /><br /><br />");
+                                }
                             }
-                        }
+                        });
                     }
                 });
             }
@@ -49,13 +52,19 @@
                     data: { fid: friendId },
                     success: function(response) {
                         <% if @pending_friends.length-1 == 0 %>
-                            $("#pending").remove();   
+                            $("#requestId"+friendId).addClass('animated bounceOutRight');
+                            $("#requestId"+friendId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                                $("#pending").remove(); 
+                            });
                         <% else %>
-                            $("#requestId"+friendId).remove();
-                            pendingReq--;
-                            if (pendingReq == 0) {
-                                $("#pending").remove();        
-                            }
+                            $("#requestId"+friendId).addClass('animated bounceOutRight');
+                            $("#requestId"+friendId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                                $("#requestId"+friendId).remove();
+                                pendingReq--;
+                                if (pendingReq == 0) {
+                                    $("#pending").remove();        
+                                }
+                            });
                         <% end %>
                     }
                 });
