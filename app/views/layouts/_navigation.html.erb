@@ -99,6 +99,10 @@
    } else {
      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
    }
+   $("#notificationdropdown").addClass('animated shake');
+   $("#friendId"+friendId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      $("#notificationdropdown").removeClass('animated shake');
+   });
   });
   <% end %>
 </script>
