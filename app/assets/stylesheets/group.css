@@ -5,6 +5,7 @@
 	padding:10px;
 	margin:15px;
 	overflow:hidden;
+	width: 100%;
 }
 
 .pending_friend {
