@@ -8,9 +8,9 @@ class FriendsController < ApplicationController
     def create
         if user_signed_in?
             Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'my-event', {
-                fid: params[:friend_id]
+                fid: current_user.id
             })
-            current_user.friends.create(user_id: current_user.id, accepted: false, friend_id: params[:friend_id])
+            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
         end
         render nothing: true
     end
@@ -27,11 +27,18 @@ class FriendsController < ApplicationController
     def show
         if user_signed_in?
             f_ids = []
+            pending_f_ids = []
             current_user.friends.each do |f|
-                f_ids << f.friend_id
+                if f.accepted == true
+                    f_ids << f.friend_id
+                else
+                    pending_f_ids << f.friend_id
+                end
             end
             @friend = Friend.new
-            @friends = User.find(f_ids, :select => "name, location, latitude, longitude, id")
+
+            @pending_friends = User.find(pending_f_ids)
+            @friends = User.find(f_ids)
         else
            redirect_to root_url
         end 
@@ -39,7 +46,7 @@ class FriendsController < ApplicationController
 
     def reject
         if user_signed_in?
-            current_user.friends.where(friend_id: friend_id).first.destroy!
+            Friend.delete_all(user_id: params[:friend_id], friend_id: current_user.id)
         end
         render nothing: true
     end
@@ -47,7 +54,7 @@ class FriendsController < ApplicationController
     def accept
         if user_signed_in?
             current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id].to_i, accepted: true)
-            accepted_friend = Friend.where(user_id: friend_id, friend_id: current_user.id).first
+            accepted_friend = Friend.where(user_id: params[:friend_id], friend_id: current_user.id).first
             accepted_friend.accepted = true
             accepted_friend.save!
         end
@@ -55,10 +62,13 @@ class FriendsController < ApplicationController
     end
 
     def search
-        @results = User.find_by_fuzzy_name(params[:search], :limit => 10)
+        @results = User.find_by_fuzzy_name(params[:search], limit: 10)
         @results.delete(current_user)
         current_user.friends.each do |f|
             @results.delete(User.find(f.friend_id))
+
+            #do not show friends that are already requested but still pending
+            @results.delete(f) if f.accepted = false
         end
         respond_to do |format|
             format.js

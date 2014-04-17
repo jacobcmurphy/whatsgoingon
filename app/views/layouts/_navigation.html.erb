@@ -92,23 +92,16 @@
 
   <% if user_signed_in? %>
   channel.bind('my-event', function(data) {
-    $("#notification-list").append('<li class="user-notification-block"><p>' + data.fid + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
-    if (!$('#elemId').length) {
-      <% notifs = Friend.notifications current_user.id %>
-      $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
-    } else {
-      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
-    }
+   $("#notifications").load(location.href + " #notifications");
   });
   <% end %>
 </script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <% notifs = Friend.notifications current_user.id %>
-
-         <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %><span id="notification-count">(<%= notifs.size.to_s %>)</span><% end %><b class="caret"></b></a>
-              <ul class="dropdown-menu" id="notification-list">
+         <li id= "notifications" class="dropdown">
+         <% notifs = Friend.notifications current_user.id %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Notifications <% if notifs.size > 0 %>(<%= notifs.size.to_s %>)<% end %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
                  <% notifs.each do |pend| %>
                   <li class="user-notification-block">
                     <p>
@@ -122,7 +115,6 @@
                 <% end %>
               </ul>
         </li>
-
 
       <li><%= link_to "Logout", destroy_user_session_path %></li>
       <% else %>

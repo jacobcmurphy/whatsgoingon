@@ -92,6 +92,22 @@
 
 </div>
 
+    <% if @pending_friends.size > 0 %>
+        <div class= "row">
+        Pending friends:
+        </div>
+        <% @pending_friends.each do |pf| %>
+            <div class='row' id="friendId<%= pf.id %>">
+            <div class='card'>
+            <%= pf.name %>
+
+            <span class="deletefriend" onclick="deleteFriend(<%= pf[:id] %>, <%= pf[:name] %>);"> &#10006; </span>
+            </div>
+            </div>
+        <% end %>
+        </div>
+    <% end %>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
