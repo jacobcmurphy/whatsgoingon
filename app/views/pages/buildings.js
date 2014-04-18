@@ -1,13 +1,12 @@
 	var SSCCoords = [
   		new google.maps.LatLng(42.366061, -71.258425),
-        new google.maps.LatLng(42.365953, -71.258642),
-		new google.maps.LatLng(42.365742, -71.258564),
+      new google.maps.LatLng(42.365953, -71.258642),
+		  new google.maps.LatLng(42.365742, -71.258564),
 	    new google.maps.LatLng(42.365875, -71.257893),
 	    new google.maps.LatLng(42.366034, -71.257706),
 	    new google.maps.LatLng(42.366145, -71.257910)
 	];
-
-  	
+	
   	building0 = new google.maps.Polygon({
     paths: SSCCoords,
     strokeColor: '#FF0000',
@@ -25,7 +24,6 @@
 		new google.maps.LatLng(42.367906, -71.258835)
 	];
 
-  	// Construct the library
   	building1 = new google.maps.Polygon({
     paths: libraryCoords,
     strokeColor: '#FF0000',
@@ -34,8 +32,6 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
   	});
-
-  //	google.maps.geometry.poly.containsLocation(google.maps.LatLng(latitude, longitude),polygons);
 
   	var usdanCoords = [
   		new google.maps.LatLng(42.367953, -71.257469),
@@ -62,7 +58,6 @@
   		new google.maps.LatLng(42.367351, -71.260681)
   	];
   	
-
   	building3 = new google.maps.Polygon({
     paths: usenCoords,
     strokeColor: '#FF0000',
@@ -79,7 +74,6 @@
   		new google.maps.LatLng(42.367599, -71.261234)
   	];
   	
-
   	building4 = new google.maps.Polygon({
     paths: renCoords,
     strokeColor: '#FF0000',
@@ -96,7 +90,6 @@
   		new google.maps.LatLng(42.367532, -71.261542),
   		new google.maps.LatLng(42.367298, -71.261783)		
   	];
-  	
 
   	building5 = new google.maps.Polygon({
     paths: deroyCoords,
@@ -114,7 +107,6 @@
   		new google.maps.LatLng(42.367063, -71.261669)		
   	];
   	
-
   	building6 = new google.maps.Polygon({
     paths: shapiroCoords,
     strokeColor: '#FF0000',
@@ -123,9 +115,6 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
   	});
-
-  
-
   	//***HERE ENDS MASSELL QUAD
 
   	//***HERE BEGINS ROSENTHAL QAUD
@@ -136,7 +125,6 @@
   		new google.maps.LatLng(42.367427, -71.260323)		
   	];
   	
-
   	building7 = new google.maps.Polygon({
     paths: rosNorthCoords,
     strokeColor: '#FF0000',
@@ -153,7 +141,6 @@
   		new google.maps.LatLng(42.367224, -71.260045)		
   	];
   	
-
   	building8 = new google.maps.Polygon({
     paths: rosEastCoords,
     strokeColor: '#FF0000',
@@ -163,7 +150,6 @@
     fillOpacity: opac
   	});
 
-
   	var rosSouthCoords = [
   		new google.maps.LatLng(42.366755, -71.260401),
   		new google.maps.LatLng(42.366741, -71.259959),
@@ -171,7 +157,6 @@
   		new google.maps.LatLng(42.366963, -71.260372)		
   	];
   	
-
   	building9 = new google.maps.Polygon({
     paths: rosSouthCoords,
     strokeColor: '#FF0000',
@@ -183,7 +168,6 @@
 
   	//***HERE ENDS ROSENTHAL QUAD
 
-
   	var SCCCoords = [
   		new google.maps.LatLng(42.365510, -71.260671),
   		new google.maps.LatLng(42.365542, -71.259840),
@@ -191,7 +175,6 @@
   		new google.maps.LatLng(42.366158, -71.260080),
   		new google.maps.LatLng(42.366004, -71.260434)			
   	];
-  	
 
   	building10 = new google.maps.Polygon({
     paths: SCCCoords,
@@ -210,7 +193,6 @@
   		new google.maps.LatLng(42.366676, -71.260954),
   		new google.maps.LatLng(42.366347, -71.261018)				
   	];
-  	
 
   	building11 = new google.maps.Polygon({
     paths: shermanCoords,
@@ -341,7 +323,6 @@
 
   	//***HERE BEGINS EAST
 
-
 	var HassCoords = [
   		new google.maps.LatLng(42.367651, -71.254630),
   		new google.maps.LatLng(42.367670, -71.254472),
@@ -354,8 +335,6 @@
   		new google.maps.LatLng(42.367986, -71.255074),
   		new google.maps.LatLng(42.367855, -71.254772),
   		new google.maps.LatLng(42.367651, -71.254628)
-
-
   	];
 
   	building19 = new google.maps.Polygon({
@@ -385,7 +364,6 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
   	});
-
 
   	var ICCCoords = [
   		new google.maps.LatLng(42.367538, -71.255099),
@@ -471,7 +449,6 @@
     fillOpacity: opac
   	});
 
-
   	var shiffCoords = [
   		new google.maps.LatLng(42.369459, -71.256881),
   		new google.maps.LatLng(42.369580, -71.256707),
@@ -505,7 +482,6 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
   	});
-
 
   	var hellerCoords = [
   		new google.maps.LatLng(42.369149, -71.259733),
@@ -681,7 +657,6 @@
   		new google.maps.LatLng(42.364441, -71.259703),
   		new google.maps.LatLng(42.364333, -71.259362),
   		new google.maps.LatLng(42.363878, -71.259649)
-
   	];
 
   	building38 = new google.maps.Polygon({

@@ -52,25 +52,18 @@
 
 			var markers = [];
 			var infoWindows = [];
-
 			
-
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
 		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman", "Mandel", "Heller", "ASAC", "Castle", "Brown", "Schwartz", "Ziv 127", "Ziv 128", "Ziv 129", "Ziv 130", "Admissions", "Slosberg"];
 
 		<% buildingsArraySize = 38 %>
-
 		var opac = .35;
-
 		<%= render file: "pages/buildings.js", layout: false, content_type: 'text/plain' %>
 
 	  	<% for i in 0..buildingsArraySize %>
 	  	<%= raw "building" + i.to_s + ".setMap(map);" %>
-	  	<% end %>
-
-		  
-
-//*********HERE ENDS MAPPING OF BRANDEIS******************//
+	  	<% end %>  
+//*********HERE ENDS MAPPING OF BRANDEIS********************************//
 
 			var mymarker = new google.maps.Marker({
 				position: latlng, 
@@ -110,7 +103,6 @@
 		  <% for i in 0..buildingsArraySize %>
 		  <%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "]; console.log(mybuilding)}" %>
 		  <% end %>
-
 		
 			$.ajax({
 			    type: 'POST',  
@@ -130,9 +122,6 @@
 			    }
 			});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
-
-
-
 
 //// ******** BUTTON
 
@@ -167,9 +156,6 @@
 				for (var i = 0; i < markers.length; i++) {
 				    markers[i].setMap(null);
 				}
-
-				
-
 				markers = [];
 				// add my location
 		   		var mymarker = new google.maps.Marker({
@@ -229,12 +215,8 @@
 			controlDiv.index = 1;
   			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
 
-			//// ******** BUTTON
-
+			//// ******** END BUTTON
 		}
-
-
-
 
 		function error(msg) {
 			var s = $('#status');
