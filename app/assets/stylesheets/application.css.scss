@@ -135,3 +135,9 @@ $colHover       : #B2D4FF;
 body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-facebook, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-facebook:visited, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-twitter, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-twitter:visited, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-google-plus, body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-google-plus:visited {
     color: #ffffff;
 }
+
+@media(max-width:767px) {
+    .user-notification-block {
+        color: #FFFFFF;
+    }
+}
