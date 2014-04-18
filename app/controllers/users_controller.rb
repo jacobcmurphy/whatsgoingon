@@ -49,11 +49,11 @@ class UsersController < ApplicationController
 
 
    def update_location
-    curr = User.find(current_user.id)
-    curr.latitude = params[:latitude]
-    curr.longitude = params[:longitude]
-    curr.location = params[:location]
-    curr.save!
+    current_user.latitude = params[:latitude]
+    current_user.longitude = params[:longitude]
+    current_user.location = params[:location]
+    current_user.save!
+
     render nothing: true
    end
 
@@ -61,6 +61,7 @@ class UsersController < ApplicationController
       curr = User.find(current_user.id)
       curr.color_status = params[:color_status]
       curr.save!
+      
       render nothing: true
    end
   # PATCH/PUT /users/1

@@ -89,10 +89,10 @@ class FriendsController < ApplicationController
                 { color_status:  user_friends[i][:color_status] } ]}
             dbMarkers.merge! thisMarker
         end
+        
         respond_to do |format|
             format.json { render json: dbMarkers }
         end
-        render nothing: true
     end
 
     def destroy

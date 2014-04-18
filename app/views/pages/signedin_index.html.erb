@@ -686,11 +686,12 @@
 				myinfowindow.open(map, mymarker);
 			});
 
-			<% for i in 0...Friend.most_recent(cuid).length %>
-			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + Friend.most_recent(cuid)[i][:latitude].to_s + ", " + Friend.most_recent(cuid)[i][:longitude].to_s + ");" %>
+			<% most_recent_friends = Friend.most_recent(cuid) %>
+			<% for i in 0...most_recent_friends.length %>
+			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + most_recent_friends[i][:latitude].to_s + ", " + most_recent_friends[i][:longitude].to_s + ");" %>
 			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map });\n" %>
 			<%= raw "markers.push(newmarker"+i.to_s+");" %>
-			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + Friend.most_recent(cuid)[i][:name] + "\" });" %>
+			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + most_recent_friends[i][:name] + "\" });" %>
 			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
