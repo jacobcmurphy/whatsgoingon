@@ -689,7 +689,8 @@
 			<% most_recent_friends = Friend.most_recent(cuid) %>
 			<% for i in 0...most_recent_friends.length %>
 			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + most_recent_friends[i][:latitude].to_s + ", " + most_recent_friends[i][:longitude].to_s + ");" %>
-			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, icon: '" + imgpath = asset_path("marker" + most_recent_friends[i][:color_status].to_s + ".png'") %>
+			<% imgpath = asset_path('marker' + most_recent_friends[i][:color_status].to_s + '.png') %>
+			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, icon: '" + imgpath + "' });" %>
 			<%= raw "markers.push(newmarker"+i.to_s+");" %>
 			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + most_recent_friends[i][:name] + "\" });" %>
 			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
