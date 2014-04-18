@@ -7,7 +7,7 @@
 	<p> <%= @results.length%> <%= 'match'.pluralize(@results.length, :es) %> found </p>
 		<% @results.each do |r| %>
 			<% puts r.attributes %>
-			<div class='card'><%= link_to r[:name], r %>
+			<div class='card'><%= r[:name] %>
 			<button type="submit" class="btn btn-primary pull-right" onclick="sendRequest(<%= r[:id] %>);"> Add </button>
 			</div>
 		<% end %>
