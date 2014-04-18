@@ -56,9 +56,9 @@
 			
 
 //******HERE STARTS MAPPING OF BRANDEIS, THIS WILL BE MOVED**************//
-		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman", "Mandel", "Heller", "ASAC", "Castle", "Brown", "Schwartz", "Ziv 127", "Ziv 128", "Ziv 129", "Ziv 130"];
+		var buildings = ["SSC", "Library", "Usdan", "Usen", "Renfield", "Deroy", "Shapiro", "Rosie North", "Rosie East", "Rosie South", "SCC", "Sherman", "Ridgewood A", "Ridgewood B", "Ridgewood C", "Reitman", "Cable", "Gordon", "Scheffres", "Hass", "Pom", "ICC", "Rabb Building", "Olin-Sang", "Golding", "Lown", "Shiffman", "Mandel", "Heller", "ASAC", "Castle", "Brown", "Schwartz", "Ziv 127", "Ziv 128", "Ziv 129", "Ziv 130", "Admissions", "Slosberg"];
 
-			<% buildingsArraySize = 36 %>
+			<% buildingsArraySize = 38 %>
 
 			var opac = .35;
 
@@ -713,6 +713,46 @@
 
 		  	building36 = new google.maps.Polygon({
 		    paths: ziv130Coords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	//***HERE ENDS ZIV 
+
+
+		  	var admissionsCoords = [
+		  		new google.maps.LatLng(42.364058, -71.261017),
+		  		new google.maps.LatLng(42.364377, -71.260677),
+		  		new google.maps.LatLng(42.364621, -71.260618),
+		  		new google.maps.LatLng(42.364625, -71.260824),
+		  		new google.maps.LatLng(42.364149, -71.261261)
+		  	];
+
+		  	building37 = new google.maps.Polygon({
+		    paths: admissionsCoords,
+		    strokeColor: '#FF0000',
+		    strokeOpacity: opac,
+		    strokeWeight: 2,
+		    fillColor: '#00AAAA',
+		    fillOpacity: opac
+		  	});
+
+		  	var slosbergCoords = [
+		  		new google.maps.LatLng(42.363983, -71.259971),
+		  		new google.maps.LatLng(42.364441, -71.259703),
+		  		new google.maps.LatLng(42.364333, -71.259362),
+		  		
+		  		
+		  		new google.maps.LatLng(42.363878, -71.259649)
+
+
+		  	];
+
+		  	building38 = new google.maps.Polygon({
+		    paths: slosbergCoords,
 		    strokeColor: '#FF0000',
 		    strokeOpacity: opac,
 		    strokeWeight: 2,
