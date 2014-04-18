@@ -16,5 +16,6 @@
 //= require bootstrap-switch.min
 //= require fuse
 //= require underscore-min
+//= require noty
 //= require turbolinks
 //= require_tree .

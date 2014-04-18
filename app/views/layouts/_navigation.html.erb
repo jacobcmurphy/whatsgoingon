@@ -92,17 +92,32 @@
 
   <% if user_signed_in? %>
   channel.bind('my-event', function(data) {
-   $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
-   if (!$('#elemId').length) {
-     <% notifs = Friend.notifications current_user.id %>
-     $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
-   } else {
-     $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
-   }
-   $("#notificationdropdown").addClass('animated shake');
-   $("#friendId"+friendId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
+    if (!$('#elemId').length) {
+      <% notifs = Friend.notifications current_user.id %>
+      $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
+    } else {
+      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
+    }
+    $("#notificationdropdown").addClass('animated shake');
+    $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       $("#notificationdropdown").removeClass('animated shake');
-   });
+    });
+    noty({
+      layout: 'bottom',
+      type: 'alert',
+      text: data.name + ' sent you a friend request.',
+      dismissQueue: true, 
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 500 
+        },
+      timeout: 2000,
+      maxVisible: 1,
+      killer: true
+    });
   });
   <% end %>
 </script>
