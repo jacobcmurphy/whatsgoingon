@@ -18,6 +18,6 @@ label.required:after {
 	content:" *";
 }
 
-a, a:visited, body > main > div > div > a.btn.btn-block.btn-social.btn-twitter {
+body > main > div > div > a.btn.btn-block.btn-social.btn-twitter {
 	color: #FFFFFF;
 }
