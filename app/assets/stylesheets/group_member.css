@@ -1,19 +1,20 @@
 .card {
-	background:#FFF;
 	border:1px solid #AAA;
 	border-bottom:1px solid #BBB;
 	padding:10px;
 	margin:15px;
 	overflow:hidden;
-	width: 98%;
+	margin-left: 0px;
 }
 
 .innercard {
 	width: 96%;
+	margin-left: 2%;
 }
 
 .innerinnercard {
 	width: 94%;
+	margin-left: 3%;
 }
 
 .groupname {

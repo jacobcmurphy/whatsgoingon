@@ -108,11 +108,11 @@
 
     <%= render 'friends/friend_search' %>
 
-
-    <div id="therowsinthebody">
-        <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>
+    <div class="container">
+        <div id="therowsinthebody">
+            <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>
+        </div>
     </div>
-
     <% if @pending_friends.size > 0 %>
         <div id="pending">
             <% if @my_friends.length == 0 %>
