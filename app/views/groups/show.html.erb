@@ -65,8 +65,8 @@ function searchForFriends() {
         confirm: 'Are you sure you want to remove '+memb.name+' from '+@group.name+'?', :method => :delete, class: 'btn btn-default btn-danger' %> </span>
     </div>
   <% end %>
-  
-  <div class="innercard card">
+</div>
+<div class="card">
     <h4>Add a friend to <%= @group.name %></h4>
       <div class="form-group">
           <%= text_field_tag :search, nil, class: "form-control", id: "search_box", :placeholder=> "Search for a friend to add to " + @group.name, onKeyUp:"searchForFriends();"  %>
@@ -89,4 +89,3 @@ function searchForFriends() {
       </div>
     <% end %>
   </div>
-</div>
