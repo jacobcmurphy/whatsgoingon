@@ -1,5 +1,9 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
+
+<% statusNames = ["In Class", "Working", "Studying", "Eating", "Partying", "Relaxing", "In Class", "Working", "Studying", "Eating", "Partying", "In Class", "Working"] %>
+
 <div class="container" id="friends">
+
 
     <% cuid = current_user.id %>
 
@@ -95,7 +99,7 @@
                 s.html(typeof msg == 'string' ? msg : "failed");
                 s.addClass('fail');    
             }
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[f[:color_status].to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         if (navigator.geolocation) {
