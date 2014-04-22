@@ -60,14 +60,6 @@ ActiveRecord::Schema.define(version: 20140410195647) do
     t.string   "username"
   end
 
-  create_table "check_ins", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "time"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "location"
-  end
-
   create_table "friends", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"

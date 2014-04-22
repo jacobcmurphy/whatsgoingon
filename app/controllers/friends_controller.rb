@@ -81,12 +81,12 @@ class FriendsController < ApplicationController
         cuid = current_user.id
         dbMarkers = {}
         user_friends = Friend.most_recent(cuid)
-        for i in 0...user_friends.length
-            thisMarker = { user_friends[i][:user_id] => [ 
-                { name: user_friends[i][:name] }, 
-                { lat:  user_friends[i][:latitude] }, 
-                { lng:  user_friends[i][:longitude] }, 
-                { color_status:  user_friends[i][:color_status] } ]}
+        user_friends.each do |f|
+            thisMarker = { f.id => [ 
+                {name:f.name }, 
+                {lat:f.latitude }, 
+                {lng:f.longitude }, 
+                {color_status:f.color_status } ]}
             dbMarkers.merge! thisMarker
         end
         
