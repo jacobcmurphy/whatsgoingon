@@ -7,12 +7,13 @@
  *= require bootstrap-social
  *= require font-awesome
  *= require animate
+ *= require flat-ui
  *= require_self
  *= require_tree .
  */
 
 body {
-    background-color: #F2F2F1 !important;
+    background-color: #F9F9F9 !important;
 }
 
 
@@ -73,7 +74,7 @@ $colHover       : #B2D4FF;
 
 /* other style */
  
- .card {
+ /*.card {
 	padding:1.5rem;
 	box-shadow:0 1px 2px #aaa;
 	background:white;
@@ -84,6 +85,17 @@ $colHover       : #B2D4FF;
 	transform-origin:top left;
     overflow: hidden;
     width: 100%;
+ }*/
+
+ .card {
+    margin: 10px;
+    margin-top: 12px;
+    background-color: #ECECEC;
+    padding: 10px;
+    border-radius: 7px 7px 7px 7px; /* top left, top right, bottom right, bottom left */ 
+    border: 0px;
+    border-bottom: 0px;
+    box-shadow: none;
  }
  
  .nounderline {

@@ -1,6 +1,4 @@
 .card {
-	border:1px solid #AAA;
-	border-bottom:1px solid #BBB;
 	padding:10px;
 	margin:15px;
 	overflow:hidden;
@@ -10,12 +8,16 @@
 .innercard {
 	width: 96%;
 	margin-left: 2%;
+	box-shadow:0 1px 2px #aaa;
+	background-color: #F1F1F1;
 }
 
-.innerinnercard {
+/*.innerinnercard {
 	width: 94%;
 	margin-left: 3%;
-}
+	border:1px solid #AAA;
+	border-bottom:1px solid #BBB;
+}*/
 
 .groupname {
 	display: inline;

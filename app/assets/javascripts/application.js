@@ -17,5 +17,7 @@
 //= require fuse
 //= require underscore-min
 //= require noty
+//= require flatui-checkbox
+//= require flatui-radio
 //= require turbolinks
 //= require_tree .
