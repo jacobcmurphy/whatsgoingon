@@ -13,12 +13,14 @@ Whatsgoingon::Application.routes.draw do
   resources :users
   match "users/update_location" => "users#update_location", via: :post
   match "users/color_status" => "users#color_status", via: :post
+  match "users/changeVisibility" => "users#changeVisibility", via: :post
+
 
   
   resources :groups, only: [:new, :create, :destroy, :show]
   match "groups" => "groups#index", via: :get
   match "groups" => "groups#destroy", via: :delete
-  match "groups/changeVisibility", via: :post
+  match "groups/changeVisibility" => "groups#changeVisibility", via: :post
 
 
   resource :group_members, only: [:create, :destroy]

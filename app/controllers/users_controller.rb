@@ -57,13 +57,23 @@ class UsersController < ApplicationController
     render nothing: true
    end
 
-   def color_status
+
+    def change_visibility
+        if user_signed_in?
+          current_user.visible  = params[:visibility]
+          current_user.save!
+        end
+        render nothing: true
+    end
+
+
+    def color_status
       curr = User.find(current_user.id)
       curr.color_status = params[:color_status]
       curr.save!
       
       render nothing: true
-   end
+    end
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update

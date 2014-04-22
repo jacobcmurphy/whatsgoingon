@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :location
       t.float :latitude
       t.float :longitude
-      t.boolean :visible
+      t.boolean :visible, default: true
       t.integer :color_status, default: 12
 
       t.timestamps

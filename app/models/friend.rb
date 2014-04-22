@@ -20,7 +20,7 @@ class Friend < ActiveRecord::Base
 	def self.most_recent uid
 		if uid.is_a? Integer
 		  test = User.find_by_sql([
-		        "SELECT *
+		        "SELECT DISTINCT *
 		        FROM users AS u
 		        WHERE u.updated_at > ? AND u.id != ? AND u.visible = TRUE AND u.id IN
 		          (SELECT user_id

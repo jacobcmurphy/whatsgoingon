@@ -98,12 +98,14 @@ ActiveRecord::Schema.define(version: 20140410195647) do
     t.text     "about"
     t.string   "image"
     t.string   "location"
-    t.boolean  "visible"
-    t.integer  "color_status"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "visible",                default: true
+    t.integer  "color_status",           default: 12
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: ""
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
