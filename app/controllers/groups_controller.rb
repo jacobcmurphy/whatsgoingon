@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
     if user_signed_in?
       @groups = Group.where(user_id: current_user.id)
     else
-      redirect_to groups_path
+      redirect_to root_url
     end
   end
 
