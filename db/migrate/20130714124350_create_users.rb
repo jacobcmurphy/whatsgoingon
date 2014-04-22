@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.text :about
       t.string :image
       t.string :location
+      t.float :latitude
+      t.float :longitude
       t.boolean :visible
       t.integer :color_status
 
