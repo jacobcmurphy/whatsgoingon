@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.boolean :visible
-      t.integer :color_status
+      t.integer :color_status, default: 12
 
       t.timestamps
     end
