@@ -4,10 +4,10 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap.min
  *= require bootstrap-switch.min
- *= require bootstrap-social
- *= require font-awesome
  *= require animate
  *= require flat-ui
+ *= require bootstrap-social
+ *= require font-awesome
  *= require_self
  *= require_tree .
  */
