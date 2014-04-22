@@ -1,12 +1,16 @@
 <% statusNames = ["In Class", "Working", "Studying", "Eating", "Partying", "Relaxing"] %>
-
+<script>
+  function forwardToHome() {
+    window.location = "<%= root_url %>";
+  }
+</script>
 
 <%# navigation styled for Bootstrap 3.0 %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "What's Going On?", root_url, class: 'navbar-brand' %>
+        <%= link_to "What's Going On?", root_url, class: 'navbar-brand', onclick: "forwardToHome();" %>
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>

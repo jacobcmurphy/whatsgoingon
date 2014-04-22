@@ -17,7 +17,7 @@
         function success(position) {
             $haslocation = true;
             $pos = position;
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         function deleteFriend(friendId, friendName) {
@@ -33,9 +33,9 @@
                             var rowbody = $("#therowsinthebody");
                             if ($.trim($(rowbody).html()).length == 0) {
                                 rowbody.empty();
-                                rowbody.html('<div class="row card">Get started adding your first friend!</div>');
+                                rowbody.html('<div class="row card">Get started by adding your first friend!</div>');
                                 if (pendingReq > 0) {
-                                    rowbody.append("<br /><br /><br />");
+                                    rowbody.append("<br />");
                                 }
                             }
                         });
@@ -96,7 +96,7 @@
                 s.html(typeof msg == 'string' ? msg : "failed");
                 s.addClass('fail');    
             }
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         if (navigator.geolocation) {
@@ -110,14 +110,11 @@
 
     <div class="container">
         <div id="therowsinthebody">
-            <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started adding your first friend!</div>" %><% end %>
+            <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>
         </div>
-    </div>
+    
     <% if @pending_friends.size > 0 %>
         <div id="pending">
-            <% if @my_friends.length == 0 %>
-                <br /><br /><br />
-            <% end %>
             <br />
             Pending friends:
             <% @pending_friends.each do |pf| %>
@@ -125,7 +122,7 @@
             <% end %>
         </div>
     <% end %>
-
+</div>
     <!-- Button trigger modal -->
     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="addnewfriendbutton">
       Add New Friend
