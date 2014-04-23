@@ -8,10 +8,9 @@
 
 
 	<p>
+	My Visibility for My Friends
 	<input id="visibilityCheckbox" type="checkbox" data-size="small" name="VisibilityToggle" value="<%= current_user.visible.to_s %>" data-off-color="default" onfocus="changeVisibility(<%= !current_user.visible.to_s %>);">
-
-			     <script>$("[name='VisibilityToggle']").bootstrapSwitch('state', <%= (!current_user.visible).to_s %>, false);
-			     </script>
+	<script>$("[name='VisibilityToggle']").bootstrapSwitch('state', <%= (!current_user.visible).to_s %>, false);</script>
 	</input>
 	</p>
 
