@@ -16,6 +16,20 @@ body {
     background-color: #F9F9F9 !important;
 }
 
+body > div.navbar.navbar-default.navbar-fixed-top > div > div.navbar-header > a, #navbar-main > ul > li > a, #botherme, #bothermeyes, #bothermeno {
+    font-weight:100;
+    letter-spacing:1px;
+}
+
+#notification-list > li > p {
+    font-size: 98%;
+}
+
+#notification-list > li > p {
+    font-weight:200;
+    letter-spacing:1px;
+}
+
 
  /* nav bar */
 
@@ -160,5 +174,11 @@ body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-f
 
     #botherme, #bothermeyes, #bothermeno {
         color: #FFFFFF;
+    }
+
+    #navbar-main > ul > li.dropdown.open > ul > li > a, #notification-list > li > p {
+        font-weight:100;
+        letter-spacing:1px;
+        padding-left: 4px;
     }
 }
