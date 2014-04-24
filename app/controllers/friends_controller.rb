@@ -6,13 +6,11 @@ class FriendsController < ApplicationController
     end
 
     def create
-        if user_signed_in?
-            Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'my-event', {
-                fid: current_user.id,
-                name: current_user.name
-            })
-            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
-        end
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'my-event', {
+            fid: current_user.id,
+            name: current_user.name
+        })
+        current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
         render nothing: true
     end
   
@@ -48,8 +46,10 @@ class FriendsController < ApplicationController
     def reject
         if user_signed_in?
             Friend.delete_all(user_id: params[:friend_id], friend_id: current_user.id)
+            render nothing: true
+        else
+            redirect_to root_url
         end
-        render nothing: true
     end
 
     def accept
@@ -58,40 +58,51 @@ class FriendsController < ApplicationController
             accepted_friend = Friend.where(user_id: params[:friend_id], friend_id: current_user.id).first
             accepted_friend.accepted = true
             accepted_friend.save!
+            render nothing: true
+        else
+            redirect_to root_url
         end
-        render nothing: true
     end
 
     def search
-        @results = User.find_by_fuzzy_name(params[:search], limit: 10)
-        @results.delete(current_user)
-        current_user.friends.each do |f|
-            @results.delete(User.find(f.friend_id))
+        if user_signed_in?
+            @results = User.find_by_fuzzy_name(params[:search], limit: 10)
+            @results.delete(current_user)
+            current_user.friends.each do |f|
+                @results.delete(User.find(f.friend_id))
 
-            #do not show friends that are already requested but still pending
-            @results.delete(f) if f.accepted = false
-        end
-        respond_to do |format|
-            format.js
+                #do not show friends that are already requested but still pending
+                @results.delete(f) if f.accepted = false
+            end
+
+            respond_to do |format|
+                format.js
+            end
+        else
+            redirect_to root_url
         end
     end
 
 
     def getmarkers
-        cuid = current_user.id
-        dbMarkers = {}
-        user_friends = Friend.most_recent(cuid)
-        user_friends.each do |f|
-            thisMarker = { f.id => [ 
-                {name:f.name }, 
-                {lat:f.latitude }, 
-                {lng:f.longitude }, 
-                {color_status:f.color_status } ]}
-            dbMarkers.merge! thisMarker
-        end
-        
-        respond_to do |format|
-            format.json { render json: dbMarkers }
+        if user_signed_in?
+            cuid = current_user.id
+            dbMarkers = {}
+            user_friends = Friend.most_recent(cuid)
+            user_friends.each do |f|
+                thisMarker = { f.id => [ 
+                    {name:f.name }, 
+                    {lat:f.latitude }, 
+                    {lng:f.longitude }, 
+                    {color_status:f.color_status } ]}
+                dbMarkers.merge! thisMarker
+            end
+            
+            respond_to do |format|
+                format.json { render json: dbMarkers }
+            end
+        else
+            redirect_to root_url
         end
     end
 

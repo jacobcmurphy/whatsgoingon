@@ -1,4 +1,3 @@
-
 class PagesController < ApplicationController
 
   def terms
@@ -8,7 +7,7 @@ class PagesController < ApplicationController
   	if current_user.nil?
   		redirect_to new_user_session_path
   	else
-  		  render 'signedin_index'
+  		render 'signedin_index'
   	end
   end
 end

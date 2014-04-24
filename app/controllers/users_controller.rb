@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-
     if user_signed_in?
         redirect_to current_user
     else
@@ -49,42 +47,52 @@ class UsersController < ApplicationController
 
 
    def update_location
-    current_user.latitude = params[:latitude]
-    current_user.longitude = params[:longitude]
-    current_user.location = params[:location]
-    current_user.save!
-
+    if user_signed_in?
+      current_user.latitude = params[:latitude]
+      current_user.longitude = params[:longitude]
+      current_user.location = params[:location]
+      current_user.save!
+    end
     render nothing: true
    end
 
 
-    def change_visibility
-        if user_signed_in?
-          current_user.visible  = params[:visibility]
-          current_user.save!
-        end
+    def changeVisibility
+      if user_signed_in?
+        current_user.visible  = params[:visibility]
+        current_user.save!
         render nothing: true
+      else
+        redirect_to root_url
+      end
     end
 
 
     def color_status
-      curr = User.find(current_user.id)
-      curr.color_status = params[:color_status]
-      curr.save!
-      
-      render nothing: true
+      if user_signed_in?
+        curr = User.find(current_user.id)
+        curr.color_status = params[:color_status]
+        curr.save!
+        render nothing: true
+      else
+        redirect_to root_url
+      end
     end
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_url
     end
   end
 

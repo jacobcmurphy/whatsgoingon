@@ -90,20 +90,14 @@
 			});
 
 			<% most_recent_friends = Friend.most_recent(cuid) %>
-<% puts "***************************" %>
-<% puts most_recent_friends.size %>
-<% puts "***************************" %>
+
 			<% for i in 0...most_recent_friends.length %>
 			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + most_recent_friends[i][:latitude].to_s + ", " + most_recent_friends[i][:longitude].to_s + ");" %>
 			<% imgpath = asset_path('marker' + most_recent_friends[i][:color_status].to_s + '.png') %>
 			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, icon: '" + imgpath + "' });" %>
-<% puts "***************************" %>
-<% puts most_recent_friends[i].color_status %>
-<% puts "***************************" %>
+
 			<%= raw "markers.push(newmarker"+i.to_s+");" %>
-<% puts "***************************" %>
-<% puts most_recent_friends[i].name %>
-<% puts "***************************" %>
+
 			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + most_recent_friends[i][:name] + "\" });" %>
 			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
@@ -128,7 +122,6 @@
 			    url: 'users/update_location', 
 			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
 			    success: function(response) {
-			        
 			    }
 			});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec

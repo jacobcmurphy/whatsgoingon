@@ -125,6 +125,26 @@
             <% end %>
         </div>
     <% end %>
+
+    <!--for changing visibility status -->
+    <div>
+    Visibility to friends
+    <input id="visibilityCheckbox" type="checkbox" data-size="small" name="VisibilityToggle" value="<%= current_user.visible.to_s %>" data-off-color="default" onfocus="changeVisibility(<%=(! current_user.visible).to_s %>);">
+    <script>$("[name='VisibilityToggle']").bootstrapSwitch('state', <%= (current_user.visible).to_s %>, false);</script>
+    </input>
+    </div>
+
+    <script>
+    function changeVisibility(vis) {
+    $.ajax({  
+        type: 'POST',  
+        url: '/users/changeVisibility', 
+        data: { visibility: vis },
+        success: function(response) {
+        }
+    });
+}
+</script>
 </div>
     <!-- Button trigger modal -->
     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="addnewfriendbutton">

@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
     if user_signed_in?
       @group = Group.new
     else
-      redirect_to groups_path
+      redirect_to root_url
     end
   end
 
@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
         redirect_to groups_path
       end
     else
-      redirect_to groups_path
+      redirect_to root_url
   	end
   end
 
@@ -22,11 +22,14 @@ class GroupsController < ApplicationController
     if user_signed_in?
       @group = Group.find(params[:id].to_i)
       @group.destroy
+
       respond_to do |format|
         format.html { redirect_to groups_path }
         format.json { head :no_content }
       end
-   end
+    else
+      redirect_to root_url
+    end
   end
 
   def show
@@ -53,9 +56,9 @@ class GroupsController < ApplicationController
       end
       @my_friends = User.find(f_ids)
 
-      else
-        redirect_to root_url
-      end
+    else
+      redirect_to root_url
+    end
   end
 
 
@@ -69,10 +72,14 @@ class GroupsController < ApplicationController
   end
 
   def changeVisibility
-    grp = Group.find(params[:group_id])
-    grp.visible = !(grp.visible)
-    grp.save! 
-    redirect_to groups_path
+    if user_signed_in?
+      grp = Group.find(params[:group_id])
+      grp.visible = !(grp.visible)
+      grp.save! 
+      redirect_to groups_path
+    else
+      redirect_to root_url
+    end
   end
 
 end
