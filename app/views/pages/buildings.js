@@ -667,3 +667,185 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
   	});
+
+    var gosmanCoords = [
+      new google.maps.LatLng(42.364389, -71.254867),
+      new google.maps.LatLng(42.364999, -71.253896),
+      new google.maps.LatLng(42.365804, -71.254776),
+      new google.maps.LatLng(42.365169, -71.255736)
+    ];
+
+    building39 = new google.maps.Polygon({
+    paths: gosmanCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var medcenterCoords = [
+      new google.maps.LatLng(42.365969, -71.255300),
+      new google.maps.LatLng(42.366001, -71.255085),
+      new google.maps.LatLng(42.366218, -71.255148),
+      new google.maps.LatLng(42.366178, -71.255384)
+    ];
+
+    building40 = new google.maps.Polygon({
+    paths: medcenterCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var policeCoords = [
+      new google.maps.LatLng(42.366186, -71.255598),
+      new google.maps.LatLng(42.366205, -71.255320),
+      new google.maps.LatLng(42.366339, -71.255386),
+      new google.maps.LatLng(42.366294, -71.255629)
+    ];
+
+    building41 = new google.maps.Polygon({
+    paths: policeCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var pearlmanCoords = [
+      new google.maps.LatLng(42.367322, -71.258167),
+      new google.maps.LatLng(42.367298, -71.257921),
+      new google.maps.LatLng(42.367609, -71.257829),
+      new google.maps.LatLng(42.367591, -71.258141),
+      new google.maps.LatLng(42.367514, -71.258213)
+    ];
+
+    building42 = new google.maps.Polygon({
+    paths: pearlmanCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var modsCoords = [
+      new google.maps.LatLng(42.365408, -71.253223),
+      new google.maps.LatLng(42.365663, -71.252808),
+      new google.maps.LatLng(42.366533, -71.253805),
+      new google.maps.LatLng(42.366238, -71.254430)
+    ];
+
+    building43 = new google.maps.Polygon({
+    paths: modsCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+
+    var facultyCoords = [
+      new google.maps.LatLng(42.365426, -71.261314),
+      new google.maps.LatLng(42.365636, -71.260858),
+      new google.maps.LatLng(42.365885, -71.261083),
+      new google.maps.LatLng(42.365691, -71.261528)
+    ];
+
+    building44 = new google.maps.Polygon({
+    paths: facultyCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var roseCoords = [
+      new google.maps.LatLng(42.365477, -71.263025),
+      new google.maps.LatLng(42.365307, -71.262236),
+      new google.maps.LatLng(42.365893, -71.261952),
+      new google.maps.LatLng(42.366092, -71.262687)
+    ];
+
+    building45 = new google.maps.Polygon({
+    paths: roseCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+
+    var pollackCoords = [
+      new google.maps.LatLng(42.365152, -71.262561),
+      new google.maps.LatLng(42.365110, -71.262431),
+      new google.maps.LatLng(42.365296, -71.262305),
+      new google.maps.LatLng(42.365340, -71.262441)
+    ];
+
+    building46 = new google.maps.Polygon({
+    paths: pollackCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var artStudioCoords = [
+      new google.maps.LatLng(42.364617, -71.263390),
+      new google.maps.LatLng(42.364450, -71.262671),
+      new google.maps.LatLng(42.364811, -71.262523),
+      new google.maps.LatLng(42.365035, -71.263199)
+    ];
+
+    building47 = new google.maps.Polygon({
+    paths: artStudioCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+
+    var ibsCoords = [
+      new google.maps.LatLng(42.364309, -71.264012),
+      new google.maps.LatLng(42.364694, -71.264036),
+      new google.maps.LatLng(42.364835, -71.264607),
+      new google.maps.LatLng(42.365219, -71.264626),
+      new google.maps.LatLng(42.365013, -71.265399),
+      new google.maps.LatLng(42.364708, -71.265128)
+    ];
+
+    building48 = new google.maps.Polygon({
+    paths: ibsCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var theaterCoords = [
+      new google.maps.LatLng(42.364218, -71.262545),
+      new google.maps.LatLng(42.363949, -71.261670),
+      new google.maps.LatLng(42.364710, -71.261310),
+      new google.maps.LatLng(42.364872, -71.262086)
+    ];
+
+    building49 = new google.maps.Polygon({
+    paths: theaterCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
