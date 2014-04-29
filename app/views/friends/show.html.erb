@@ -109,9 +109,10 @@
         }
     </script>
 
-    <%= render 'friends/friend_search' %>
+    
 
     <div class="container">
+        <%= render 'friends/friend_search' %>
         <div id="therowsinthebody">
             <% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= link_to (raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, '<%= f[:name] %>');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>
         </div>
@@ -145,11 +146,12 @@
     });
 }
 </script>
-</div>
-    <!-- Button trigger modal -->
+<!-- Button trigger modal -->
     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="addnewfriendbutton">
       Add New Friend
     </button>
+</div>
+    
 </div>
 
 
