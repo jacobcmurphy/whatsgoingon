@@ -30,7 +30,6 @@
 			document.querySelector('article').appendChild(mapcanvas);
 
 			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			var latlngTest = new google.maps.LatLng(position.coords.latitude, position.coords.longitude + 0.00005);
 
 			var myOptions = {
 				zoom: 18,
@@ -46,7 +45,7 @@
 			};
 			map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
-			<% if (params.has_key?(:lat) && params.has_key?(:lng)) %>
+			<% if (params.has_key?(:lat) && params.has_key?(:lng)) && params[:lat] != "" && params[:lng] != "" %>
 			<%= "map.setCenter(new google.maps.LatLng(" + params[:lat] + ", " + params[:lng] + "));" %>
 			<% end %>
 
