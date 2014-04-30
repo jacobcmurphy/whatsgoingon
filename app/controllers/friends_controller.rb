@@ -34,8 +34,7 @@ class FriendsController < ApplicationController
                     pending_f_ids << f.friend_id
                 end
             end
-            @friend = Friend.new
-
+            # @friend = Friend.new
             @pending_friends = User.find(pending_f_ids)
             @friends = User.find(f_ids)
             @friends.each do |f|
@@ -63,8 +62,10 @@ class FriendsController < ApplicationController
 
     def accept
         if user_signed_in?
-            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id].to_i, accepted: true)
-            accepted_friend = Friend.where(user_id: params[:friend_id], friend_id: current_user.id).first
+            fid = params[:friend_id].to_i
+            cuid = current_user.id
+            current_user.friends.create(user_id: cuid, friend_id: fid, accepted: true)
+            accepted_friend = Friend.where(user_id: fid, friend_id: cuid).first
             accepted_friend.accepted = true
             accepted_friend.save!
             render nothing: true
