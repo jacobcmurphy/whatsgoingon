@@ -127,7 +127,7 @@
 </script>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-         <% notifs = Friend.notifications current_user.id %>
+         <% notifs = (Friend.notifications current_user.id).uniq %>
           <li class="dropdown" id="notificationdropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %><span id="notification-count">(<%= notifs.size.to_s %>)</span><% end %><b class="caret"></b></a>
               <ul class="dropdown-menu" id="notification-list">
