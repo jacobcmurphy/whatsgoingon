@@ -6,5 +6,9 @@ class CreateFriends < ActiveRecord::Migration
       t.boolean :accepted
       t.timestamps
     end
+
+    add_index :friends, :user_id
+    add_index :friends, :friend_id
+
   end
 end

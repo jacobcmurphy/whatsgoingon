@@ -6,5 +6,10 @@ class CreateGroupMembers < ActiveRecord::Migration
       t.integer :friend_id
       t.boolean :accepted
     end
+
+
+    add_index :group_members, :group_id
+    add_index :group_members, :user_id
+    add_index :group_members, :friend_id
   end
 end

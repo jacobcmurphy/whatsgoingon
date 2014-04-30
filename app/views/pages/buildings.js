@@ -849,3 +849,120 @@
     fillColor: '#00AAAA',
     fillOpacity: opac
     });
+
+    var villageACoords = [
+      new google.maps.LatLng(42.363517, -71.260279),
+      new google.maps.LatLng(42.363459, -71.259848),
+      new google.maps.LatLng(42.363776, -71.259786),
+      new google.maps.LatLng(42.363842, -71.260199)
+    ];
+
+    building50 = new google.maps.Polygon({
+    paths: villageACoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var villageBCoords = [
+      new google.maps.LatLng(42.363211, -71.260483),
+      new google.maps.LatLng(42.363094, -71.260129),
+      new google.maps.LatLng(42.363416, -71.259947),
+      new google.maps.LatLng(42.363523, -71.260317)
+    ];
+
+    building51 = new google.maps.Polygon({
+    paths: villageBCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var villageCCoords = [
+      new google.maps.LatLng(42.362873, -71.260856),
+      new google.maps.LatLng(42.362754, -71.260371),
+      new google.maps.LatLng(42.363087, -71.260180),
+      new google.maps.LatLng(42.363239, -71.260612)
+    ];
+
+    building52 = new google.maps.Polygon({
+    paths: villageCCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+  var verticaCoords = [
+      new google.maps.LatLng(42.366971, -71.259248),
+      new google.maps.LatLng(42.366721, -71.258623),
+      new google.maps.LatLng(42.366953, -71.258467),
+      new google.maps.LatLng(42.367236, -71.259079)
+    ];
+
+    building53 = new google.maps.Polygon({
+    paths: verticaCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var volenCoords = [
+      new google.maps.LatLng(42.366733, -71.259307),
+      new google.maps.LatLng(42.366525, -71.258827),
+      new google.maps.LatLng(42.366723, -71.258644),
+      new google.maps.LatLng(42.366937, -71.259165)
+    ];
+
+    building54 = new google.maps.Polygon({
+    paths: volenCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var goldsmithCoords = [
+      new google.maps.LatLng(42.367131, -71.258660),
+      new google.maps.LatLng(42.366985, -71.258301),
+      new google.maps.LatLng(42.367121, -71.258172),
+      new google.maps.LatLng(42.367276, -71.258524)
+    ];
+
+    building55 = new google.maps.Polygon({
+    paths: goldsmithCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var bassineCoords = [
+      new google.maps.LatLng(42.366993, -71.258325),
+      new google.maps.LatLng(42.366638, -71.257546),
+      new google.maps.LatLng(42.366785, -71.257425),
+      new google.maps.LatLng(42.367127, -71.258203)
+    ];
+
+    building56 = new google.maps.Polygon({
+    paths: bassineCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+
+
+
+  

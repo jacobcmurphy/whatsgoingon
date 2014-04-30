@@ -5,5 +5,8 @@ class CreateGroups < ActiveRecord::Migration
       t.string :name
       t.boolean :visible
     end
+
+    add_index :groups, :user_id
+
   end
 end
