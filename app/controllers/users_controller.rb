@@ -39,8 +39,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        formataswith 'new'
       end
     end
   end
@@ -87,8 +86,7 @@ class UsersController < ApplicationController
           format.html { redirect_to @user, notice: 'User was successfully updated.' }
           format.json { head :no_content }
         else
-          format.html { render action: 'edit' }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
+          formataswith 'edit'
         end
       end
     else
@@ -115,5 +113,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def formataswith action
+      format.html { render action: action }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
     end
 end
