@@ -45,7 +45,7 @@ function searchForFriends() {
 <div class="container">
   <div class="card">
     <div>
-      <h3 class="groupname"><%= @group.name %></h3>
+      <h4 class="groupname"><%= @group.name %></h4>
       <span class="right">  
       	<input id="check<%= @group.name %>" type="checkbox" data-size="small" name="<%= "group" + @group.id.to_s + "VisibilityToggle" %>" value="check<%= @group.name %>" data-off-color="default" onfocus="changeGroupVisibility(<%= @group.id.to_s %>);">
         <script>$("[name='<%= "group" + @group.id.to_s + "VisibilityToggle" %>']").bootstrapSwitch('state', <%= @group.visible.to_s %>, false);</script>
@@ -67,7 +67,7 @@ function searchForFriends() {
   <% end %>
 </div>
 <div class="card">
-    <h4>Add a friend to <%= @group.name %></h4>
+    <h6>Add a friend to <%= @group.name %></h6>
       <div class="form-group">
           <%= text_field_tag :search, nil, class: "form-control", id: "search_box", :placeholder=> "Search for a friend to add to " + @group.name, onKeyUp:"searchForFriends();"  %>
       </div>

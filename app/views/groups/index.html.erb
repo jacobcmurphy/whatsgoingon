@@ -36,7 +36,7 @@ function changeGroupVisibility(groupId) {
 			<div class="modal-content">
 				<%= form_for(@group = Group.new) do |f| %>
 				<div class="modal-header">
-					<h2 class="center">Add a New Group</h1>
+					<h3 class="center">Add a New Group</h3>
 				</div>
 				<div class="modal-body">
 					<% if @group.errors.any? %>
