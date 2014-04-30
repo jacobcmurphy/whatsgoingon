@@ -102,7 +102,7 @@
 
 			var mybuilding = "";
 		  <% for i in 0..buildingsArraySize %>
-		  <%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "]; console.log(mybuilding)}" %>
+		  <%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];}" %>
 		  <% end %>
 		
 			$.ajax({
@@ -115,12 +115,12 @@
 
 			setInterval(function() {
 			    $.ajax({  
-			    type: 'POST',  
-			    url: 'users/update_location', 
-			    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
-			    success: function(response) {
-			    }
-			});
+				    type: 'POST',  
+				    url: 'users/update_location', 
+				    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
+				    success: function(response) {
+				    }
+				});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
 
 //// ******** BUTTON
@@ -162,7 +162,7 @@
 					position: latlng, 
 					map: map, 
 					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)",
-					zIndex: 2,
+					zIndex: 3,
 					<% imgpath = asset_path('marker' + current_user.color_status.to_s.to_s + '.png') %>
 					<%= raw "icon: '" + imgpath + "'" %>
 				});
