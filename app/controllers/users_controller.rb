@@ -47,6 +47,7 @@ class UsersController < ApplicationController
 
    def update_location
     if user_signed_in?
+      current_user.current_sign_in_at = Time.new
       current_user.latitude = params[:latitude]
       current_user.longitude = params[:longitude]
       current_user.location = params[:location]
