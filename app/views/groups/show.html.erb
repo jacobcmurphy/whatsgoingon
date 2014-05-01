@@ -1,14 +1,4 @@
 <script>
-function changeGroupVisibility(groupId) {
-  $.ajax({  
-      type: 'POST',  
-      url: '/groups/changeVisibility', 
-      data: { group_id: groupId },
-      success: function(response) {
-      }
-  });
-}
-
 function searchForFriends() {
   $('#search_box').focus();
   var friends = <%= raw @my_friends.to_json %>;
@@ -47,9 +37,6 @@ function searchForFriends() {
     <div>
       <h4 class="groupname"><%= @group.name %></h4>
       <span class="right">  
-      	<input id="check<%= @group.name %>" type="checkbox" data-size="small" name="<%= "group" + @group.id.to_s + "VisibilityToggle" %>" value="check<%= @group.name %>" data-off-color="default" onfocus="changeGroupVisibility(<%= @group.id.to_s %>);">
-        <script>$("[name='<%= "group" + @group.id.to_s + "VisibilityToggle" %>']").bootstrapSwitch('state', <%= @group.visible.to_s %>, false);</script>
-        </input>
         <%= link_to 'Delete', @group, confirm: 'Are you sure you want to delete ' + @group.name + '?', :method => :delete, class: 'btn btn-default btn-danger' %>
       </span>
   </div>
