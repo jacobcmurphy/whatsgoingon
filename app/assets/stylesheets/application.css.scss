@@ -196,3 +196,15 @@ body > main > div > div.container > div > div > a.btn.btn-block.btn-social.btn-f
 #therowsinthebody > div > a > div, #pending > div > div, #therowsinthebody > div > div {
     margin-left: 15px;
 }
+
+@media (max-width: 991px) {
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-header {
+    float: none;
+  }
+}
