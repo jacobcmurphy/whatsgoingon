@@ -126,20 +126,22 @@
 
 function clearnotif(obje) {
   obje.parent().parent().remove();
-  console.log("sdfs");
-  $("#notification-count").data(parseInt($("#notification-count").data())-1);
-
-  console.log("sdfssss");
+  $("#notification-count").html(parseInt($("#notification-count").text())-1);
+  if (parseInt($("#notification-count").text()) == 0) {
+    $("#notification-count").remove();
+    $('#notificationstitle').html('Notifications<b class="caret"></b>');
+    $('#notification-list').append(' <li id="no-new-notifs" class="user-notification-block">No New Notifications</li>');
+  }
 }
 
 channel.bind('send-shout', function(data) {
     $('#no-new-notifs').remove();
     $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
-    if (!$('#elemId').length) {
+    if (!$('#notification-count').length) {
       <% notifs = Friend.notifications current_user.id %>
       $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
     } else {
-      $("#notification-count").html("<%= (notifs.size+1).to_s %>");  
+      $("#notification-count").html(parseInt($("#notification-count").text())+1);  
     }
     $("#notificationdropdown").addClass('animated shake');
     $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
