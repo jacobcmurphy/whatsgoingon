@@ -99,9 +99,9 @@
     $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
     if (!$('#elemId').length) {
       <% notifs = Friend.notifications current_user.id %>
-      $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
+      $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
     } else {
-      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
+      $("#notification-count").html("<%= (notifs.size+1).to_s %>");  
     }
     $("#notificationdropdown").addClass('animated shake');
     $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
@@ -123,14 +123,23 @@
       killer: true
     });
   });
+
+function clearnotif(obje) {
+  obje.parent().parent().remove();
+  console.log("sdfs");
+  $("#notification-count").data(parseInt($("#notification-count").data())-1);
+
+  console.log("sdfssss");
+}
+
 channel.bind('send-shout', function(data) {
     $('#no-new-notifs').remove();
-    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Clear</button></div></p></li>');
+    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
     if (!$('#elemId').length) {
       <% notifs = Friend.notifications current_user.id %>
-      $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
+      $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
     } else {
-      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
+      $("#notification-count").html("<%= (notifs.size+1).to_s %>");  
     }
     $("#notificationdropdown").addClass('animated shake');
     $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
@@ -158,7 +167,7 @@ channel.bind('send-shout', function(data) {
       <% if user_signed_in? %>
          <% notifs = (Friend.notifications current_user.id).uniq %>
           <li class="dropdown" id="notificationdropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %><span id="notification-count">(<%= notifs.size.to_s %>)</span><% end %><b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %>(<span id="notification-count"><%= notifs.size.to_s %></span>)<% end %><b class="caret"></b></a>
               <ul class="dropdown-menu" id="notification-list">
                   <% if notifs.size == 0 %>
                     <li id="no-new-notifs" class="user-notification-block">No New Notifications</li>
