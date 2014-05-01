@@ -96,72 +96,78 @@
 
   <% if user_signed_in? %>
   channel.bind('my-event', function(data) {
-    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
-    if (!$('#elemId').length) {
-      <% notifs = Friend.notifications current_user.id %>
-      $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
-    } else {
-      $("#notification-count").html("<%= (notifs.size+1).to_s %>");  
-    }
-    $("#notificationdropdown").addClass('animated shake');
-    $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-      $("#notificationdropdown").removeClass('animated shake');
-    });
-    noty({
-      layout: 'bottom',
-      type: 'alert',
-      text: data.name + ' sent you a friend request.',
-      dismissQueue: true, 
-      animation: {
-        open: {height: 'toggle'},
-        close: {height: 'toggle'},
-        easing: 'swing',
-        speed: 500 
+    if (!$('#frequest'+data.fid).length) {
+      $('#no-new-notifs').remove();
+      $("#notification-list").append('<li id="frequest'+data.fid+'" class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
+      if (!$('#notification-count').length) {
+        <% notifs = Friend.notifications current_user.id %>
+        $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+      } else {
+        $("#notification-count").html(parseInt($("#notification-count").text())+1);  
+      }
+      $("#notificationdropdown").addClass('animated shake');
+      $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $("#notificationdropdown").removeClass('animated shake');
+      });
+      noty({
+        layout: 'bottom',
+        type: 'alert',
+        text: data.name + ' sent you a friend request.',
+        dismissQueue: true, 
+        animation: {
+          open: {height: 'toggle'},
+          close: {height: 'toggle'},
+          easing: 'swing',
+          speed: 500 
         },
-      timeout: 2000,
-      maxVisible: 1,
-      killer: true
-    });
+        timeout: 2000,
+        maxVisible: 1,
+        killer: true
+      });
+    }
   });
 
-function clearnotif(obje) {
-  obje.parent().parent().remove();
-  $("#notification-count").html(parseInt($("#notification-count").text())-1);
-  if (parseInt($("#notification-count").text()) == 0) {
-    $("#notification-count").remove();
-    $('#notificationstitle').html('Notifications<b class="caret"></b>');
-    $('#notification-list').append(' <li id="no-new-notifs" class="user-notification-block">No New Notifications</li>');
-  }
-}
-
-channel.bind('send-shout', function(data) {
-    $('#no-new-notifs').remove();
-    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
-    if (!$('#notification-count').length) {
-      <% notifs = Friend.notifications current_user.id %>
-      $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
-    } else {
-      $("#notification-count").html(parseInt($("#notification-count").text())+1);  
+  function clearnotif(obje) {
+    obje.parent().parent().remove();
+    $("#notification-count").html(parseInt($("#notification-count").text())-1);
+    if (parseInt($("#notification-count").text()) == 0) {
+      $("#notification-count").remove();
+      $('#notificationstitle').html('Notifications<b class="caret"></b>');
+      $('#notification-list').append(' <li id="no-new-notifs" class="user-notification-block">No New Notifications</li>');
     }
-    $("#notificationdropdown").addClass('animated shake');
-    $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-      $("#notificationdropdown").removeClass('animated shake');
-    });
-    noty({
-      layout: 'bottom',
-      type: 'alert',
-      text: data.name + ' sent you a shoutout.',
-      dismissQueue: true, 
-      animation: {
-        open: {height: 'toggle'},
-        close: {height: 'toggle'},
-        easing: 'swing',
-        speed: 500 
+  }
+
+  channel.bind('send-shout', function(data) {
+    if (!$('#shoutout'+data.fid).length) {
+      $('#no-new-notifs').remove();
+      $("#notification-list").append('<li id="shoutout'+data.fid+'" class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
+      
+      if (!$('#notification-count').length) {
+        <% notifs = Friend.notifications current_user.id %>
+        $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+      } else {
+        $("#notification-count").html(parseInt($("#notification-count").text())+1);  
+      }
+      $("#notificationdropdown").addClass('animated shake');
+      $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $("#notificationdropdown").removeClass('animated shake');
+      });
+      noty({
+        layout: 'bottom',
+        type: 'alert',
+        text: data.name + ' sent you a shoutout.',
+        dismissQueue: true, 
+        animation: {
+          open: {height: 'toggle'},
+          close: {height: 'toggle'},
+          easing: 'swing',
+          speed: 500 
         },
-      timeout: 2000,
-      maxVisible: 1,
-      killer: true
-    });
+        timeout: 2000,
+        maxVisible: 1,
+        killer: true
+      });
+    }
   });
   <% end %>
 </script>

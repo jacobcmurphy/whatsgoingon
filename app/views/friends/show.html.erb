@@ -108,25 +108,6 @@
             error('not supported');
         }
 
-        channel.bind('send-shout', function(data) {
-            noty({
-              layout: 'bottom',
-              type: 'alert',
-              text: data.cname + 'sent you a shoutout',
-              dismissQueue: true, 
-              animation: {
-                open: {height: 'toggle'},
-                close: {height: 'toggle'},
-                easing: 'swing',
-                speed: 500 
-                },
-              timeout: 2000,
-              maxVisible: 1,
-              killer: true
-            });
-        });
-
-
         function shout(cname, fname, fid) {
             $.ajax({  
                 type: 'POST',  
