@@ -1,50 +1,68 @@
 <script>
 function searchForFriends() {
     $('#search_box').focus();
-	var friends = <%= raw @my_friends.to_json %>;
+    var friends = <%= raw @my_friends.to_json %>;
 
-	var query = $("#search_box").val();
+    var query = $("#search_box").val();
 
-	var options = {
-	  keys: ['name', 'location']
-	};
+    var options = {
+      keys: ['name', 'location']
+    };
 
-	var f = new Fuse(friends, options);
+    var f = new Fuse(friends, options);
     var r = f.search(query);
 
     var result = $("#therowsinthebody");
 
+    <% friendNoLocation = "result.append('<div class=\"row\" id=\"friendId'+this.id+'\"><div class=\"card\">' + this.name + '</div><span class=\"deletefriend\" onclick=\"deleteFriend('+this.id+', ' + this.name + ');\">&#10006;</span></div>');" %>
+
     if (friends.length != 0 && query.length == 0) {
-    	result.empty();
-    	if (!$haslocation) {
-    		$.each(friends, function() {
-        	   result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
-      		});		
-    	} else {
-    		$.each(friends, function() {
-        	   result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
-      		});		
-    	}
+        result.empty();
+        if (!$haslocation) {
+            $.each(friends, function() {
+                if (this.latitude != null || this.longitude != null) {
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                } else {
+                    <%= raw friendNoLocation %>
+                }
+            });     
+        } else {
+            $.each(friends, function() {
+                if (this.latitude != null || this.longitude != null) {
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                } else {
+                    <%= raw friendNoLocation %>
+                }
+            });     
+        }
     } else if (friends.length != 0 && r.length != 0) {
-    	result.empty();
-    	if (!$haslocation) {
-    		$.each(r, function() {
-        	   result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
-      		});		
-    	} else {
-    		$.each(r, function() {
-        	   result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
-      		});		
-    	}
+        result.empty();
+        if (!$haslocation) {
+            $.each(r, function() {
+                if (this.latitude != null || this.longitude != null) {
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                } else {
+                    <%= raw friendNoLocation %>
+                }
+            });     
+        } else {
+            $.each(r, function() {
+                if (this.latitude != null || this.longitude != null) {
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                } else {
+                    <%= raw friendNoLocation %>
+                }
+            });     
+        }
     } else if (friends.length != 0 && r.length == 0) {
-    	result.empty();
+        result.empty();
     } else {
-    	result.empty();
-    	result.html('<div class="row card">Get started by adding your first friend!</div>');
+        result.empty();
+        result.html('<div class="row card">Get started by adding your first friend!</div>');
     }
 }
 </script>
 
 <div class="form-group">
-	<%= text_field_tag :search_box, nil, class: "form-control", placeholder: "Search for your current friends", onKeyUp:"searchForFriends();"  %>
+    <%= text_field_tag :search_box, nil, class: "form-control", placeholder: "Search for your current friends", onKeyUp:"searchForFriends();"  %>
 </div>
