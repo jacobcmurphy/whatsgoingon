@@ -962,6 +962,72 @@
     fillOpacity: opac
     });
 
+    var gzangCoords = [
+      new google.maps.LatLng(42.366771, -71.258504),
+      new google.maps.LatLng(42.366670, -71.258235),
+      new google.maps.LatLng(42.366362, -71.258487),
+      new google.maps.LatLng(42.366129, -71.257956),
+      new google.maps.LatLng(42.366646, -71.257508),
+      new google.maps.LatLng(42.366999, -71.258340)
+    ];
+
+    building57 = new google.maps.Polygon({
+    paths: gzangCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var abeCoords = [
+      new google.maps.LatLng(42.366034, -71.259160),
+      new google.maps.LatLng(42.365929, -71.258865),
+      new google.maps.LatLng(42.366688, -71.258282),
+      new google.maps.LatLng(42.366758, -71.258449)
+    ];
+
+    building58 = new google.maps.Polygon({
+    paths: abeCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var rosenstielCoords = [
+      new google.maps.LatLng(42.365930, -71.257775),
+      new google.maps.LatLng(42.365661, -71.257168),
+      new google.maps.LatLng(42.365902, -71.256978),
+      new google.maps.LatLng(42.366165, -71.257545)
+    ];
+
+    building59 = new google.maps.Polygon({
+    paths: rosenstielCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
+    var kosowCoords = [
+      new google.maps.LatLng(42.365992, -71.257178),
+      new google.maps.LatLng(42.365808, -71.256650),
+      new google.maps.LatLng(42.366173, -71.256373),
+      new google.maps.LatLng(42.366345, -71.256864)
+    ];
+
+    building60 = new google.maps.Polygon({
+    paths: kosowCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: opac,
+    strokeWeight: 2,
+    fillColor: '#00AAAA',
+    fillOpacity: opac
+    });
+
 
 
 
