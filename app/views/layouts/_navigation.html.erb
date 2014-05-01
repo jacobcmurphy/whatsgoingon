@@ -124,6 +124,7 @@
     });
   });
 channel.bind('send-shout', function(data) {
+    $('#no-new-notifs').remove();
     $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Clear</button></div></p></li>');
     if (!$('#elemId').length) {
       <% notifs = Friend.notifications current_user.id %>
@@ -160,7 +161,7 @@ channel.bind('send-shout', function(data) {
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %><span id="notification-count">(<%= notifs.size.to_s %>)</span><% end %><b class="caret"></b></a>
               <ul class="dropdown-menu" id="notification-list">
                   <% if notifs.size == 0 %>
-                    <li class="user-notification-block">No New Notifications</li>
+                    <li id="no-new-notifs" class="user-notification-block">No New Notifications</li>
                   <% end %>
                  <% notifs.each do |pend| %>
                   <li class="user-notification-block">
