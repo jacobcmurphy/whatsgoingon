@@ -38,7 +38,7 @@ class FriendsController < ApplicationController
             @pending_friends = User.find(pending_f_ids)
             @friends = User.find(f_ids)
             @friends.each do |f|
-                if f.current_sign_in_at <= 10.minutes.ago
+                if f.current_sign_in_at <= 10.minutes.ago || f.visible == false
                     f.location = ""
                     f.latitude = ""
                     f.longitude = ""
