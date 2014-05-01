@@ -123,6 +123,34 @@
       killer: true
     });
   });
+channel.bind('send-shout', function(data) {
+    $("#notification-list").append('<li class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Clear</button></div></p></li>');
+    if (!$('#elemId').length) {
+      <% notifs = Friend.notifications current_user.id %>
+      $('#notificationstitle').html('Notifications <span id="notification-count">(<%= (notifs.size+1).to_s %>)</span><b class="caret"></b>');
+    } else {
+      $("#notification-count").html("(<%= (notifs.size+1).to_s %>)");  
+    }
+    $("#notificationdropdown").addClass('animated shake');
+    $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      $("#notificationdropdown").removeClass('animated shake');
+    });
+    noty({
+      layout: 'bottom',
+      type: 'alert',
+      text: data.name + ' sent you a shoutout.',
+      dismissQueue: true, 
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 500 
+        },
+      timeout: 2000,
+      maxVisible: 1,
+      killer: true
+    });
+  });
   <% end %>
 </script>
     <ul class="nav navbar-nav navbar-right">

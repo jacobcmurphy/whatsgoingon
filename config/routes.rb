@@ -32,10 +32,11 @@ Whatsgoingon::Application.routes.draw do
       post 'accept'
       post 'reject'
       post 'auth'
+      post 'shoutout'
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post
-    match "friends/shoutout" => "friends#shoutout", via: :post
+    # match "friends/shoutout" => "friends#shoutout", via: :post
 
 
 
