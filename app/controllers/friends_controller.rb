@@ -13,6 +13,14 @@ class FriendsController < ApplicationController
         current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
         render nothing: true
     end
+
+    def shoutout
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-shout', {
+            fid: current_user.id,
+            name: current_user.name
+        })
+        render nothing: true
+    end
   
     def auth
         if current_user

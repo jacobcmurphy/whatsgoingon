@@ -35,6 +35,7 @@ Whatsgoingon::Application.routes.draw do
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post
+    match "friends/shoutout" => "friends#shoutout", via: :post
 
 
 

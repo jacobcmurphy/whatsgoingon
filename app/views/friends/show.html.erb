@@ -108,12 +108,11 @@
             error('not supported');
         }
 
-
-        function shout(cname, fname, fid) {
+        channel.bind('send-shout', function(data) {
             noty({
               layout: 'bottom',
               type: 'alert',
-              text: 'Shoutout sent to ' + fname,
+              text: data.cname + 'sent you a shoutout',
               dismissQueue: true, 
               animation: {
                 open: {height: 'toggle'},
@@ -125,6 +124,33 @@
               maxVisible: 1,
               killer: true
             });
+        });
+
+
+        function shout(cname, fname, fid) {
+            $.ajax({  
+                type: 'POST',  
+                url: '/friends/shoutout', 
+                data: { fid: fid },
+                success: function() {
+                    noty({
+                      layout: 'bottom',
+                      type: 'alert',
+                      text: 'Shoutout sent to ' + fname,
+                      dismissQueue: true, 
+                      animation: {
+                        open: {height: 'toggle'},
+                        close: {height: 'toggle'},
+                        easing: 'swing',
+                        speed: 500 
+                        },
+                      timeout: 2000,
+                      maxVisible: 1,
+                      killer: true
+                    });
+                }
+            });
+            
         }
     </script>
 
