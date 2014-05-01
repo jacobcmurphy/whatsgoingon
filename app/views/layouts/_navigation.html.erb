@@ -131,6 +131,9 @@
           <li class="dropdown" id="notificationdropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notificationstitle">Notifications <% if notifs.size > 0 %><span id="notification-count">(<%= notifs.size.to_s %>)</span><% end %><b class="caret"></b></a>
               <ul class="dropdown-menu" id="notification-list">
+                  <% if notifs.size == 0 %>
+                    <li class="user-notification-block">No New Notifications</li>
+                  <% end %>
                  <% notifs.each do |pend| %>
                   <li class="user-notification-block">
                     <p>
