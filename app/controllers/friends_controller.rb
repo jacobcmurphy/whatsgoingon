@@ -14,6 +14,7 @@ class FriendsController < ApplicationController
         render nothing: true
     end
 
+<<<<<<< HEAD
     def wave
         if params[:friend_id] != "" && !params[:friend_id].nil?
             puts "******************** "
@@ -21,6 +22,10 @@ class FriendsController < ApplicationController
             puts params
         end
         Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-wave', {
+=======
+    def shoutout
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-shout', {
+>>>>>>> fa997063ae752b80411daf773b18847b7f603c8c
             fid: current_user.id,
             name: current_user.name
         })
