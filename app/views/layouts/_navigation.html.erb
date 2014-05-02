@@ -137,10 +137,10 @@
     }
   }
 
-  channel.bind('send-shout', function(data) {
-    if (!$('#shoutout'+data.fid).length) {
+  channel.bind('send-wave', function(data) {
+    if (!$('#wave'+data.fid).length) {
       $('#no-new-notifs').remove();
-      $("#notification-list").append('<li id="shoutout'+data.fid+'" class="user-notification-block"><p>' + data.name + ' is sending you a shoutout<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
+      $("#notification-list").append('<li id="wave'+data.fid+'" class="user-notification-block"><p>' + data.name + ' is sending you a wave<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
       
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
@@ -155,7 +155,7 @@
       noty({
         layout: 'bottom',
         type: 'alert',
-        text: data.name + ' sent you a shoutout.',
+        text: data.name + ' sent you a wave.',
         dismissQueue: true, 
         animation: {
           open: {height: 'toggle'},

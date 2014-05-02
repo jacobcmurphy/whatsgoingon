@@ -20,7 +20,7 @@
         function success(position) {
             $haslocation = true;
             $pos = position;
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %><%= raw "<div class=\"card\"><i class=\"fa fa-bullhorn\" onclick=\"shout(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><% else %><%= raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>" %><% end %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><% else %><%= raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>" %><% end %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         function deleteFriend(friendId, friendName) {
@@ -99,7 +99,7 @@
                 s.html(typeof msg == 'string' ? msg : "failed");
                 s.addClass('fail');    
             }
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= raw "<div class=\"card\"><i class=\"fa fa-bullhorn\" onclick=\"shout(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         if (navigator.geolocation) {
@@ -108,16 +108,16 @@
             error('not supported');
         }
 
-        function shout(cname, fname, fid) {
+        function wave(cname, fname, fid) {
             $.ajax({  
                 type: 'POST',  
-                url: '/friends/shoutout', 
+                url: '/friends/wave', 
                 data: { friend_id: fid },
                 success: function() {
                     noty({
                       layout: 'bottom',
                       type: 'alert',
-                      text: 'Shoutout sent to ' + fname,
+                      text: 'Wave sent to ' + fname,
                       dismissQueue: true, 
                       animation: {
                         open: {height: 'toggle'},
@@ -143,7 +143,7 @@
             <% @my_friends.each do |f| %>
             <div class="row" id="friendId<%= f.id.to_s %>">
                 <% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %>
-                 <%= raw '<div class="card"><i class="fa fa-bullhorn" onclick="shout(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"></i>' %>
+                 <%= raw '<div class="card"><img src="assets/wave.png" onclick="wave(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"></i>' %>
                 <%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %>
                 </div>
                 <% else %>
