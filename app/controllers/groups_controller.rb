@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
 
       # get all friend ids for friends currently not in the group
       current_user.friends.each do |f|
-          f_ids << f.friend_id unless mem_ids.include? f.friend_id
+          f_ids << f.friend_id unless f.accepted == false or mem_ids.include? f.friend_id
       end
       @my_friends = User.find(f_ids)
 
