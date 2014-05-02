@@ -54,7 +54,7 @@ class GroupsController < ApplicationController
       current_user.friends.each do |f|
           f_ids << f.friend_id unless f.accepted == false or mem_ids.include? f.friend_id
       end
-      @my_friends = User.find(f_ids)
+      @my_friends = User.find(f_ids, order: "name")
 
     else
       redirect_to root_url
