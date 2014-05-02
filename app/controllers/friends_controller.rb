@@ -15,7 +15,7 @@ class FriendsController < ApplicationController
     end
 
     def wave
-        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-shout', {
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-wave', {
             fid: current_user.id,
             name: current_user.name
         })
