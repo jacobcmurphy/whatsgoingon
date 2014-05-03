@@ -1,7 +1,5 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
 
-<% statusNames = ["Class in", "Working in", "Studying in", "Eating in", "Partying in", "Relaxing in", "Class in", "Working in", "Studying in", "Eating in", "Partying in", "Relaxing in", " "] %>
-
 <div class="container" id="friends">
 
 
@@ -20,7 +18,7 @@
         function success(position) {
             $haslocation = true;
             $pos = position;
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><% else %><%= raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span></div>" %><% end %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + inbuildings[buildings.index(f[:location].to_s).to_i].to_s + "&nbsp;&nbsp;&nbsp;\'+getDistanceFromLatLonInMi(" + f[:latitude].to_s + ", " + f[:longitude].to_s + ", position.coords.latitude, position.coords.longitude)+\'</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><% else %><%= raw "<div class=\"card\">" + f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + inbuildings[buildings.index(f[:location].to_s).to_i].to_s + "&nbsp;&nbsp;&nbsp;</span></div>" %><% end %><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         function deleteFriend(friendId, friendName) {
@@ -75,7 +73,7 @@
         }
 
         function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
-            var R = 6371; // Radius of the earth in km
+            var R = 6371; // Radius of the earth km
             var dLat = deg2rad(lat2-lat1);  // deg2rad below
             var dLon = deg2rad(lon2-lon1);
             var a =
@@ -84,7 +82,7 @@
                             Math.sin(dLon/2) * Math.sin(dLon/2)
                     ;
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            var d = R * c; // Distance in km
+            var d = R * c; // Distance km
             var dInMi = d*0.621371; // American units
             return (dInMi < 0.1 ? "<0.1 mi" : roundToTwo(dInMi).toString() + " mi");
         }
@@ -99,7 +97,7 @@
                 s.html(typeof msg == 'string' ? msg : "failed");
                 s.addClass('fail');    
             }
-            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"></i> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
+            $("#therowsinthebody").html('<% @my_friends.each do |f| %><div class="row" id="friendId<%= f.id.to_s %>"><%= raw "<div class=\"card\"><img src=\"assets/wave.png\" onclick=\"wave(\\'" + current_user.name + "\\', \\'" + f[:name] + "\\', " + f[:id].to_s + ");\"> " %><%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + inbuildings[buildings.index(f[:location].to_s).to_i].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %></div><span class="deletefriend" onclick="deleteFriend(<%= f[:id] %>, \'<%= f[:name] %>\');">&#10006;</span></div><% end %><% if @my_friends.length == 0 %><%= raw "<div class=\"row card\">Get started by adding your first friend!</div>" %><% end %>');
         }
 
         if (navigator.geolocation) {
@@ -147,8 +145,8 @@
             <% @my_friends.each do |f| %>
             <div class="row" id="friendId<%= f.id.to_s %>">
                 <% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %>
-                 <%= raw '<div class="card"><img src="assets/wave.png" onclick="wave(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"></i>' %>
-                <%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + f[:location].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %>
+                    <%= raw '<div class="card"><img src="assets/wave.png" onclick="wave(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"></i>' %>
+                    <%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + inbuildings[buildings.index(f[:location].to_s).to_i].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %>
                 </div>
                 <% else %>
                     <%= raw "<div class=\"card\">" + f[:name].to_s + "</div>" %>
@@ -220,6 +218,10 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+    </div>
+  </div>
+</div>
+</div>
     </div>
   </div>
 </div>
