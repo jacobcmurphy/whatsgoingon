@@ -2,11 +2,18 @@
 <div class="center">
 
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
-	    
+
 	<article>
 		<p id="loading">Finding your location: <span id="status">checking...</span></p>
 	</article>
 	<script>
+
+		var map;
+		var latlng;
+		var markers;
+		var infoWindows;
+		var eventmarkers;
+
 		function success(position) {
 			var s = document.querySelector('#status');
 
@@ -29,7 +36,7 @@
 
 			document.querySelector('article').appendChild(mapcanvas);
 
-			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
 			var myOptions = {
 				zoom: 18,
@@ -49,8 +56,9 @@
 			<%= "map.setCenter(new google.maps.LatLng(" + params[:lat] + ", " + params[:lng] + "));" %>
 			<% end %>
 
-			var markers = [];
-			var infoWindows = [];
+			markers = [];
+			infoWindows = [];
+			eventmarkers = [];
 			
 //******HERE STARTS MAPPING OF BRANDEIS*************//
 		var buildings = <%= raw buildings.inspect %>;
@@ -246,9 +254,9 @@
 			controlText.innerHTML = '<strong>Add Event</strong>';
 			controlUI.appendChild(controlText);
 
-			// refresh button
+			// add event button listener
 			google.maps.event.addDomListener(controlUI, 'click', function() {
-				$('#addEventModal').modal();	
+				$('#addEventModal').modal();
   			});
 
 			controlDiv.index = 1;
@@ -271,16 +279,73 @@
 			error('not supported');
 		}
 
+		// function createEvent(title, description, date) {
+		// 	$('#addEventModal').modal('toggle');
+		// 	alert(); 	
+		// }
+
+		function ce(title, description, start_time, end_time) {
+			console.log(title + " " + description + " " + start_time + " " + end_time)
+			var eventmarker = new google.maps.Marker({
+				position: latlng, 
+				draggable: true,
+				map: map, 
+				title: title,
+				zIndex: 3,
+				icon: '/assets/EventMarker.png'
+			});
+			eventmarkers.push(eventmarker);
+			var eventInfoWindow = new google.maps.InfoWindow({
+				content: title
+			});
+			infoWindows.push(eventInfoWindow);
+			google.maps.event.addListener(eventmarker, 'click', function() {
+				for (var i = 0; i < infoWindows.length; i++) {
+					infoWindows[i].close();
+				}
+				eventInfoWindow.open(map, eventmarker);
+			});
+			google.maps.event.addListener(eventmarker, 'mouseup', function() {
+			    // AJAX UPDATE LOCATION HERE
+		    });
+			eventmarker.setDraggable(false);
+			eventmarker.setDraggable(true);
+			$('#addEventModal').modal('toggle');
+		}
+
+		
+
 	</script>
 </div>
 
 <div class="modal fade" id="addEventModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-body">
-				Add a New Event
+			<%= form_for(@event = Event.new) do |f| %>
+			<div class = "modal-header">
+				<h3 class = "center"> Add A New Event</h3>
 			</div>
-			Some stuff here
+			<div class="modal-body">
+				<div class="container">
+					<%= f.text_field :title, :placeholder => "Event Name" %><br /><br />
+					<%= f.text_area :description, :placeholder => "Event Description", :size => "30x5" %><br /><br />
+					<input id="start_time" type="text" placeholder="Start Time"><br /><br />
+					<input id="end_time" type="text" placeholder="End Time">
+					<script>
+					$('#start_time').datetimepicker({
+					  minDate:'0'
+					});
+					$('#end_time').datetimepicker({
+					  minDate:'0'
+					});
+					</script>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="ce($('#event_title').val(), $('#event_description').val(), $('#start_time').val(), $('#end_time').val());">Create</button>
+			</div>
 		</div>
+		<% end %>
 	</div>
 </div>

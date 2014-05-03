@@ -49,6 +49,8 @@ GEM
     arel (4.0.2)
     atomic (1.1.16)
     bcrypt (3.1.7)
+    bootstrap3-datetimepicker-rails (3.0.0)
+      momentjs-rails (~> 2.5.0)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -126,6 +128,8 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (4.7.5)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
     multi_json (1.9.2)
     multipart-post (2.0.0)
     naught (1.0.0)
@@ -266,6 +270,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  bootstrap3-datetimepicker-rails (~> 3.0.0)
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
@@ -277,6 +282,7 @@ DEPENDENCIES
   koala
   launchy
   linkedin
+  momentjs-rails (~> 2.5.0)
   omniauth
   omniauth-facebook (= 1.4.0)
   omniauth-github

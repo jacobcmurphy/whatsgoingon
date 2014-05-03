@@ -109,7 +109,7 @@
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
-      $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
+      $('title').text('(' + $("#notification-count").text() + ') What\'s Going On');
       $("#notificationdropdown").addClass('animated shake');
       $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
         $("#notificationdropdown").removeClass('animated shake');
@@ -137,7 +137,7 @@
      $("#notification-count").html(parseInt($("#notification-count").text())-1);
      
     if(parseInt("#notification-count") > 0) {
-      $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
+       $('title').text('(' + $("#notification-count").text() + ') What\'s Going On');
     }
     else {
       $('title').text('What\'s Going On');
@@ -225,7 +225,7 @@
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
 
-        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
+        $('title').text('(' + $("#notification-count").text() + ') What\'s Going On');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }

@@ -19,5 +19,6 @@
 //= require noty
 //= require flatui-checkbox
 //= require flatui-radio
+//= require jquery.datetimepicker
 //= require turbolinks
 //= require_tree .
