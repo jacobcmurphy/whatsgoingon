@@ -59,8 +59,8 @@ class FriendsController < ApplicationController
                 end
             end
             # @friend = Friend.new
-            @pending_friends = User.find(pending_f_ids)
-            @friends = User.find(f_ids)
+            @pending_friends = User.find(pending_f_ids, order: "name")
+            @friends = User.find(f_ids, order: "name")
             @friends.each do |f|
                 if f.current_sign_in_at <= 10.minutes.ago || f.visible == false
                     f.location = ""
