@@ -19,10 +19,11 @@ class EventsController < ApplicationController
     @events = Event.find_by_sql("
         SELECT * 
         FROM events AS e
-        WHERE e.group_id IN 
+        WHERE end_time < ? AND e.group_id IN 
            (SELECT g.id
-                FROM group_members AS gm
-                WHERE e.group_id = gm.id AND (gm.user_id = ? OR gm.friend_id = ?))", current_user.id, current_user.id)
+            FROM group_members AS gm
+            WHERE e.group_id = gm.id AND (gm.user_id = ? OR gm.friend_id = ?)
+        ORDER BY start_time)", Time.now, current_user.id, current_user.id)
   end
 
 
