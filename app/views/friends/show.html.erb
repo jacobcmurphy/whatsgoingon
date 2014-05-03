@@ -145,7 +145,7 @@
             <% @my_friends.each do |f| %>
             <div class="row" id="friendId<%= f.id.to_s %>">
                 <% if f[:longitude].to_s != "" || f[:latitude].to_s != "" %>
-                    <%= raw '<div class="card"><img src="assets/wave.png" onclick="wave(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"></i>' %>
+                    <%= raw '<div class="card"><img src="assets/wave.png" onclick="wave(\'' + current_user.name + '\', \'' + f[:name] + '\', ' + f[:id].to_s + ');"> ' %>
                     <%= link_to (raw f[:name].to_s + "<span class=\"right\">" + statusNames[(f[:color_status]).to_i].to_s + "&nbsp;" + inbuildings[buildings.index(f[:location].to_s).to_i].to_s + "&nbsp;&nbsp;&nbsp;</span>"), ("/?lat="+f[:latitude].to_s+"&lng="+f[:longitude].to_s) %>
                 </div>
                 <% else %>
@@ -170,7 +170,7 @@
     <% end %>
 
     <!--for changing visibility status -->
-    <div>
+    <div id ="Visibilitytofriends">
     Visibility to friends
     <input id="visibilityCheckbox" type="checkbox" data-size="small" name="VisibilityToggle" value="<%= current_user.visible.to_s %>" data-off-color="default" onfocus="changeVisibility(<%=(! current_user.visible).to_s %>);">
     <script>$("[name='VisibilityToggle']").bootstrapSwitch('state', <%= (current_user.visible).to_s %>, false);</script>
