@@ -21,6 +21,22 @@ class FriendsController < ApplicationController
         })
         render nothing: true
     end
+
+    def acceptwave
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'accept-wave', {
+            fid: current_user.id,
+            name: current_user.name
+        })
+        render nothing: true
+    end
+    def rejectwave
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'reject-wave', {
+            fid: current_user.id,
+            name: current_user.name
+        })
+        render nothing: true
+    end
+
   
     def auth
         if current_user

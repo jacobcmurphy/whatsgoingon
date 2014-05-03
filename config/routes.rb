@@ -33,6 +33,8 @@ Whatsgoingon::Application.routes.draw do
       post 'reject'
       post 'auth'
       post 'wave'
+      post 'acceptwave'
+      post 'rejectwave'
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post

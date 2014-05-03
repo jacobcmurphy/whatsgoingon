@@ -137,10 +137,70 @@
     }
   }
 
+  function acceptWave(fid, obje) {
+    $.ajax({  
+        type: 'POST',  
+        url: '/friends/acceptwave', 
+        data: { friend_id: fid },
+        success: function() {
+        }
+    });
+    clearnotif(obje);
+    //location.reload(true);
+  }
+
+  function rejectWave(fid, obje) {
+    $.ajax({  
+        type: 'POST',  
+        url: '/friends/rejectwave', 
+        data: { friend_id: fid },
+        success: function() {
+        }
+    });
+    clearnotif(obje);
+    //location.reload(true);
+  }
+
+  channel.bind('accept-wave', function(data) {
+    noty({
+      layout: 'bottom',
+      type: 'alert',
+      text: data.name + ' wants you to come over!',
+      dismissQueue: true, 
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 500 
+      },
+      timeout: 2000,
+      maxVisible: 1,
+      killer: true
+    });
+  });
+
+  channel.bind('reject-wave', function(data) {
+    noty({
+      layout: 'bottom',
+      type: 'alert',
+      text: data.name + ' is busy right now.',
+      dismissQueue: true, 
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 500 
+      },
+      timeout: 2000,
+      maxVisible: 1,
+      killer: true
+    });
+  });
+
   channel.bind('send-wave', function(data) {
     if (!$('#wave'+data.fid).length) {
       $('#no-new-notifs').remove();
-      $("#notification-list").append('<li id="wave'+data.fid+'" class="user-notification-block"><p>' + data.name + ' sent you a wave<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-danger" onclick="clearnotif($(this));">Clear</button></div></p></li>');
+      $("#notification-list").append('<li id="wave'+data.fid+'" class="user-notification-block"><p>' + data.name + ' sent you a wave<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptWave(' + data.fid + ', $(this));">Come Over!</button><button type="button" class="btn btn-danger" onclick="rejectWave(' + data.fid + ', $(this));">Not Right Now!</button></div></p></li>');
       
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
