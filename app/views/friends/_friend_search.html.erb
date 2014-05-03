@@ -6,13 +6,18 @@ function searchForFriends() {
     var query = $("#search_box").val();
 
     var options = {
-      keys: ['name', 'location']
+      keys: ['name', 'location', 'color_status', 'id']
     };
 
     var f = new Fuse(friends, options);
     var r = f.search(query);
 
     var result = $("#therowsinthebody");
+
+    var buildings = <%= raw buildings.inspect %>;
+    var inbuildings = <%= raw inbuildings.inspect %>;
+    var statusNames = <%= raw statusNames.inspect %>;
+    
 
     <% friendNoLocation = "result.append('<div class=\"row\" id=\"friendId'+this.id+'\"><div class=\"card\">' + this.name + '<span class=\"right\"> Offline </span></div><span class=\"deletefriend\" onclick=\"deleteFriend('+this.id+', ' + this.name + ');\">&#10006;</span></div>');" %>
 
@@ -21,7 +26,7 @@ function searchForFriends() {
         if (!$haslocation) {
             $.each(friends, function() {
                 if (this.latitude != null || this.longitude != null) {
-                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card"><img src="assets/wave.png" onclick="wave(\'<%= current_user.name %>\', \'' + this.name + '\', ' + this.id + ');"> ' + this.name + '<span class="right">' + statusNames[this.color_status] + '&nbsp;' + inbuildings[buildings.indexOf(this.location)] + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
                 } else {
                     <%= raw friendNoLocation %>
                 }
@@ -29,7 +34,7 @@ function searchForFriends() {
         } else {
             $.each(friends, function() {
                 if (this.latitude != null || this.longitude != null) {
-                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card"><img src="assets/wave.png" onclick="wave(\'<%= current_user.name %>\', \'' + this.name + '\', ' + this.id + ');"> ' + this.name + '<span class="right">' + statusNames[this.color_status] + '&nbsp;' + inbuildings[buildings.indexOf(this.location)] + '&nbsp;&nbsp;&nbsp' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
                 } else {
                     <%= raw friendNoLocation %>
                 }
@@ -40,7 +45,7 @@ function searchForFriends() {
         if (!$haslocation) {
             $.each(r, function() {
                 if (this.latitude != null || this.longitude != null) {
-                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + statusNames[this.color_status] + '&nbsp;' + inbuildings[buildings.indexOf(this.location)] + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
                 } else {
                     <%= raw friendNoLocation %>
                 }
@@ -48,7 +53,7 @@ function searchForFriends() {
         } else {
             $.each(r, function() {
                 if (this.latitude != null || this.longitude != null) {
-                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card">' + this.name + '<span class="right">' + this.location + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
+                    result.append('<div class="row" id="friendId'+this.id+'"><a href="/?lat=' + this.latitude + '&lng='+this.latitude+'"><div class="card"><img src="assets/wave.png" onclick="wave(\'<%= current_user.name %>\', \'' + this.name + '\', ' + this.id + ');"> ' + this.name + '<span class="right">' + statusNames[this.color_status] + '&nbsp;' + inbuildings[buildings.indexOf(this.location)] + '&nbsp;&nbsp;&nbsp;' + getDistanceFromLatLonInMi(this.latitude, this.longitude, $pos.coords.latitude, $pos.coords.longitude) + '</span></div></a><span class="deletefriend" onclick="deleteFriend('+this.id+', ' + this.name + ');">&#10006;</span></div>');
                 } else {
                     <%= raw friendNoLocation %>
                 }
@@ -58,7 +63,9 @@ function searchForFriends() {
         result.empty();
     } else {
         result.empty();
+        <% if @offline_friends.size == 0 && @pending_friends.size == 0 %>
         result.html('<div class="row card">Get started by adding your first friend!</div>');
+        <% end %>
     }
 }
 </script>
