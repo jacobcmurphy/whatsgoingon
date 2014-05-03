@@ -36,26 +36,30 @@ class GroupsController < ApplicationController
     if user_signed_in?
       # get the group info
       @group = Group.find(params[:id].to_i)
-      @mems = @group.group_members
-      mem_ids = []
 
-      @mems.each do |mem|
-        mem_ids << mem[:friend_id]
+      if current_user.id == @group.user_id
+        @mems = @group.group_members
+        mem_ids = []
+
+        @mems.each do |mem|
+          mem_ids << mem[:friend_id]
+        end
+        # all members currently in the group
+        @members = User.find_all_by_id(mem_ids)
+
+
+        # possible friends to add
+
+        f_ids = []
+
+        # get all friend ids for friends currently not in the group
+        current_user.friends.each do |f|
+            f_ids << f.friend_id unless f.accepted == false or mem_ids.include? f.friend_id
+        end
+        @my_friends = User.find(f_ids, order: "name")
+      else
+        redirect_to groups_path
       end
-      # all members currently in the group
-      @members = User.find_all_by_id(mem_ids)
-
-
-      # possible friends to add
-
-      f_ids = []
-
-      # get all friend ids for friends currently not in the group
-      current_user.friends.each do |f|
-          f_ids << f.friend_id unless f.accepted == false or mem_ids.include? f.friend_id
-      end
-      @my_friends = User.find(f_ids, order: "name")
-
     else
       redirect_to root_url
     end
