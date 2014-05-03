@@ -71,6 +71,9 @@
     </ul>
 <script>
 
+ 
+
+
   function acceptFriend(friendId, obje) {
     $.ajax({  
         type: 'POST',  
@@ -162,7 +165,10 @@
     //location.reload(true);
   }
 
+
   channel.bind('accept-wave', function(data) {
+    $('#acceptAlertModal').modal() 
+    $(".modal-body #friendName").text(data.name + ' wants you to come over!');
     noty({
       layout: 'bottom',
       type: 'alert',
@@ -181,6 +187,8 @@
   });
 
   channel.bind('reject-wave', function(data) {
+    $('#rejectAlertModal').modal() 
+    $(".modal-body #friendName").text(data.name + ' is busy right now.');
     noty({
       layout: 'bottom',
       type: 'alert',
