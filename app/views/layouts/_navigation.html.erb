@@ -106,10 +106,10 @@
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
-        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
+      $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       $("#notificationdropdown").addClass('animated shake');
       $("#notificationdropdown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
         $("#notificationdropdown").removeClass('animated shake');

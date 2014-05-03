@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140503163122) do
   add_index "events", ["end_time"], name: "index_events_on_end_time", using: :btree
   add_index "events", ["group_id"], name: "index_events_on_group_id", using: :btree
 
+
   create_table "friends", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140503163122) do
     t.integer "group_id"
     t.integer "user_id"
     t.integer "friend_id"
+    t.boolean "accepted"
   end
 
   add_index "group_members", ["friend_id"], name: "index_group_members_on_friend_id", using: :btree
