@@ -123,7 +123,7 @@
 				});
 			}, 10 * 60 * 1000); // 10 * 60 * 1000 milsec
 
-//// ******** BUTTON
+//// ******** REFRESH BUTTON
 
 			// Create a div to hold the control.
 			var controlDiv = document.createElement('div');
@@ -215,7 +215,48 @@
 			controlDiv.index = 1;
   			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
 
-			//// ******** END BUTTON
+			//// ******** END REFRESH BUTTON
+
+
+
+			//// ******** EVENT BUTTON
+
+			// Create a div to hold the control.
+			var controlDiv = document.createElement('div');
+
+			// Set CSS styles for the DIV containing the control
+			// Setting padding to 5 px will offset the control
+			// from the edge of the map.
+			controlDiv.style.padding = '5px';
+
+			// Set CSS for the control border.
+			var controlUI = document.createElement('div');
+			controlUI.style.backgroundColor = 'white';
+			controlUI.style.cursor = 'pointer';
+			controlUI.style.textAlign = 'center';
+			controlUI.title = 'Click to refresh map';
+			controlDiv.appendChild(controlUI);
+
+			// Set CSS for the control interior.
+			var controlText = document.createElement('div');
+			controlText.style.fontFamily = 'Arial,sans-serif';
+			controlText.style.fontSize = '12px';
+			controlText.style.paddingLeft = '4px';
+			controlText.style.paddingRight = '4px';
+			controlText.innerHTML = '<strong>Add Event</strong>';
+			controlUI.appendChild(controlText);
+
+			// refresh button
+			google.maps.event.addDomListener(controlUI, 'click', function() {
+				$('#addEventModal').modal();	
+  			});
+
+			controlDiv.index = 1;
+  			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv);
+
+			//// ******** END EVENT BUTTON
+
+
 		}
 
 		function error(msg) {
@@ -231,4 +272,15 @@
 		}
 
 	</script>
+</div>
+
+<div class="modal fade" id="addEventModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				Add a New Event
+			</div>
+			Some stuff here
+		</div>
+	</div>
 </div>

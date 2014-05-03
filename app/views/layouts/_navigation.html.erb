@@ -106,6 +106,7 @@
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
@@ -133,7 +134,16 @@
 
   function clearnotif(obje) {
     obje.parent().parent().remove();
-    $("#notification-count").html(parseInt($("#notification-count").text())-1);
+     $("#notification-count").html(parseInt($("#notification-count").text())-1);
+     
+    if(parseInt("#notification-count") > 0) {
+      $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
+    }
+    else {
+      $('title').text('What\'s Going On');
+    }
+    
+    
     if (parseInt($("#notification-count").text()) == 0) {
       $("#notification-count").remove();
       $('#notificationstitle').html('Notifications<b class="caret"></b>');
@@ -167,7 +177,7 @@
 
 
   channel.bind('accept-wave', function(data) {
-    $('#acceptAlertModal').modal() 
+    $('#acceptAlertModal').modal(); 
     $(".modal-body #friendName").text(data.name + ' wants you to come over!');
     noty({
       layout: 'bottom',
@@ -187,7 +197,7 @@
   });
 
   channel.bind('reject-wave', function(data) {
-    $('#rejectAlertModal').modal() 
+    $('#rejectAlertModal').modal(); 
     $(".modal-body #friendName").text(data.name + ' is busy right now.');
     noty({
       layout: 'bottom',
@@ -214,6 +224,8 @@
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+
+        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
