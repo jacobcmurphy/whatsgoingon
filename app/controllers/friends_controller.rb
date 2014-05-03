@@ -49,27 +49,31 @@ class FriendsController < ApplicationController
 
     def show
         if user_signed_in?
-            f_ids = []
-            pending_f_ids = []
+            offline_ids = []
+            pending_ids = []
+
             current_user.friends.each do |f|
                 if f.accepted == true
-                    f_ids << f.friend_id
+                    offline_ids << f.friend_id
                 else
-                    pending_f_ids << f.friend_id
+                    pending_ids << f.friend_id
                 end
             end
-            # @friend = Friend.new
-            @pending_friends = User.find(pending_f_ids, order: "name")
-            @friends = User.find(f_ids, order: "name")
+            
+            # currently online friends
+            @friends = Friend.most_recent(current_user.id).sort!{ |a,b| a.name.downcase <=> b.name.downcase }
+
+            # pending friend requests
+            @pending_friends = User.find(pending_ids, order: "name")
+
+            # find the ids of all friends that are offline
             @friends.each do |f|
-                if f.current_sign_in_at <= 10.minutes.ago || f.visible == false
-                    f.location = ""
-                    f.latitude = ""
-                    f.longitude = ""
-                    f.color_status = 13
-                    puts f
-                end
+                offline_ids.delete(f.id)
             end
+
+            @offline_friends = User.find(offline_ids, order: "name")
+
+            return @friends
         else
            redirect_to root_url
         end 
