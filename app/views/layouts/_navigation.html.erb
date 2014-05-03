@@ -106,6 +106,7 @@
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
@@ -133,7 +134,16 @@
 
   function clearnotif(obje) {
     obje.parent().parent().remove();
-    $("#notification-count").html(parseInt($("#notification-count").text())-1);
+     $("#notification-count").html(parseInt($("#notification-count").text())-1);
+     
+    if(parseInt("#notification-count") > 0) {
+      $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
+    }
+    else {
+      $('title').text('What\'s Going On');
+    }
+    
+    
     if (parseInt($("#notification-count").text()) == 0) {
       $("#notification-count").remove();
       $('#notificationstitle').html('Notifications<b class="caret"></b>');
@@ -214,6 +224,8 @@
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
+
+        $('title').text('What\'s Going On (' + $("#notification-count").text() + ')');
       } else {
         $("#notification-count").html(parseInt($("#notification-count").text())+1);  
       }
