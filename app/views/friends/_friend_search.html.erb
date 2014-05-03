@@ -63,7 +63,9 @@ function searchForFriends() {
         result.empty();
     } else {
         result.empty();
+        <% if @offline_friends.size == 0 && @pending_friends.size == 0 %>
         result.html('<div class="row card">Get started by adding your first friend!</div>');
+        <% end %>
     }
 }
 </script>
