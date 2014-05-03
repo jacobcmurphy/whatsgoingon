@@ -24,6 +24,7 @@ Whatsgoingon::Application.routes.draw do
 
 
   resource :group_members, only: [:create, :destroy]
+  resource :events
 
   resource :friends do
     collection do

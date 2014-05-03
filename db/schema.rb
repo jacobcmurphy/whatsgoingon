@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20140410195647) do
     t.integer "group_id"
     t.integer "user_id"
     t.integer "friend_id"
-    t.boolean "accepted"
   end
 
   add_index "group_members", ["friend_id"], name: "index_group_members_on_friend_id", using: :btree
