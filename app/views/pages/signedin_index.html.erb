@@ -284,7 +284,8 @@
 		// 	alert(); 	
 		// }
 
-		function ce(title, description) {
+		function ce(title, description, start_time, end_time) {
+			console.log(title + " " + description + " " + start_time + " " + end_time)
 			var eventmarker = new google.maps.Marker({
 				position: latlng, 
 				draggable: true,
@@ -325,15 +326,23 @@
 			</div>
 			<div class="modal-body">
 				<div class="container">
-					<%= f.text_field :title, :placeholder => "  Event Name" %><br /><br />
+					<%= f.text_field :title, :placeholder => "Event Name" %><br /><br />
 					<%= f.text_area :description, :placeholder => "Event Description", :size => "30x5" %><br /><br />
-					<p>Date: <input type="text" id="datepicker"></p>
+					<input id="start_time" type="text" placeholder="Start Time"><br /><br />
+					<input id="end_time" type="text" placeholder="End Time">
+					<script>
+					$('#start_time').datetimepicker({
+					  minDate:'0'
+					});
+					$('#end_time').datetimepicker({
+					  minDate:'0'
+					});
+					</script>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<!-- <button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="createEvent($('#event_title').val(), $('#event_description').val(), $('#datepicker').val());">Create</button> -->
-				<button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="ce($('#event_title').val(), $('#event_description').val());">Create</button>
+				<button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="ce($('#event_title').val(), $('#event_description').val(), $('#start_time').val(), $('#end_time').val());">Create</button>
 			</div>
 		</div>
 		<% end %>
