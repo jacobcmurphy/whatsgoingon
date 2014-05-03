@@ -4,7 +4,7 @@ module ApplicationHelper
   	end
 
   	def statusNames 
-  		statusNames = ["Class", "Working", "Studying", "Eating", "Partying", "Relaxing", "Class", "Working", "Studying", "Eating", "Partying", "Relaxing", " "]
+  		statusNames = ["In Class", "Working", "Studying", "Eating", "Partying", "Relaxing", "In Class", "Working", "Studying", "Eating", "Partying", "Relaxing", " "]
 	end
 
 	def inbuildings
