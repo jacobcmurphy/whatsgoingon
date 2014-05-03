@@ -177,7 +177,7 @@
 
 
   channel.bind('accept-wave', function(data) {
-    $('#acceptAlertModal').modal() 
+    $('#acceptAlertModal').modal(); 
     $(".modal-body #friendName").text(data.name + ' wants you to come over!');
     noty({
       layout: 'bottom',
@@ -197,7 +197,7 @@
   });
 
   channel.bind('reject-wave', function(data) {
-    $('#rejectAlertModal').modal() 
+    $('#rejectAlertModal').modal(); 
     $(".modal-body #friendName").text(data.name + ' is busy right now.');
     noty({
       layout: 'bottom',

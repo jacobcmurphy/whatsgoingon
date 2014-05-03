@@ -31,6 +31,19 @@ function searchForFriends() {
     result.html('<div class="row card">Get started by adding your first friend!</div>');
   }  
 }
+
+
+function addFriendToGroup(groupid, friendid) {
+  $.ajax({  
+      type: 'POST',  
+      url: '/group_members', 
+      data: { friend_id: friendid,  group_id: groupid },
+      success: function(response) {
+          window.location.reload();
+      }
+  });
+}
+
 </script>
 <div class="container">
   <div class="card">
@@ -65,10 +78,7 @@ function searchForFriends() {
             <div class="innercard card">
               <%= member.name %>
               <span class="right">
-              <%= form_tag group_members_path, method: "post" %>
-              <%= hidden_field_tag  'group_id', @group.id %>
-              <%= hidden_field_tag  'friend_id', member.id %>
-              <%= submit_tag "Add", class: "btn btn-primary"%>
+              <button type="button" class="btn btn-primary" onclick="addFriendToGroup(<%= @group.id %>, <%= member.id %>)">Add</button>
               </span>
             </div>
           <% end %>

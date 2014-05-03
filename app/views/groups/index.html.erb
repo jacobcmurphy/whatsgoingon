@@ -15,7 +15,7 @@ function changeGroupVisibility(groupId) {
 
 	<% @groups.each do |group| %>
 	<div class="card">
-		<%= group.name %>
+		<span id="groupname"><%= group.name %></span>
 		<span class="right">
 			Visible to Group?
 			<input id="check<%= group.name %>" type="checkbox" data-size="small" name="<%= "group" + group.id.to_s + "VisibilityToggle" %>" value="check<%= group.name %>" data-off-color="default" onfocus="changeGroupVisibility(<%= group.id.to_s %>);">
