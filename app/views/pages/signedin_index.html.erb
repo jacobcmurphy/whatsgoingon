@@ -210,13 +210,13 @@
 	  				});
 				});
 
-				$.ajax({  
-				    type: 'POST',  
-				    url: 'users/update_location', 
-				    data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
-				    success: function(response) {  
-				    }
-				});
+				// $.ajax({  
+				//     type: 'POST',  
+				//     url: 'users/update_location', 
+				//     data: { latitude: latlng.lat(), longitude: latlng.lng(), location: mybuilding },
+				//     success: function(response) {  
+				//     }
+				// });
 
   			});
 
@@ -284,8 +284,8 @@
 		// 	alert(); 	
 		// }
 
-		function ce(title, description, start_time, end_time) {
-			console.log(title + " " + description + " " + start_time + " " + end_time)
+		function ce(title, description, start_time, end_time, groups) {
+			console.log(title + " " + description + " " + start_time + " " + end_time + " " + groups);
 			var eventmarker = new google.maps.Marker({
 				position: latlng, 
 				draggable: true,
@@ -306,14 +306,34 @@
 				eventInfoWindow.open(map, eventmarker);
 			});
 			google.maps.event.addListener(eventmarker, 'mouseup', function() {
-			    // AJAX UPDATE LOCATION HERE
+			    // $.ajax({  
+			    //     type: 'POST',  
+			    //     url: '/events', 
+			    //     data: {
+			    //     		title: title,
+			    //     		description: description,
+			    //     		start_time: start_time,
+			    //     		end_time: end_time,
+			    //     	 },
+			    //     success: function() {
+			    //     }
+			    // });
 		    });
 			eventmarker.setDraggable(false);
 			eventmarker.setDraggable(true);
 			$('#addEventModal').modal('toggle');
 		}
 
-		
+
+		$('#addEventModal').on('hidden.bs.modal', function (e) {
+		  $(this)
+		    .find("input,textarea,select")
+		       .val('')
+		       .end()
+		    .find("input[type=checkbox], input[type=radio]")
+		       .prop("checked", "")
+		       .end();
+		});
 
 	</script>
 </div>
@@ -321,7 +341,7 @@
 <div class="modal fade" id="addEventModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<%= form_for(@event = Event.new) do |f| %>
+			<%= form_for(event = Event.new) do |f| %>
 			<div class = "modal-header">
 				<h3 class = "center"> Add A New Event</h3>
 			</div>
@@ -330,8 +350,17 @@
 					<%= f.text_field :title, :placeholder => "Event Name" %><br /><br />
 					<%= f.text_area :description, :placeholder => "Event Description", :size => "30x5" %><br /><br />
 					<input id="start_time" type="text" placeholder="Start Time"><br /><br />
-					<input id="end_time" type="text" placeholder="End Time">
+					<input id="end_time" type="text" placeholder="End Time"><br /><br />
+					<div id="groupselectdiv">
+						<select data-placeholder="Choose a Group" class="chosen-select" id="chosenselected" multiple  tabindex="4">
+							<option value=""></option>
+							<% current_user.groups.each do |group| %>
+							<option value="<%= group.id %>"><%= group.name %></option>
+							<% end %>
+						</select>
+					</div>
 					<script>
+					 $(".chosen-select").chosen({no_results_text: "Group not found", width: "100%"});
 					$('#start_time').datetimepicker({
 					  minDate:'0'
 					});
@@ -343,9 +372,15 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="ce($('#event_title').val(), $('#event_description').val(), $('#start_time').val(), $('#end_time').val());">Create</button>
+				<button type="button" id="addeventsubmitbutton" class="btn btn-primary" onclick="ce($('#event_title').val(), $('#event_description').val(), $('#start_time').val(), $('#end_time').val(), $('#chosenselected').val());">Create</button>
 			</div>
 		</div>
 		<% end %>
 	</div>
 </div>
+
+
+
+<script type="text/javascript">
+	
+</script>

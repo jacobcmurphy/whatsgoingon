@@ -9,6 +9,7 @@
  *= require bootstrap-social
  *= require font-awesome
  *= require jquery.datetimepicker
+ *= require chosen.min
  *= require_self
  *= require_tree .
  */
@@ -230,4 +231,8 @@ body > main > div > div.container > div.row > div > a > i {
         padding-top: 10px;
         padding-bottom: 10px;
     }
+}
+
+#groupselectdiv {
+    width: 310px;
 }

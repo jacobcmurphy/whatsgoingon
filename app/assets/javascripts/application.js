@@ -20,5 +20,6 @@
 //= require flatui-checkbox
 //= require flatui-radio
 //= require jquery.datetimepicker
+//= require chosen.jquery.min
 //= require turbolinks
 //= require_tree .
