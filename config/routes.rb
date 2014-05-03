@@ -24,7 +24,12 @@ Whatsgoingon::Application.routes.draw do
 
 
   resource :group_members, only: [:create, :destroy]
-  resource :events
+
+
+  
+  resources :events, only: [:new, :create, :destroy, :show]
+  match "events" => "events#index", via: :get
+  match "events" => "events#destroy", via: :delete
 
   resource :friends do
     collection do
@@ -39,7 +44,6 @@ Whatsgoingon::Application.routes.draw do
     end
   end
   match "friends/destroy" => "friends#destroy", via: :post
-    # match "friends/wave" => "friends#wave", via: :post
 
 
 

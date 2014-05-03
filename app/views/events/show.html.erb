@@ -1,0 +1,9 @@
+<div class="container">
+	<% @events.each do |e| %>
+		<div class="card">
+	      <h4 class="eventtitle"><%= link_to e.title, e %></h4> 
+	      <%= e.start_time.strftime("%b #{e.start_time.day.ordinalize} at %l:%M %p") %> - <%= e.end_time.strftime("%b #{e.end_time.day.ordinalize} at %l:%M %p") %>
+	      <p><%= e.description %></p>
+	  	</div>
+    <% end %>
+</div>
