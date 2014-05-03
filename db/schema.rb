@@ -76,9 +76,6 @@ ActiveRecord::Schema.define(version: 20140503163122) do
     t.datetime "updated_at"
   end
 
-  add_index "friends", ["friend_id"], name: "index_friends_on_friend_id", using: :btree
-  add_index "friends", ["user_id"], name: "index_friends_on_user_id", using: :btree
-
   create_table "group_members", force: true do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -86,17 +83,11 @@ ActiveRecord::Schema.define(version: 20140503163122) do
     t.boolean "accepted"
   end
 
-  add_index "group_members", ["friend_id"], name: "index_group_members_on_friend_id", using: :btree
-  add_index "group_members", ["group_id"], name: "index_group_members_on_group_id", using: :btree
-  add_index "group_members", ["user_id"], name: "index_group_members_on_user_id", using: :btree
-
   create_table "groups", force: true do |t|
     t.integer "user_id"
     t.string  "name"
     t.boolean "visible"
   end
-
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
   create_table "trigrams", force: true do |t|
     t.string  "trigram",     limit: 3

@@ -2,6 +2,16 @@
 <div class="center">
 
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&sensor=false"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 	    
 	<article>
 		<p id="loading">Finding your location: <span id="status">checking...</span></p>
@@ -248,7 +258,10 @@
 
 			// refresh button
 			google.maps.event.addDomListener(controlUI, 'click', function() {
-				$('#addEventModal').modal();	
+				$('#addEventModal').modal();
+
+
+
   			});
 
 			controlDiv.index = 1;
@@ -277,10 +290,23 @@
 <div class="modal fade" id="addEventModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-body">
-				Add a New Event
+				<%= form_for(@event = Event.new) do |f| %>
+			<div class = "modal-header">
+				<h3 class = "center"> Add A New Event</h3>
 			</div>
-			Some stuff here
-		</div>
+			<div class="modal-body">
+				<div class="container">
+						<%= f.text_field :title, :placeholder => "  Event Name" %><br /><br />
+						<%= f.text_area :description, :placeholder => "Event Description", :size => "30x5" %><br /><br />
+						<p>Date: <input type="text" id="datepicker"></p>
+				</div>
+			</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Create</button>
+				</div>
+			</div>
+			<% end %>
+
 	</div>
 </div>
