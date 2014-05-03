@@ -41,6 +41,9 @@
                                 }
                                 <% end %>
                             }
+                            <% if @offline_friends.size == 0 %>
+                            $("#offline").remove();
+                            <% end %>
                         });
                     }
                 });
