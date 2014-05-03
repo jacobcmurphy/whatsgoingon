@@ -71,7 +71,7 @@
     </ul>
 <script>
 
-  function acceptFriend(friendId) {
+  function acceptFriend(friendId, obje) {
     $.ajax({  
         type: 'POST',  
         url: '/friends/accept', 
@@ -79,26 +79,27 @@
         success: function() {
         }
     });
-    location.reload(true);
+    //location.reload(true);
+    clearnotif(obje);
   }
 
-  function rejectFriend(friendId) {
+  function rejectFriend(friendId, obje) {
     $.ajax({  
         type: 'POST',  
         url: '/friends/reject', 
         data: { friend_id: friendId },
         success: function() {
-          location.reload(true);
         }
     });
-    location.reload(true);
+    clearnotif(obje);
+    //location.reload(true);
   }
 
   <% if user_signed_in? %>
   channel.bind('my-event', function(data) {
     if (!$('#frequest'+data.fid).length) {
       $('#no-new-notifs').remove();
-      $("#notification-list").append('<li id="frequest'+data.fid+'" class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ');">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ');">Reject</button></div></p></li>');
+      $("#notification-list").append('<li id="frequest'+data.fid+'" class="user-notification-block"><p>' + data.name + ' wants to add you.<div class="btn-group request-buttons-left-padding"><button type="button" class="btn btn-success" onclick="acceptFriend(' + data.fid + ', $(this);">Accept</button><button type="button" class="btn btn-danger" onclick="rejectFriend(' + data.fid + ', $(this));">Reject</button></div></p></li>');
       if (!$('#notification-count').length) {
         <% notifs = Friend.notifications current_user.id %>
         $('#notificationstitle').html('Notifications (<span id="notification-count"><%= (notifs.size+1).to_s %></span>)<b class="caret"></b>');
