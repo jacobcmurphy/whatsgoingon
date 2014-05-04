@@ -23,15 +23,20 @@ class EventsController < ApplicationController
   end
 
 
+
   def show
-    @events = Event.find_by_sql("
-        SELECT * 
-        FROM events AS e
-        WHERE e.group_id IN 
-           (SELECT g.id
-                FROM group_members AS gm
-                WHERE e.group_id = gm.id AND (gm.user_id = ? OR gm.friend_id = ?))", current_user.id, current_user.id)
+    if user_signed_in?
+      @events = Event.where(id: params[:id].to_i)
+      group = Group.find(@events.first.group_id)
+      if group.id = current_user.id # the user can edit this event
+      else
+        redirect_to events_path
+      end
+    else
+      redirect_to root_url
+    end
   end
+
 
 
   def destroy
