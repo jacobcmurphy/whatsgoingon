@@ -363,12 +363,14 @@
 						</select>
 					</div>
 					<script>
-					 $(".chosen-select").chosen({no_results_text: "Group not found", width: "100%"});
+					$(".chosen-select").chosen({no_results_text: "Group not found", width: "100%"});
 					$('#start_time').datetimepicker({
-					  minDate:'0'
+					  minDate:'0',
+					  format:'m/d/Y H:i'
 					});
 					$('#end_time').datetimepicker({
-					  minDate:'0'
+					  minDate:'0',
+					  format:'m/d/Y H:i'
 					});
 					</script>
 				</div>

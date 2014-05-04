@@ -12,9 +12,10 @@ class EventsController < ApplicationController
     if user_signed_in?
       group_ids = params[:group_ids].map(&:to_i)
       groups = Group.find(group_ids)
-
+      start_time = DateTime.strptime(params[:start_time], '%m/%d/%Y %H:%M')
+      end_time = DateTime.strptime(params[:end_time], '%m/%d/%Y %H:%M')
       groups.each do |g|
-          g_event = g.events.create(title: params[:title], description: params[:description], latitude: params[:lat], longitude: params[:long], group_id: g.id.to_i)
+          g_event = g.events.create(title: params[:title], description: params[:description], latitude: params[:lat], longitude: params[:long], group_id: g.id.to_i, start_time: start_time, end_time: end_time)
           g_event.save!
       end
     else
