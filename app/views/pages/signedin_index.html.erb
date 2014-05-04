@@ -97,7 +97,6 @@
 			});
 
 			<% most_recent_friends = Friend.most_recent(cuid) %>
-
 			<% for i in 0...most_recent_friends.length %>
 			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + most_recent_friends[i][:latitude].to_s + ", " + most_recent_friends[i][:longitude].to_s + ");" %>
 			<% imgpath = asset_path('marker' + most_recent_friends[i][:color_status].to_s + '.png') %>
@@ -108,10 +107,11 @@
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
+
 			var mybuilding = "";
-		  <% for i in 0..buildingsArraySize %>
-		  <%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];}" %>
-		  <% end %>
+		  	<% for i in 0..buildingsArraySize %>
+		  	<%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];}" %>
+		  	<% end %>
 		
 			$.ajax({
 			    type: 'POST',  

@@ -1,4 +1,5 @@
 <div class="container">
+	<% @events = @events.uniq { |e| e.title } %>
 	<% @events.each do |e| %>
 		<div class="card">
 	      <h4 class="eventtitle"><%= link_to e.title, e %></h4> 

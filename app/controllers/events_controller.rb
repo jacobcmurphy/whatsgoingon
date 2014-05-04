@@ -44,8 +44,6 @@ class EventsController < ApplicationController
     end
   end
 
-
-
   def destroy
     if user_signed_in?
       Event.find(params[:event_id].to_i).destroy
@@ -64,6 +62,7 @@ class EventsController < ApplicationController
         event.update(latitude: params[:lat])
         event.update(longitude: params[:lng])
       end
+      render :nothing => true
     else 
       redirect_to root_url
     end
