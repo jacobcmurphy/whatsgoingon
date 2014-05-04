@@ -305,20 +305,38 @@
 				}
 				eventInfoWindow.open(map, eventmarker);
 			});
-			google.maps.event.addListener(eventmarker, 'mouseup', function() {
-			    // $.ajax({  
-			    //     type: 'POST',  
-			    //     url: '/events', 
-			    //     data: {
-			    //     		title: title,
-			    //     		description: description,
-			    //     		start_time: start_time,
-			    //     		end_time: end_time,
-			    //     	 },
-			    //     success: function() {
-			    //     }
-			    // });
+		    $.ajax({  
+		        type: 'POST',  
+		        url: '/events/new_event', 
+		        dataType : 'json', 
+		        data: {
+		        		title: title,
+		        		description: description,
+		        		start_time: start_time,
+		        		end_time: end_time,
+		        		group_ids: groups,
+		        		lat: eventmarker.position.lat(),
+		        		lng: eventmarker.position.lng()
+		        	 },
+		        success: function(data) {
+		        	google.maps.event.addListener(eventmarker, 'mouseup', function() {
+					    $.ajax({  
+					        type: 'POST',  
+					        url: '/events/update_location', 
+					        data: {
+					        		event_ids: data,
+					        		lat: eventmarker.position.lat(),
+					        		lng: eventmarker.position.lng()
+					        	 },
+					        success: function() {
+					        }
+					    });
+				    });
+		        }
 		    });
+
+		    //update
+			
 			eventmarker.setDraggable(false);
 			eventmarker.setDraggable(true);
 			$('#addEventModal').modal('toggle');

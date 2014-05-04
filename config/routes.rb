@@ -30,6 +30,8 @@ Whatsgoingon::Application.routes.draw do
   resources :events, only: [:new, :create, :destroy, :show]
   match "events" => "events#index", via: :get
   match "events" => "events#destroy", via: :delete
+  match "events/update_location" => "events#update_location", via: :post
+  match "events/new_event" => "events#create", via: :post
 
   resource :friends do
     collection do
