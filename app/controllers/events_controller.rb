@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
+  
+  def index
+  	if user_signed_in?
+      @events = Event.find_events(current_user.id)
+    else
+      redirect_to root_url
+    end
+  end
 
-  def create
+    def create
     if user_signed_in?
       group_ids = params[:group_ids].map(&:to_i)
       groups = Group.find(group_ids)
