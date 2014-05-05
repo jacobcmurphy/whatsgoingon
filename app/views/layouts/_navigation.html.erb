@@ -22,7 +22,7 @@
         <% if user_signed_in? %>
         <li><%= link_to "Friends", friends_path %></li>
         <li><%= link_to "Groups", groups_path %></li>
-        <li><%= link_to "Events", events_path %></li>
+        <li><%= link_to (raw "<span>Events</span><span id=\"beta\">(Beta)</span>"), events_path %></li>
         <!-- <li><%= link_to "My Account", User.find(current_user.id) %></li> -->
 
 
