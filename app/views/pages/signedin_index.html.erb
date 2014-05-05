@@ -107,12 +107,11 @@
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
-
 			<% my_current_events = Event.find_events(cuid) %>
 			<% for i in 0...my_current_events.length %>
 			<%=	raw "var eventlatlng"+i.to_s+" = new google.maps.LatLng(" + my_current_events[i][:latitude].to_s + ", " + my_current_events[i][:longitude].to_s + ");" %>
 			<% imgpath = asset_path('EventMarker.png') %>
-			<%= raw "var eventnewmarker"+i.to_s+" = new google.maps.Marker({position: eventlatlng"+i.to_s+", map: map, icon: '" + imgpath + "' });" %>
+			<%= raw "var eventnewmarker"+i.to_s+" = new google.maps.Marker({position: eventlatlng"+i.to_s+", map: map, draggable: true , icon: '" + imgpath + "' });" %>
 			<%= raw "eventmarkers.push(eventnewmarker"+i.to_s+");" %>
 			<%= raw "var eventInfoWindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + my_current_events[i][:title] + "\" });" %>
 			<%= raw "infoWindows.push(eventInfoWindow"+i.to_s+");" %>
