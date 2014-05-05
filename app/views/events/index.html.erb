@@ -1,10 +1,32 @@
 <div class="container">
 	<% @events = @events.uniq { |e| e.title } %>
 	<% @events.each do |e| %>
-		<div class="card">
-	      <h4 class="eventtitle"><%= link_to e.title, e %></h4> 
-	      <%= e.start_time.strftime("%b #{e.start_time.day.ordinalize} at %l:%M %p") %> - <%= e.end_time.strftime("%b #{e.end_time.day.ordinalize} at %l:%M %p") %>
-	      <p><%= e.description %></p>
+		<div class="row" id="eventId<%= e.id %>">
+			<div class="card">
+		      <!-- <h4 class="eventtitle"><%= link_to e.title, e %></h4>  -->
+		      <h4 class="eventtitle"><%= e.title %></h4>
+		      <%= e.start_time.strftime("%b #{e.start_time.day.ordinalize} at %l:%M %p") %> - <%= e.end_time.strftime("%b #{e.end_time.day.ordinalize} at %l:%M %p") %>
+		      <p><%= e.description %></p>
+		  	</div>
+		  	<span class="deletefriend" onclick="deleteEvent(<%= e.id %>);">&#10006;</span>
 	  	</div>
     <% end %>
 </div>
+
+<script>
+function deleteEvent(eventId) {
+    if (confirm("Are you sure you want to delete this event?")) {
+        $.ajax({
+            type: 'POST',  
+            url: '/events/delete', 
+            data: { event_id: eventId },
+            success: function(response) {
+                $("#eventId"+eventId).addClass('animated bounceOutRight');
+                $("#eventId"+eventId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                    $("#eventId"+eventId).remove();
+                });
+            }
+        });
+    }
+}
+</script>

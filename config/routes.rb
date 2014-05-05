@@ -33,6 +33,7 @@ Whatsgoingon::Application.routes.draw do
   match "events/update_location" => "events#update_location", via: :post
   match "events/update_location_single" => "events#update_location_single", via: :post
   match "events/new_event" => "events#create", via: :post
+  match "events/delete" => "events#destroy", via: :post
 
   resource :friends do
     collection do
