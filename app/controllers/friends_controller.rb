@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
         @friend = Friend.new
     end
 
-    def pusher_helper action friend_or_wave
+    def pusher_helper action, friend_or_wave
         Pusher.trigger('private-channel-' + params[:friend_id].to_s, action, {
             fid: current_user.id,
             name: current_user.name
