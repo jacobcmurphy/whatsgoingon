@@ -55,13 +55,24 @@ class EventsController < ApplicationController
 
   def update_location
     if user_signed_in?
-      event_ids = params[:event_ids].map(&:to_i)   
+      event_ids = params[:event_ids].map(&:to_i)
       events = Event.find(event_ids)
       events.each do |e|
         event = Event.find_by(id: e.id)
         event.update(latitude: params[:lat])
         event.update(longitude: params[:lng])
       end
+      render :nothing => true
+    else 
+      redirect_to root_url
+    end
+  end
+
+  def update_location_single
+    if user_signed_in?
+      event = Event.find(params[:event_id])
+      event.update(latitude: params[:lat])
+      event.update(longitude: params[:lng])
       render :nothing => true
     else 
       redirect_to root_url

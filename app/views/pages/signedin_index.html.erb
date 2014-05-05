@@ -108,6 +108,7 @@
 			<% end %>
 
 			<% my_current_events = Event.find_events(cuid) %>
+			<% my_current_events = my_current_events.uniq { |e| e.title } %>
 			<% for i in 0...my_current_events.length %>
 			<%=	raw "var eventlatlng"+i.to_s+" = new google.maps.LatLng(" + my_current_events[i][:latitude].to_s + ", " + my_current_events[i][:longitude].to_s + ");" %>
 			<% imgpath = asset_path('EventMarker.png') %>
@@ -116,7 +117,7 @@
 			<%= raw "var eventInfoWindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + my_current_events[i][:title] + "\" });" %>
 			<%= raw "infoWindows.push(eventInfoWindow"+i.to_s+");" %>
 			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}eventInfoWindow"+i.to_s+".open(map, eventnewmarker"+i.to_s+");});" %>
-			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", 'mouseup', function() { $.ajax({ type: 'POST', url: '/events/update_location', data: { event_ids: " + my_current_events[i][:id].to_s + ", lat: " + my_current_events[i][:latitude].to_s + ", lng: " + my_current_events[i][:longitude].to_s + " }, success: function() { } }); });" %>
+			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", 'mouseup', function() { $.ajax({ type: 'POST', url: '/events/update_location_single', data: { event_id: " + my_current_events[i][:id].to_s + ", lat: eventnewmarker"+i.to_s+".position.lat(), lng: eventnewmarker"+i.to_s+".position.lng() }, success: function() { } }); });" %>
 			<% end %>
 
 
