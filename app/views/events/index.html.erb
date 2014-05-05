@@ -1,3 +1,9 @@
+<% if @events.size == 0 %>
+    <div class="card">
+        <center> You Have No Events </center>
+    </div>
+<% end %> 
+
 <div class="container">
 	<% @events = @events.uniq { |e| e.title } %>
 	<% @events.each do |e| %>
