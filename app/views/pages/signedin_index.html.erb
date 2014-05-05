@@ -107,6 +107,17 @@
 			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
 			<% end %>
 
+			<% my_current_events = Event.find_events(cuid) %>
+			<% for i in 0...my_current_events.length %>
+			<%=	raw "var newlatlng"+i.to_s+" = new google.maps.LatLng(" + most_recent_friends[i][:latitude].to_s + ", " + most_recent_friends[i][:longitude].to_s + ");" %>
+			<% imgpath = asset_path('marker' + most_recent_friends[i][:color_status].to_s + '.png') %>
+			<%= raw "var newmarker"+i.to_s+" = new google.maps.Marker({position: newlatlng"+i.to_s+", map: map, icon: '" + imgpath + "' });" %>
+			<%= raw "markers.push(newmarker"+i.to_s+");" %>
+			<%= raw "var myinfowindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + most_recent_friends[i][:name] + "\" });" %>
+			<%= raw "infoWindows.push(myinfowindow"+i.to_s+");" %>
+			<%= raw "google.maps.event.addListener(newmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
+			<% end %>
+
 
 			var mybuilding = "";
 		  	<% for i in 0..buildingsArraySize %>
