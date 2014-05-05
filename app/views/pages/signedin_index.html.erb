@@ -116,6 +116,7 @@
 			<%= raw "var eventInfoWindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + my_current_events[i][:title] + "\" });" %>
 			<%= raw "infoWindows.push(eventInfoWindow"+i.to_s+");" %>
 			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}eventInfoWindow"+i.to_s+".open(map, eventnewmarker"+i.to_s+");});" %>
+			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", 'mouseup', function() { $.ajax({ type: 'POST', url: '/events/update_location', data: { event_ids: " + my_current_events[i][:id].to_s + ", lat: " + my_current_events[i][:latitude].to_s + ", lng: " + my_current_events[i][:longitude].to_s + " }, success: function() { } }); });" %>
 			<% end %>
 
 
