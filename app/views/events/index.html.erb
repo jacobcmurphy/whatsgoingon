@@ -1,10 +1,11 @@
-<% if @events.size == 0 %>
-    <div class="card">
-        <center> You Have No Events </center>
-    </div>
-<% end %> 
+
 
 <div class="container">
+    <% if @events.size == 0 %>
+    <div class="row card">
+        <div class="center">You Have No Events</div>
+    </div>
+    <% end %> 
 	<% @events = @events.uniq { |e| e.title } %>
 	<% @events.each do |e| %>
 		<div class="row" id="eventId<%= e.id %>">
@@ -30,6 +31,9 @@ function deleteEvent(eventId) {
                 $("#eventId"+eventId).addClass('animated bounceOutRight');
                 $("#eventId"+eventId).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     $("#eventId"+eventId).remove();
+                    <% if @events.size == 0 %>
+                        $('.container').append('<div class="row card"><div class="center">You Have No Events</div></div>');
+                    <% end %> 
                 });
             }
         });

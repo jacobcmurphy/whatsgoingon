@@ -14,6 +14,8 @@ class EventsController < ApplicationController
       groups = Group.find(group_ids)
       start_time = DateTime.strptime(params[:start_time], '%m/%d/%Y %H:%M')
       end_time = DateTime.strptime(params[:end_time], '%m/%d/%Y %H:%M')
+      start_time = dt.change(:offset => "-0500")
+      end_time = dt.change(:offset => "-0500")
       event_ids=[]
       groups.each do |g|
           g_event = g.events.create(title: params[:title], description: params[:description], latitude: params[:lat], longitude: params[:lng], group_id: g.id.to_i, start_time: start_time, end_time: end_time)
