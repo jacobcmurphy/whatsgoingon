@@ -10,8 +10,7 @@ class EventsController < ApplicationController
 
   def create
     if user_signed_in?
-      group_ids = params[:group_ids]
-      group_ids = group_ids.map(&:to_i)
+      group_ids = params[:group_ids].map(&:to_i)
       groups = Group.find(group_ids)
       start_time = DateTime.strptime(params[:start_time], '%m/%d/%Y %H:%M')
       end_time = DateTime.strptime(params[:end_time], '%m/%d/%Y %H:%M')
@@ -56,8 +55,8 @@ class EventsController < ApplicationController
 
   def update_location
     if user_signed_in?
-      event_ids = params[:event_ids]
-      event_ids = event_ids.map(&:to_i)
+      eids = params[:event_ids]
+      event_ids = eids.map(&:to_i)
       events = Event.find(event_ids)
       events.each do |e|
         event = Event.find_by(id: e.id)
