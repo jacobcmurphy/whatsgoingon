@@ -5,36 +5,31 @@ class FriendsController < ApplicationController
         @friend = Friend.new
     end
 
-    def create
-        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'my-event', {
+    def pusher_helper action friend_or_wave
+        Pusher.trigger('private-channel-' + params[:friend_id].to_s, action, {
             fid: current_user.id,
             name: current_user.name
         })
-        current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
+        if friend_or_wave == 'friend'
+            current_user.friends.create(user_id: current_user.id, friend_id: params[:friend_id], accepted: false)
+        end
         render nothing: true
+    end
+
+    def create
+        pusher_helper 'my-event', 'friend'
     end
 
     def wave
-        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'send-wave', {
-            fid: current_user.id,
-            name: current_user.name
-        })
-        render nothing: true
+        pusher_helper 'send-wave', 'wave'
     end
 
     def acceptwave
-        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'accept-wave', {
-            fid: current_user.id,
-            name: current_user.name
-        })
-        render nothing: true
+        pusher_helper 'accept-wave', 'wave'
     end
+
     def rejectwave
-        Pusher.trigger('private-channel-' + params[:friend_id].to_s, 'reject-wave', {
-            fid: current_user.id,
-            name: current_user.name
-        })
-        render nothing: true
+        pusher_helper 'reject-wave', 'wave'
     end
 
   
@@ -158,6 +153,8 @@ class FriendsController < ApplicationController
         end
     end
 
-
     helper_method :show
+
+
+
 end
