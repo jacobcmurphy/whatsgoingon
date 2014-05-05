@@ -115,7 +115,7 @@
 			<%= raw "eventmarkers.push(eventnewmarker"+i.to_s+");" %>
 			<%= raw "var eventInfoWindow"+i.to_s+" = new google.maps.InfoWindow({content: \"" + my_current_events[i][:title] + "\" });" %>
 			<%= raw "infoWindows.push(eventInfoWindow"+i.to_s+");" %>
-			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}myinfowindow"+i.to_s+".open(map, newmarker"+i.to_s+");});" %>
+			<%= raw "google.maps.event.addListener(eventnewmarker"+i.to_s+", \'click\', function() {for (var i = 0; i < infoWindows.length; i++) {infoWindows[i].close();}eventInfoWindow"+i.to_s+".open(map, eventnewmarker"+i.to_s+");});" %>
 			<% end %>
 
 
