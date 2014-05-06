@@ -7,7 +7,7 @@
 	    new google.maps.LatLng(42.366145, -71.257910)
 	];
 	
-  	building61 = new google.maps.Polygon({
+  	building0 = new google.maps.Polygon({
     paths: SSCCoords,
     strokeColor: '#FF0000',
     strokeOpacity: opac,

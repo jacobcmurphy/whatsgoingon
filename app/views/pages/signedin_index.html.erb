@@ -123,7 +123,7 @@
 
 			var mybuilding = "";
 		  	<% for i in 0..buildingsArraySize %>
-		  	<%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];}" %>
+		  	<%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];} else{ mybuilding = 'is Not In A Building';}"  %>
 		  	<% end %>
 		
 			$.ajax({
