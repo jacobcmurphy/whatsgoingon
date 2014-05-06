@@ -61,7 +61,7 @@
 //******HERE STARTS MAPPING OF BRANDEIS*************//
 		var buildings = <%= raw buildings.inspect %>;
 
-		<% buildingsArraySize = 60 %>
+		<% buildingsArraySize = buildings.size - 1 %>
 		var opac = 0;
 		<%= render file: "pages/buildings.js", layout: false, content_type: 'text/plain' %>
 
@@ -121,7 +121,7 @@
 
 			var mybuilding = "";
 		  	<% for i in 0..buildingsArraySize %>
-		  	<%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];} else{ mybuilding = 'is Not In A Building';}"  %>
+		  	<%= raw "if (google.maps.geometry.poly.containsLocation(latlng,building" +i.to_s+ ")) { mybuilding = buildings[" + i.to_s + "];} "  %>
 		  	<% end %>
 		
 			$.ajax({
