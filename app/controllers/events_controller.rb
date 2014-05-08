@@ -9,26 +9,27 @@ class EventsController < ApplicationController
   end
 
   def create
-    if user_signed_in?
-      group_ids = params[:group_ids].map(&:to_i)
-      groups = Group.find(group_ids)
-      start_time = DateTime.strptime(params[:start_time], '%m/%d/%Y %H:%M')
-      end_time = DateTime.strptime(params[:end_time], '%m/%d/%Y %H:%M')
-      start_time = dt.change(:offset => "-0400")
-      end_time = dt.change(:offset => "-0400")
-      event_ids=[]
-      groups.each do |g|
-          g_event = g.events.create(title: params[:title], description: params[:description], latitude: params[:lat], longitude: params[:lng], group_id: g.id.to_i, start_time: start_time, end_time: end_time)
-          g_event.save!
-          event_ids << g_event.id
-      end
-      respond_to do |format|
-        format.json { render json: event_ids }
-        format.html { render :nothing => true }
-      end
-    else
+    # if user_signed_in?
+    #   group_ids = params[:group_ids].map(&:to_i)
+    #   groups = Group.find(group_ids)
+    #   start_time = DateTime.strptime(params[:start_time], '%m/%d/%Y %H:%M')
+    #   end_time = DateTime.strptime(params[:end_time], '%m/%d/%Y %H:%M')
+    #   start_time = dt.change(:offset => "-0400")
+    #   end_time = dt.change(:offset => "-0400")
+    #   event_ids=[]
+    #   groups.each do |g|
+    #       g_event = g.events.create(title: params[:title], description: params[:description], latitude: params[:lat], longitude: params[:lng], group_id: g.id.to_i, start_time: start_time, end_time: end_time)
+    #       g_event.save!
+    #       event_ids << g_event.id
+    #   end
+    #   respond_to do |format|
+    #     format.json { render json: event_ids }
+    #     format.html { render :nothing => true }
+    #   end
+    #   render json: event_ids
+    # else
       redirect_to root_url
-    end
+    # end
   end
 
 
@@ -56,19 +57,19 @@ class EventsController < ApplicationController
   end
 
   def update_location
-    if user_signed_in?
-      eids = params[:event_ids]
-      event_ids = eids.map(&:to_i)
-      events = Event.find(event_ids)
-      events.each do |e|
-        event = Event.find_by(id: e.id)
-        event.update(latitude: params[:lat])
-        event.update(longitude: params[:lng])
-      end
-      render :nothing => true
-    else 
+    # if user_signed_in?
+    #   eids = params[:event_ids]
+    #   event_ids = eids.map(&:to_i)
+    #   events = Event.find(event_ids)
+    #   events.each do |e|
+    #     event = Event.find_by(id: e.id)
+    #     event.update(latitude: params[:lat])
+    #     event.update(longitude: params[:lng])
+    #   end
+    #   render :nothing => true
+    # else 
       redirect_to root_url
-    end
+    # end
   end
 
   def update_location_single
